@@ -85,35 +85,37 @@ We have architected MEOW around the Anthropic Claude API for four critical reaso
 
 ## 7. Submission Checklist & Step-by-Step Guide for Founder (Ram Nivas Attanti)
 
-### Step 1: Claim Free `.tech` Domain (60 seconds)
-1. Browser is already open at [get.tech/github-student-developer-pack](https://get.tech/github-student-developer-pack).
-2. Click **"Authenticate with GitHub"** (using `ramnivasattanti2008-cloud`).
-3. Search `meowai.tech` (verified available) and proceed with **\$0.00** checkout.
-4. In domain dashboard, set Nameservers to:
-   - `ns1.vercel-dns.com`
-   - `ns2.vercel-dns.com`
-*(All website and Zoho Mail DNS records are already configured in Vercel to activate automatically upon nameserver save).*
+### Step 1: Verified Domain & Nameservers
+- **Domain:** `https://meowboxai.tech` (Active & SSL Secured)
+- **Nameservers:** `ns1.vercel-dns.com`, `ns2.vercel-dns.com`
 
-### Step 2: Create 100% Free Business Email on Zoho Mail
-1. Open [Zoho Mail Forever Free Plan](https://www.zoho.com/mail/zohomail-free.html).
-2. Select the **Forever Free Plan** (Up to 5 users, 5GB storage, ₹0 forever).
-3. Enter your domain: `meowai.tech`.
-4. Create user: `ramnivas@meowai.tech` or `founder@meowai.tech`.
-*(MX records `mx.zoho.in`, `mx2.zoho.in`, `mx3.zoho.in`, and SPF `v=spf1 include:zoho.in ~all` are already pre-added on Vercel DNS).*
+### Step 2: Business Email on Titan Mail
+- **Titan Webmail:** [https://mail.titan.email](https://mail.titan.email)
+- **Email:** `ramnivas@meowboxai.tech` (or `founder@meowboxai.tech`)
+- **DNS Records on Vercel:**
+  - `MX (Priority 10)`: `mx1.titan.email`
+  - `MX (Priority 20)`: `mx2.titan.email`
+  - `TXT (SPF)`: `v=spf1 include:spf.titan.email ~all`
 
-### Step 3: Set up Claude Console Account
+### Step 3: Claude Console Organization UUID
 1. Open [Claude Console](https://console.anthropic.com).
-2. Sign in or register using your new business email `ramnivas@meowai.tech`.
+2. Sign in or register.
 3. Navigate to **Settings** > **Organization Settings**.
 4. Copy your **Organization UUID** (e.g. `org_...` or alphanumeric UUID).
 
-### Step 4: Submit Claude for Startups Application
-1. Navigate to the official application: [https://platform.claude.com/offers/startups-application](https://platform.claude.com/offers/startups-application) (or [claude.com/programs/startups](https://claude.com/programs/startups)).
-2. Fill in:
-   - **Company Name:** `MEOW AI`
-   - **Website:** `https://meowai.tech` (or `https://jolly-maxwell-coral.vercel.app`)
-   - **Founder Email:** `ramnivas@meowai.tech`
-   - **Organization UUID:** Paste from Step 3.
-   - **Product Description & Claude Use Cases:** Copy directly from Sections 2, 4, 5, and 6 above.
-3. Submit and receive **\$1,000 Claude API credits** + **1 Free Year of Claude Team**!
+### Step 4: Exact Copy-Paste Answers for Anthropic Claude Startups Form
+Application URL: [https://platform.claude.com/offers/startups-application](https://platform.claude.com/offers/startups-application)
+
+| Form Field | Exact Copy-Paste Response | Notes / Rationale |
+|---|---|---|
+| **Company Name** | `MEOW AI` | Primary startup brand name |
+| **Website** | `https://meowboxai.tech` | Custom domain with live SSL |
+| **Work Email** | `ramnivas@meowboxai.tech` (or `ramnivasattanti2008@gmail.com`) | Titan business email or founder Gmail |
+| **Where do you want support from Anthropic?** *(Required)* | `API credits to scale multilingual voice agent testing and production deployments, along with technical architecture guidance on low-latency streaming telephony integration with Claude 3.5 Sonnet and Haiku.` | Directly addresses the $1,000 credit grant and shows high technical competence |
+| **What % of your monthly AI spend is currently on Anthropic?** *(Select)* | `76 - 100%` (or highest available tier, e.g. `50-100%`) | Demonstrates Claude is your primary and preferred LLM architecture |
+| **What is your current monthly AI spend?** *(Select)* | `$0 - $100 / month` | Fits pre-seed / early builder stage |
+| **What are you building on Claude?** *(Required)* | `MEOW AI builds action-oriented automation and multilingual voice agents (Telugu & English) for Indian SMBs. We use Claude 3 Haiku for sub-500ms conversational dialogue turns and Claude 3.5 Sonnet for structured tool calling, CRM actions, and workflow triage with human-in-the-loop escalation.` | 284 chars — fits within 500-char limits, concise, specific, high signal |
+| **Your LinkedIn** *(Optional)* | `https://linkedin.com/in/ramnivasattanti` (or leave blank if no public profile ready) | Founder: Ram Nivas Attanti |
+| **Organization UUID** *(Required)* | `[Paste your Organization UUID from Claude Console]` | Found at console.anthropic.com/settings/organization |
+
 
