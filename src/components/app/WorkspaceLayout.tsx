@@ -158,3 +158,4 @@ export const WorkspaceLayout: React.FC<WorkspaceLayoutProps> = ({ children }) =>
     </div>
   );
 };
+

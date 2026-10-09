@@ -90,3 +90,4 @@ To qualify for the Claude Startups program, a domain-matching business email (e.
 - [x] Explicit browser microphone consent disclosure prior to speech recording.
 - [x] AI identity disclosure ("I am MEOW Voice AI") strictly configured.
 - [x] Human-in-the-loop escalation paths provided for all booking & business decisions.
+

@@ -76,3 +76,4 @@ export const WorkflowSchema = z.object({
   steps: z.array(WorkflowStepSchema).min(1, 'At least one step is required'),
   status: z.enum(['active', 'draft', 'paused']).default('draft'),
 });
+

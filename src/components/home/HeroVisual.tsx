@@ -243,3 +243,4 @@ export const HeroVisual: React.FC = () => {
     </div>
   );
 };
+

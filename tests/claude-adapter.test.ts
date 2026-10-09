@@ -38,3 +38,4 @@ describe('ClaudeAdapter & Simulation Engine', () => {
     expect(output.adCopy).toContain('Zero Pre-EMI');
   });
 });
+
