@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
 import { VoiceAgentDemo } from '@/components/voice/VoiceAgentDemo';
+import { CallRecordingShowcase } from '@/components/voice/CallRecordingShowcase';
 import {
   PhoneCall,
   CalendarCheck,
@@ -81,8 +82,13 @@ export default function VoiceAiPage() {
         </div>
 
         {/* Live Interactive Voice Agent Demo Sandbox */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <VoiceAgentDemo />
+        </section>
+
+        {/* Live Call Transcripts & Recording Showcase */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+          <CallRecordingShowcase />
         </section>
 
         {/* Practical Applications Grid */}

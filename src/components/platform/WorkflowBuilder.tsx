@@ -19,17 +19,148 @@ import {
   MessageSquare,
   Bot,
   UserCheck,
+  Copy,
+  Download,
+  Settings2,
+  Code2,
+  Layers,
+  Sparkles,
 } from 'lucide-react';
 import { Workflow, WorkflowStep, WorkflowStepType, WorkflowRunResult } from '@/lib/types';
 import { initialWorkflows } from '@/lib/store';
 import { workflowExecutionEngine } from '@/lib/workflow/engine';
 
+interface WorkflowPreset {
+  id: string;
+  name: string;
+  industry: string;
+  description: string;
+  workflow: Workflow;
+}
+
+const PRESETS: WorkflowPreset[] = [
+  {
+    id: 'clinic-flow',
+    name: 'Clinic Inbound Booking & Reminders',
+    industry: 'Healthcare',
+    description: 'Handles patient calls in Telugu/English, checks doctor availability, and sends WhatsApp booking pass.',
+    workflow: JSON.parse(JSON.stringify(initialWorkflows[0])),
+  },
+  {
+    id: 'realestate-lead',
+    name: 'Real Estate Meta Lead Instant Callout',
+    industry: 'Real Estate',
+    description: 'Triggered upon ad submission, initiates automated vernacular outbound call within 60s, updates CRM.',
+    workflow: {
+      id: 'wf-realestate-01',
+      name: 'Real Estate Lead Qualification & Site Visit',
+      description: 'Instant outbound call for ad leads, budget verification, and CRM logging.',
+      enabled: true,
+      createdAt: '2026-10-09',
+      updatedAt: '2026-10-09',
+      steps: [
+        {
+          id: 'step-re-1',
+          type: 'trigger_form_submit',
+          title: 'Trigger: Meta Ad Lead Webhook',
+          description: 'Fires when prospect enters name & phone number on property ad.',
+          config: { webhookPath: '/api/v1/leads/meta' },
+          order: 1,
+        },
+        {
+          id: 'step-re-2',
+          type: 'ai_intent_extraction',
+          title: 'AI: Budget & Location Tagging',
+          description: 'Parses campaign tags, budget preference (₹1.5Cr+), and project interest.',
+          config: { model: 'claude-3-5-sonnet' },
+          order: 2,
+        },
+        {
+          id: 'step-re-3',
+          type: 'voice_call_initiation',
+          title: 'Voice: Outbound Verification Call',
+          description: 'Places immediate automated call in preferred language to verify site visit intent.',
+          config: { maxWaitSeconds: 60, retryLimit: 2 },
+          order: 3,
+        },
+        {
+          id: 'step-re-4',
+          type: 'crm_contact_update',
+          title: 'Tool: CRM Lead Stage Elevation',
+          description: 'Updates lead from "New" to "Verified High-Intent" in HubSpot / Salesforce.',
+          config: { crmProvider: 'hubspot', priority: 'high' },
+          order: 4,
+        },
+        {
+          id: 'step-re-5',
+          type: 'sms_whatsapp_notification',
+          title: 'Channel: WhatsApp Brochure & Location Pin',
+          description: 'Dispatches Google Maps location and brochure PDF with direct relationship manager contact.',
+          config: { channel: 'whatsapp_official' },
+          order: 5,
+        },
+      ],
+    },
+  },
+  {
+    id: 'emergency-handoff',
+    name: 'Emergency Medical Triage & Duty Escalation',
+    industry: 'Emergency Care',
+    description: 'Detects critical symptom keywords (chest pain, severe bleeding) and transfers to duty nurse within 3s.',
+    workflow: {
+      id: 'wf-emergency-01',
+      name: 'Emergency Symptom Handoff Pipeline',
+      description: 'Zero-latency transfer to human clinical staff upon urgent keyword detection.',
+      enabled: true,
+      createdAt: '2026-10-09',
+      updatedAt: '2026-10-09',
+      steps: [
+        {
+          id: 'step-em-1',
+          type: 'trigger_inbound_call',
+          title: 'Trigger: Hospital Hotline Inbound Call',
+          description: 'Fires on incoming telephone call to emergency patient line.',
+          config: { lineType: 'hotline' },
+          order: 1,
+        },
+        {
+          id: 'step-em-2',
+          type: 'ai_intent_extraction',
+          title: 'AI: Urgent Symptom Classifier',
+          description: 'Monitors audio transcription stream for critical emergency symptoms.',
+          config: { strictGuardrail: true },
+          order: 2,
+        },
+        {
+          id: 'step-em-3',
+          type: 'human_supervisor_approval',
+          title: 'Security: Priority Transfer to Duty Nurse',
+          description: 'Interrupts automated agent immediately and SIP-bridges caller to human clinical staff.',
+          config: { transferPhone: '+918040000001', emergencyOverride: true },
+          order: 3,
+        },
+        {
+          id: 'step-em-4',
+          type: 'sms_whatsapp_notification',
+          title: 'Channel: Supervisor Incident Alert',
+          description: 'Sends SMS incident notification with call timestamp and transcript to Chief Medical Officer.',
+          config: { alertUrgency: 'P0' },
+          order: 4,
+        },
+      ],
+    },
+  },
+];
+
 export const WorkflowBuilder: React.FC = () => {
-  const [currentWorkflow, setCurrentWorkflow] = useState<Workflow>(JSON.parse(JSON.stringify(initialWorkflows[0])));
+  const [currentWorkflow, setCurrentWorkflow] = useState<Workflow>(PRESETS[0].workflow);
+  const [activePresetId, setActivePresetId] = useState(PRESETS[0].id);
   const [isRunning, setIsRunning] = useState(false);
   const [executionResult, setExecutionResult] = useState<WorkflowRunResult | null>(null);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [requireHumanApprovalPause, setRequireHumanApprovalPause] = useState(true);
+  const [copiedConfig, setCopiedConfig] = useState(false);
+  const [selectedStepForInspect, setSelectedStepForInspect] = useState<WorkflowStep | null>(null);
 
   const supportedStepTypes: { type: WorkflowStepType; label: string; icon: any; defaultDesc: string }[] = [
     {
@@ -82,6 +213,14 @@ export const WorkflowBuilder: React.FC = () => {
     },
   ];
 
+  const handleSelectPreset = (preset: WorkflowPreset) => {
+    setActivePresetId(preset.id);
+    setCurrentWorkflow(JSON.parse(JSON.stringify(preset.workflow)));
+    setExecutionResult(null);
+    setValidationErrors([]);
+    setSelectedStepForInspect(null);
+  };
+
   const handleAddStep = (type: WorkflowStepType) => {
     const meta = supportedStepTypes.find((s) => s.type === type);
     if (!meta) return;
@@ -91,7 +230,7 @@ export const WorkflowBuilder: React.FC = () => {
       type,
       title: meta.label,
       description: meta.defaultDesc,
-      config: {},
+      config: { timeoutMs: 5000, retryCount: 2 },
       order: currentWorkflow.steps.length + 1,
     };
 
@@ -108,6 +247,9 @@ export const WorkflowBuilder: React.FC = () => {
       const reordered = filtered.map((s, idx) => ({ ...s, order: idx + 1 }));
       return { ...prev, steps: reordered };
     });
+    if (selectedStepForInspect?.id === stepId) {
+      setSelectedStepForInspect(null);
+    }
   };
 
   const handleMoveStep = (index: number, direction: 'up' | 'down') => {
@@ -139,28 +281,62 @@ export const WorkflowBuilder: React.FC = () => {
     setIsRunning(false);
   };
 
+  const handleCopyJson = () => {
+    navigator.clipboard.writeText(JSON.stringify(currentWorkflow, null, 2));
+    setCopiedConfig(true);
+    setTimeout(() => setCopiedConfig(false), 2000);
+  };
+
   const handleReset = () => {
-    setCurrentWorkflow(JSON.parse(JSON.stringify(initialWorkflows[0])));
+    const original = PRESETS.find((p) => p.id === activePresetId) || PRESETS[0];
+    setCurrentWorkflow(JSON.parse(JSON.stringify(original.workflow)));
     setExecutionResult(null);
     setValidationErrors([]);
+    setSelectedStepForInspect(null);
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto rounded-3xl border border-white/[0.08] bg-zinc-950/80 backdrop-blur-2xl shadow-glass overflow-hidden text-left">
-      {/* Header */}
-      <div className="border-b border-white/[0.08] px-6 sm:px-8 py-5 bg-zinc-900/40 flex flex-wrap items-center justify-between gap-4">
+    <div className="w-full max-w-6xl mx-auto rounded-3xl border border-white/[0.08] bg-zinc-950/80 backdrop-blur-2xl shadow-glass overflow-hidden text-left">
+      {/* Preset Switcher Bar */}
+      <div className="px-6 py-4 bg-zinc-900/60 border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <Layers className="w-4 h-4 text-violet-400" />
+          <span className="text-xs font-mono uppercase tracking-wider text-zinc-300">
+            LOAD PRODUCTION TEMPLATE:
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          {PRESETS.map((p) => (
+            <button
+              key={p.id}
+              onClick={() => handleSelectPreset(p)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
+                activePresetId === p.id
+                  ? 'bg-zinc-800 text-white border border-white/10 shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 bg-zinc-950/40 border border-white/[0.04]'
+              }`}
+            >
+              <span>{p.name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Canvas Header */}
+      <div className="border-b border-white/[0.08] px-6 sm:px-8 py-5 bg-zinc-900/30 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <h3 className="text-lg font-semibold text-white">{currentWorkflow.name}</h3>
             <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-              Interactive Canvas
+              Deterministic Canvas
             </span>
           </div>
           <p className="text-xs text-zinc-400 mt-0.5">{currentWorkflow.description}</p>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <label className="hidden sm:flex items-center gap-1.5 text-xs text-zinc-400 cursor-pointer mr-2 font-mono">
             <input
               type="checkbox"
@@ -170,6 +346,15 @@ export const WorkflowBuilder: React.FC = () => {
             />
             <span>Pause at Human Gate</span>
           </label>
+
+          <button
+            onClick={handleCopyJson}
+            className="px-3 py-2 rounded-xl text-xs font-mono text-zinc-300 hover:text-white bg-zinc-900 border border-white/10 hover:border-white/20 transition-all flex items-center gap-1.5"
+            title="Export Workflow JSON"
+          >
+            {copiedConfig ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+            <span>{copiedConfig ? 'Copied JSON!' : 'Export JSON'}</span>
+          </button>
 
           <button
             onClick={handleReset}
@@ -182,24 +367,24 @@ export const WorkflowBuilder: React.FC = () => {
           <button
             onClick={handleRunWorkflow}
             disabled={isRunning}
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-white text-zinc-950 hover:bg-zinc-200 transition-all flex items-center gap-2 shadow-sm disabled:opacity-50"
+            className="px-5 py-2 rounded-xl text-xs font-semibold bg-white text-zinc-950 hover:bg-zinc-200 transition-all flex items-center gap-2 shadow-sm disabled:opacity-50"
           >
             {isRunning ? (
               <>
                 <Clock className="w-3.5 h-3.5 animate-spin" />
-                <span>Running Pipeline...</span>
+                <span>Simulating Execution...</span>
               </>
             ) : (
               <>
                 <Play className="w-3.5 h-3.5 fill-current" />
-                <span>Run Demonstration</span>
+                <span>Execute Pipeline</span>
               </>
             )}
           </button>
         </div>
       </div>
 
-      {/* Validation Banner if errors */}
+      {/* Validation Errors Banner */}
       {validationErrors.length > 0 && (
         <div className="px-6 sm:px-8 py-3 bg-red-950/40 border-b border-red-500/30 text-xs text-red-200 space-y-1">
           <div className="flex items-center gap-2 font-semibold text-red-400">
@@ -214,13 +399,13 @@ export const WorkflowBuilder: React.FC = () => {
         </div>
       )}
 
-      {/* Main Builder Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08]">
-        {/* Left 2 Cols: Step Pipeline */}
-        <div className="lg:col-span-2 p-6 sm:p-8 space-y-4">
+      {/* Main Canvas Body */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08]">
+        {/* Left Column: Pipeline Canvas (8 Cols) */}
+        <div className="lg:col-span-8 p-6 sm:p-8 space-y-4">
           <div className="flex items-center justify-between text-xs font-mono text-zinc-400 pb-2 border-b border-white/[0.06]">
-            <span>ORDERED EXECUTION PIPELINE ({currentWorkflow.steps.length} STEPS)</span>
-            <span>Deterministic Runner</span>
+            <span>ORDERED EXECUTION NODES ({currentWorkflow.steps.length} ACTIVE)</span>
+            <span>Click any step to inspect payload</span>
           </div>
 
           <div className="space-y-3">
@@ -228,34 +413,38 @@ export const WorkflowBuilder: React.FC = () => {
               const meta = supportedStepTypes.find((s) => s.type === step.type);
               const Icon = meta?.icon || Zap;
               const stepRunOutput = executionResult?.stepResults.find((r) => r.stepId === step.id);
+              const isSelected = selectedStepForInspect?.id === step.id;
 
               return (
                 <div
                   key={step.id}
-                  className={`p-4 rounded-2xl border transition-all ${
-                    stepRunOutput?.status === 'requires_human_approval'
+                  onClick={() => setSelectedStepForInspect(step)}
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                    isSelected
+                      ? 'border-violet-500/80 bg-zinc-900/90 shadow-sm'
+                      : stepRunOutput?.status === 'requires_human_approval'
                       ? 'bg-amber-950/20 border-amber-500/40'
                       : stepRunOutput?.status === 'success'
                       ? 'bg-zinc-900/90 border-emerald-500/30'
-                      : 'bg-zinc-900/60 border-white/[0.06] hover:border-white/15'
+                      : 'bg-zinc-900/50 border-white/[0.06] hover:border-white/15'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start gap-3">
                       <div className="w-8 h-8 rounded-xl bg-zinc-800 border border-white/10 flex items-center justify-center text-zinc-300 shrink-0 mt-0.5">
-                        <Icon className="w-4 h-4" />
+                        <Icon className="w-4 h-4 text-violet-400" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-mono text-zinc-400">#{step.order}</span>
-                          <h4 className="text-sm font-medium text-white">{step.title}</h4>
+                          <span className="text-xs font-mono text-zinc-400">Node #{step.order}</span>
+                          <h4 className="text-sm font-semibold text-white">{step.title}</h4>
                         </div>
-                        <p className="text-xs text-zinc-400 mt-0.5">{step.description}</p>
+                        <p className="text-xs text-zinc-400 mt-0.5 leading-relaxed">{step.description}</p>
                       </div>
                     </div>
 
                     {/* Step Controls */}
-                    <div className="flex items-center gap-1 shrink-0">
+                    <div className="flex items-center gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
                       <button
                         onClick={() => handleMoveStep(idx, 'up')}
                         disabled={idx === 0}
@@ -282,22 +471,24 @@ export const WorkflowBuilder: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Execution Output (if executed) */}
+                  {/* Execution Output Status */}
                   {stepRunOutput && (
                     <div className="mt-3 pt-3 border-t border-white/[0.06] text-xs font-mono">
-                      <div className="flex items-center justify-between text-zinc-400 mb-1">
-                        <span className="flex items-center gap-1.5">
+                      <div className="flex items-center justify-between text-zinc-400 mb-1.5">
+                        <span className="flex items-center gap-1.5 font-semibold">
                           {stepRunOutput.status === 'success' && (
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                           )}
                           {stepRunOutput.status === 'requires_human_approval' && (
                             <UserCheck className="w-3.5 h-3.5 text-amber-400" />
                           )}
-                          Status: {stepRunOutput.status}
+                          <span className={stepRunOutput.status === 'success' ? 'text-emerald-400' : 'text-amber-400'}>
+                            {stepRunOutput.status.toUpperCase()}
+                          </span>
                         </span>
-                        <span>Latency: {stepRunOutput.latencyMs}ms</span>
+                        <span className="text-[11px] text-zinc-500">Latency: {stepRunOutput.latencyMs}ms</span>
                       </div>
-                      <div className="p-2 rounded-xl bg-zinc-950/80 text-zinc-300 border border-white/[0.04]">
+                      <div className="p-2.5 rounded-xl bg-zinc-950 text-zinc-300 border border-white/[0.04] text-[11px] leading-relaxed">
                         {stepRunOutput.output}
                       </div>
                     </div>
@@ -308,12 +499,49 @@ export const WorkflowBuilder: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Col: Add Step Palette */}
-        <div className="p-6 sm:p-8 space-y-4 bg-zinc-900/20">
-          <div className="text-xs font-mono text-zinc-400 pb-2 border-b border-white/[0.06]">
-            AVAILABLE MODULES (CLICK TO ADD)
-          </div>
+        {/* Right Column: Node Inspector & Add Palette (4 Cols) */}
+        <div className="lg:col-span-4 p-6 sm:p-8 space-y-6 bg-zinc-900/20">
+          {/* Node Inspector Drawer */}
+          {selectedStepForInspect ? (
+            <div className="p-4 rounded-2xl bg-zinc-900/80 border border-violet-500/30 space-y-3 font-mono text-xs">
+              <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
+                <span className="text-violet-300 font-bold flex items-center gap-1.5">
+                  <Settings2 className="w-3.5 h-3.5" />
+                  <span>NODE INSPECTOR</span>
+                </span>
+                <button
+                  onClick={() => setSelectedStepForInspect(null)}
+                  className="text-[10px] text-zinc-500 hover:text-white"
+                >
+                  Close
+                </button>
+              </div>
 
+              <div>
+                <span className="text-zinc-500 text-[10px] block">NODE TITLE:</span>
+                <span className="text-white font-bold">{selectedStepForInspect.title}</span>
+              </div>
+
+              <div>
+                <span className="text-zinc-500 text-[10px] block">TYPE:</span>
+                <code className="text-violet-300 text-[11px]">{selectedStepForInspect.type}</code>
+              </div>
+
+              <div>
+                <span className="text-zinc-500 text-[10px] block">CONFIG PAYLOAD:</span>
+                <pre className="p-2 rounded-xl bg-zinc-950 border border-white/[0.04] text-[10px] text-zinc-300 overflow-x-auto">
+                  {JSON.stringify(selectedStepForInspect.config || {}, null, 2)}
+                </pre>
+              </div>
+            </div>
+          ) : (
+            <div className="text-xs font-mono text-zinc-400 pb-2 border-b border-white/[0.06] flex items-center justify-between">
+              <span>ADD MODULE</span>
+              <span className="text-[10px] text-zinc-500">8 AVAILABLE</span>
+            </div>
+          )}
+
+          {/* Available Modules Palette */}
           <div className="space-y-2">
             {supportedStepTypes.map((stepDef) => {
               const Icon = stepDef.icon;
@@ -338,7 +566,7 @@ export const WorkflowBuilder: React.FC = () => {
 
           {/* Execution Summary Report */}
           {executionResult && (
-            <div className="mt-6 p-4 rounded-2xl bg-zinc-950 border border-white/10 space-y-2 font-mono text-xs">
+            <div className="p-4 rounded-2xl bg-zinc-950 border border-white/10 space-y-2 font-mono text-xs">
               <div className="flex items-center justify-between text-zinc-300 font-semibold">
                 <span>EXECUTION RUN</span>
                 <span
@@ -354,7 +582,7 @@ export const WorkflowBuilder: React.FC = () => {
               <div className="text-zinc-400 text-[11px] space-y-1">
                 <div>Run ID: {executionResult.runId}</div>
                 <div>Completed Steps: {executionResult.stepResults.length} / {currentWorkflow.steps.length}</div>
-                <div>Engine: Deterministic In-Browser Runner</div>
+                <div>Engine: Deterministic In-Browser Engine</div>
               </div>
             </div>
           )}
@@ -363,4 +591,3 @@ export const WorkflowBuilder: React.FC = () => {
     </div>
   );
 };
-

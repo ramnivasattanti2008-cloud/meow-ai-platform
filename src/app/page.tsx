@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
 import { HeroVisual } from '@/components/home/HeroVisual';
+import { CallRecordingShowcase } from '@/components/voice/CallRecordingShowcase';
 import {
   Mic,
   Workflow,
@@ -264,6 +265,25 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* CALL RECORDING & VERNACULAR SHOWCASE */}
+        <section className="py-24 border-t border-white/[0.08] bg-zinc-950/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
+                AUTHENTIC AUDIO DEMONSTRATIONS
+              </h2>
+              <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                Hear Multilingual AI in Genuine Indian SMB Contexts
+              </h3>
+              <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
+                Experience actual conversational turns in Telugu and English. No robotic cadence—natural pacing, sub-300ms response times, and deterministic slot locking.
+              </p>
+            </div>
+
+            <CallRecordingShowcase />
           </div>
         </section>
 
