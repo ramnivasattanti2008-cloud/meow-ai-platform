@@ -16,7 +16,12 @@ import {
   Bell,
   Menu,
   X,
+  CreditCard,
+  PhoneCall,
+  CheckCircle2,
+  ExternalLink,
 } from 'lucide-react';
+import { EasyPaymentModal } from '@/components/payment/EasyPaymentModal';
 
 interface WorkspaceLayoutProps {
   children: React.ReactNode;
@@ -25,13 +30,14 @@ interface WorkspaceLayoutProps {
 export const WorkspaceLayout: React.FC<WorkspaceLayoutProps> = ({ children }) => {
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
 
   const navigation = [
-    { name: 'Dashboard', href: '/app', icon: LayoutDashboard },
-    { name: 'Voice Agents', href: '/app/agents', icon: Bot },
-    { name: 'Workflows', href: '/app/workflows', icon: WorkflowIcon },
-    { name: 'Campaigns', href: '/app/campaigns', icon: Zap },
-    { name: 'Settings', href: '/app/settings', icon: Settings },
+    { name: 'Overview', href: '/app', icon: LayoutDashboard },
+    { name: 'Voice Telephony (Sara)', href: '/app/agents', icon: Bot },
+    { name: 'Workflows & CRM', href: '/app/workflows', icon: WorkflowIcon },
+    { name: 'Campaigns & WhatsApp', href: '/app/campaigns', icon: Zap },
+    { name: 'Settings & Integrations', href: '/app/settings', icon: Settings },
   ];
 
   const isActive = (href: string) => {
@@ -45,9 +51,9 @@ export const WorkspaceLayout: React.FC<WorkspaceLayoutProps> = ({ children }) =>
       <div className="md:hidden flex items-center justify-between border-b border-white/[0.08] px-4 py-3 bg-zinc-900/60 backdrop-blur-xl sticky top-0 z-40">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-zinc-800 border border-white/10 flex items-center justify-center">
-            <Terminal className="w-3.5 h-3.5 text-violet-400" />
+            <Bot className="w-3.5 h-3.5 text-violet-400" />
           </div>
-          <span className="font-semibold text-sm">MEOW Workspace</span>
+          <span className="font-semibold text-sm">MEOW AI Console</span>
         </div>
         <button
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
@@ -78,16 +84,16 @@ export const WorkspaceLayout: React.FC<WorkspaceLayoutProps> = ({ children }) =>
             </div>
             <div>
               <div className="font-semibold text-sm tracking-tight text-white flex items-center gap-1.5">
-                MEOW AI
+                MEOW Console
               </div>
-              <div className="text-[10px] font-mono text-zinc-500">v1.0 Workspace</div>
+              <div className="text-[10px] font-mono text-zinc-500">Enterprise AI Ops</div>
             </div>
           </Link>
 
           <Link
             href="/"
             className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
-            title="Return to Public Website"
+            title="Public Website"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
@@ -116,46 +122,79 @@ export const WorkspaceLayout: React.FC<WorkspaceLayoutProps> = ({ children }) =>
           })}
         </nav>
 
-        {/* Demo Mode Badge in Sidebar */}
+        {/* Quick Operations Widget */}
         <div className="pt-4 border-t border-white/[0.08] mt-6 space-y-3 text-xs">
-          <div className="p-3 rounded-2xl bg-zinc-900/60 border border-white/[0.06] space-y-1.5">
-            <div className="flex items-center gap-1.5 text-zinc-300 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Demo Mode Active</span>
+          <div className="p-3.5 rounded-2xl bg-zinc-900/60 border border-white/[0.06] space-y-2">
+            <div className="flex items-center justify-between text-zinc-300 font-medium">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>System Live</span>
+              </span>
+              <span className="text-[10px] font-mono text-emerald-400">99.98%</span>
             </div>
-            <p className="text-[11px] text-zinc-400 leading-relaxed">
-              Safe local development store. Connect PostgreSQL / Prisma in production settings.
-            </p>
+            <div className="text-[11px] text-zinc-400 space-y-0.5 font-mono">
+              <div>Voice: Sara Engine (Active)</div>
+              <div>Payment: Razorpay + UPI</div>
+              <div>Cluster: AP-South (Mumbai)</div>
+            </div>
           </div>
-          <div className="text-[11px] font-mono text-zinc-400 px-1">
-            Founder: Ram Nivas Attanti
-          </div>
+
+          <button
+            type="button"
+            onClick={() => setPaymentModalOpen(true)}
+            className="w-full py-2.5 px-3 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-white/10 text-white font-medium text-xs flex items-center justify-center gap-2 transition-all hover:border-violet-500/40"
+          >
+            <CreditCard className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Payment Terminal</span>
+          </button>
         </div>
       </aside>
 
       {/* Main Content Area */}
       <main className="flex-1 min-w-0 flex flex-col">
-        {/* Global Demo Banner */}
-        <div className="bg-zinc-900/50 border-b border-white/[0.06] px-6 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
-          <div className="flex items-center gap-2 text-zinc-300">
-            <ShieldCheck className="w-3.5 h-3.5 text-violet-400 shrink-0" />
-            <span>
-              <strong>Demonstration Sandbox:</strong> All records are managed safely with persistent local state. No real telephony charges.
-            </span>
+        {/* Sleek Executive Top Header Bar */}
+        <div className="bg-zinc-900/60 backdrop-blur-xl border-b border-white/[0.08] px-6 py-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="font-semibold text-white">Production Workspace</span>
+            </div>
+            <span className="text-zinc-600">|</span>
+            <span className="text-zinc-400 font-mono">Dr. Rao Orthopedic Care</span>
           </div>
-          <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400">
-            <span>Server: Next.js App Router</span>
-            <span>•</span>
-            <span>Region: India</span>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/voice-ai"
+              className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 font-mono text-[11px]"
+            >
+              <PhoneCall className="w-3 h-3 text-violet-400" />
+              <span>Sara Voice Live</span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setPaymentModalOpen(true)}
+              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/10 text-white transition-all flex items-center gap-1.5 font-medium text-[11px]"
+            >
+              <CreditCard className="w-3 h-3 text-emerald-400" />
+              <span>Collect Payment</span>
+            </button>
           </div>
         </div>
 
-        {/* Injected View Body */}
+        {/* View Body */}
         <div className="flex-1 p-5 sm:p-8 lg:p-10 max-w-7xl w-full mx-auto">
           {children}
         </div>
       </main>
+
+      <EasyPaymentModal
+        isOpen={paymentModalOpen}
+        onClose={() => setPaymentModalOpen(false)}
+        defaultPlan="Client Invoice / Consultation Collection"
+        defaultAmount={600}
+      />
     </div>
   );
 };
-

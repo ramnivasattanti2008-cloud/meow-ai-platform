@@ -375,6 +375,26 @@ const PAGE_GUIDES: Record<string, PageGuideConfig> = {
 
 const KNOWLEDGE_RESPONSES = [
   {
+    keywords: ['website', 'web design', 'tech setup', 'setup', 'infrastructure', 'domain', 'email', 'design'],
+    answer:
+      "Yes! We provide end-to-end Website Designing & Full Tech Infrastructure Setup:\n• 🌐 Bespoke Next.js 14 websites with Apple/Linear-grade design & mobile CRO\n• ⚡ 100/100 Lighthouse performance & SEO setup\n• 🛠️ Complete tech setup: Custom domain DNS (Cloudflare), Google Workspace / Titan business emails, SSL certificates, and cloud hosting\n• 💬 WhatsApp quick chat & CRM integration\n\nTurnaround is just 48–72 hours for turnkey launch!",
+    links: [
+      { label: 'View Tech Setup Packages', href: '/pricing' },
+      { label: 'Configure Custom Stack', href: '/ai-services#automation-configurator' },
+      { label: 'Book Discovery Call', href: '/book' },
+    ],
+  },
+  {
+    keywords: ['payment', 'gateway', 'pay', 'upi', 'razorpay', 'stripe', 'qr', 'checkout', 'advance'],
+    answer:
+      "We provide Turnkey Easy Payment Gateway Setup & Instant Checkout:\n• ⚡ Instant UPI QR (Google Pay, PhonePe, Paytm, BHIM, Cred)\n• 💳 Credit & Debit Cards (Visa, MasterCard, RuPay, Amex)\n• 🏦 Netbanking (50+ Indian Banks)\n• 🧾 Automated GST digital tax invoices & WhatsApp confirmation dispatch\n• 🔄 Real-time webhook synchronization into your CRM & accounting ledger\n\nYou can test or pay directly right now on our Pricing or Dashboard page!",
+    links: [
+      { label: 'Open Pricing & Payment', href: '/pricing' },
+      { label: 'Console Payment Terminal', href: '/app' },
+      { label: 'Configure Services', href: '/ai-services' },
+    ],
+  },
+  {
     keywords: ['sara', 'girl', 'cute', 'voice', 'who is sara'],
     answer:
       "Sara is MEOW AI's cute and charming front-desk voice concierge! She speaks all 8 major Indian languages (Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English) with a warm, natural human tone. She books appointments, answers consultation fee questions, and handles clinic inquiries with sub-300ms latency.",

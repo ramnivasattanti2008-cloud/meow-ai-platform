@@ -53,13 +53,18 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/ai-services" className="hover:text-white transition-colors">
-                  Custom AI Services
+                <Link href="/ai-services#automation-configurator" className="hover:text-white transition-colors">
+                  Website &amp; Tech Setup
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="hover:text-white transition-colors">
+                  Payment Gateway Setup
                 </Link>
               </li>
               <li>
                 <Link href="/app" className="text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-1 font-mono text-xs">
-                  <span>Workspace Demo</span>
+                  <span>Enterprise Console</span>
                   <ArrowUpRight className="w-3 h-3" />
                 </Link>
               </li>

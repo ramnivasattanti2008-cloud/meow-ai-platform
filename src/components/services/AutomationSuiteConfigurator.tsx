@@ -17,8 +17,12 @@ import {
   Calendar,
   Lock,
   ChevronRight,
+  Globe,
+  CreditCard,
+  Layout,
 } from 'lucide-react';
 import Link from 'next/link';
+import { EasyPaymentModal } from '@/components/payment/EasyPaymentModal';
 
 interface AutomationModule {
   id: string;
@@ -47,6 +51,33 @@ const AUTOMATION_MODULES: AutomationModule[] = [
       'Official Meta Cloud API integration. Instant appointment tokens, Google Maps location pins, PDF lab report dispatch, and catalog checkout.',
     typicalRoi: '98% open rate, cuts no-shows by 40%',
     icon: MessageSquare,
+  },
+  {
+    id: 'web-design',
+    name: 'Bespoke Website Designing & Web Apps',
+    category: 'Digital Experience & Web',
+    description:
+      'Apple/Linear-grade bespoke responsive website design, custom Next.js 14 web app development, interactive animations, SEO indexing, and sub-second load times.',
+    typicalRoi: '2.6x improvement in visitor conversion & brand authority',
+    icon: Globe,
+  },
+  {
+    id: 'tech-setup',
+    name: 'Complete Tech Infrastructure Setup',
+    category: 'Full-Stack Setup',
+    description:
+      'Domain DNS setup (Cloudflare/GoDaddy), Google Workspace/Titan business emails, DMARC/SPF/DKIM deliverability, SSL encryption, Vercel/AWS cloud hosting, and PostgreSQL databases.',
+    typicalRoi: '100% turnkey launch ready in 48 hours without engineering friction',
+    icon: Server,
+  },
+  {
+    id: 'payment-gateway',
+    name: 'Easy Payment Gateway & Automated Checkout',
+    category: 'Fintech & Monetization',
+    description:
+      'Turnkey Razorpay, Stripe, and instant UPI QR integration. Accept Google Pay, PhonePe, Cards, Netbanking with automated GST tax invoices and CRM revenue sync.',
+    typicalRoi: '0% dropped checkout transactions & immediate settlement',
+    icon: CreditCard,
   },
   {
     id: 'crm-sync',
@@ -101,6 +132,7 @@ export const AutomationSuiteConfigurator: React.FC = () => {
     'crm-sync',
   ]);
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>(['te', 'en']);
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
 
   const toggleModule = (id: string) => {
     setSelectedModules((prev) =>
@@ -292,7 +324,16 @@ export const AutomationSuiteConfigurator: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setPaymentModalOpen(true)}
+            className="px-5 py-3 rounded-2xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 hover:border-violet-500/40 text-white font-semibold text-xs transition-all flex items-center gap-2 shadow-sm"
+          >
+            <CreditCard className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Pay Setup Advance (Instant UPI / Card)</span>
+          </button>
+
           <Link
             href="/book"
             className="px-6 py-3 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-xs transition-all flex items-center gap-2 shadow-lg active:scale-95"
@@ -302,6 +343,13 @@ export const AutomationSuiteConfigurator: React.FC = () => {
           </Link>
         </div>
       </div>
+
+      <EasyPaymentModal
+        isOpen={paymentModalOpen}
+        onClose={() => setPaymentModalOpen(false)}
+        defaultPlan={`Custom Automation Stack (${selectedModules.length} Modules)`}
+        defaultAmount={selectedModules.includes('web-design') ? 45000 : 25000}
+      />
     </div>
   );
 };

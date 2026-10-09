@@ -19,8 +19,10 @@ import {
   Building,
   Phone,
   HelpCircle,
+  CreditCard,
 } from 'lucide-react';
 import Link from 'next/link';
+import { EasyPaymentModal } from '@/components/payment/EasyPaymentModal';
 
 interface TimeSlot {
   time: string;
@@ -76,6 +78,7 @@ export default function BookCallPage() {
   
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -185,21 +188,30 @@ export default function BookCallPage() {
                   </div>
                 </div>
 
-                {/* Download .ics Button */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
                   <button
                     onClick={downloadICS}
-                    className="w-full sm:w-auto px-6 py-3 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-subtle"
+                    className="w-full sm:w-auto px-5 py-3 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-subtle"
                   >
                     <Download className="w-4 h-4" />
-                    <span>Add to Calendar (.ics download)</span>
+                    <span>Add to Calendar (.ics)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPaymentModalOpen(true)}
+                    className="w-full sm:w-auto px-5 py-3 rounded-full bg-zinc-900 hover:bg-zinc-850 text-white border border-white/10 hover:border-violet-500/40 transition-all text-xs font-medium flex items-center justify-center gap-2"
+                  >
+                    <CreditCard className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Fast-Track Advance (₹600 UPI)</span>
                   </button>
 
                   <Link
                     href="/"
-                    className="w-full sm:w-auto px-6 py-3 rounded-full bg-zinc-800 text-zinc-300 hover:text-white border border-white/10 transition-colors text-xs font-medium"
+                    className="w-full sm:w-auto px-5 py-3 rounded-full bg-zinc-800 text-zinc-300 hover:text-white border border-white/10 transition-colors text-xs font-medium"
                   >
-                    Return to Homepage
+                    Return Home
                   </Link>
                 </div>
               </div>
@@ -434,6 +446,13 @@ export default function BookCallPage() {
           </div>
         </div>
       </main>
+
+      <EasyPaymentModal
+        isOpen={paymentModalOpen}
+        onClose={() => setPaymentModalOpen(false)}
+        defaultPlan="Fast-Track Discovery & Architecture Advance"
+        defaultAmount={600}
+      />
 
       <Footer />
     </div>

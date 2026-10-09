@@ -85,7 +85,7 @@ export const Navbar: React.FC = () => {
               className="px-3.5 py-2 text-xs font-mono font-medium text-zinc-300 hover:text-white rounded-lg border border-white/10 hover:border-white/20 bg-zinc-900/50 hover:bg-zinc-800/60 transition-all flex items-center gap-2"
             >
               <Terminal className="w-3.5 h-3.5 text-violet-400" />
-              <span>Workspace Demo</span>
+              <span>Console</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             </Link>
 
