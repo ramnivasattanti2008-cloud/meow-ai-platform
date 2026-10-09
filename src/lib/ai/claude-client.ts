@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { voiceEngine, VoiceDialogueTurnOutput } from '../voice/engine';
 
 export interface ClaudeConfigStatus {
   configured: boolean;
@@ -183,6 +184,97 @@ Do not wrap in markdown quotes. Return strictly valid JSON.`;
       executionChecklist: checklist,
       providerUsed: 'deterministic_demo_engine',
       generatedAt: new Date().toISOString(),
+    };
+  }
+
+  /**
+   * Generates a hyper-realistic conversational telephony dialogue turn.
+   * If ANTHROPIC_API_KEY is available, calls Claude 3 Haiku with sub-300ms stream prompt.
+   * Otherwise, delegates to the ultra-realistic deterministic VoiceEngine.
+   */
+  public async generateVoiceDialogueTurn(input: {
+    userInput: string;
+    language: 'te' | 'en';
+    purpose?: 'appointment_booking' | 'customer_support' | 'lead_qualification' | 'order_inquiries';
+    history?: Array<{ speaker: 'agent' | 'user'; text: string }>;
+    personaName?: string;
+    businessName?: string;
+  }): Promise<VoiceDialogueTurnOutput & { providerUsed: 'anthropic_claude' | 'hyper_real_voice_engine' }> {
+    if (this.client && this.apiKey) {
+      try {
+        const persona = input.personaName || 'Maya';
+        const business = input.businessName || 'Dr. Rao Orthopedic Care, Hyderabad';
+        const isTelugu = input.language === 'te';
+
+        const systemPrompt = `You are ${persona}, an ultra-charming, highly professional front-desk concierge for ${business}.
+You are speaking ON A LIVE TELEPHONE CALL with a customer.
+
+CRITICAL INSTRUCTIONS FOR ULTRA-REALISTIC TELEPHONY:
+1. Speak exactly like a real human receptionist on the phone. Never sound like a robot, an essay, or a chatbot.
+2. Keep your answers short: 1 to 2 spoken sentences maximum (under 30 words). Phone callers do not listen to monologues.
+3. Use natural spoken conversational markers ("Ah, got it!", "Sure thing", "Oh wonderful", "Let me check that right away for you", "హా, తప్పకుండా అండి", "అయ్యో", "సరే అండి").
+4. If language is Telugu ('te'), respond in warm, natural conversational Telugu (or natural code-mixed Telugu-English like educated Hyderabad/Vizag locals speak).
+5. If the caller asks if you are an AI, respond with natural warmth, humor, and transparency ("Haha, caught me! Yes, I'm MEOW AI's voice assistant, but I'm connected straight to Dr. Rao's front desk so you don't wait on hold. How can I help you today?").
+6. If the caller has chest pain, severe bleeding, or an emergency, immediately flag emergency_medical_escalation and transfer them to the duty nurse.
+7. Return strictly valid JSON with keys:
+- agentResponse: string (the exact spoken words to say aloud)
+- intentDetected: string
+- shouldEscalateToHuman: boolean
+- actionExecuted: optional object { toolName: string, status: "success", details: string }
+
+Do NOT wrap with markdown code blocks.`;
+
+        const recentHistory = (input.history || []).slice(-4).map((h) => ({
+          role: h.speaker === 'user' ? ('user' as const) : ('assistant' as const),
+          content: h.text,
+        }));
+
+        const messages: Array<{ role: 'user' | 'assistant'; content: string }> = [
+          ...recentHistory,
+          { role: 'user', content: input.userInput },
+        ];
+
+        const response = await this.client.messages.create({
+          model: this.fallbackModel, // Claude 3 Haiku for lowest telephony latency
+          max_tokens: 200,
+          temperature: 0.6,
+          system: systemPrompt,
+          messages,
+        });
+
+        const rawText = response.content[0]?.type === 'text' ? response.content[0].text : '';
+        const parsed = JSON.parse(rawText.replace(/```json/g, '').replace(/```/g, '').trim());
+
+        return {
+          agentResponse: parsed.agentResponse || 'Certainly! How can I assist you with your appointment today?',
+          language: input.language,
+          intentDetected: parsed.intentDetected || 'general_dialogue',
+          shouldEscalateToHuman: Boolean(parsed.shouldEscalateToHuman),
+          actionExecuted: parsed.actionExecuted,
+          providerUsed: 'anthropic_claude',
+        };
+      } catch (err) {
+        console.warn('[ClaudeAdapter] Live voice turn fallback to VoiceEngine:', err);
+      }
+    }
+
+    // High-fidelity local voice engine fallback
+    const localResult = voiceEngine.processTurn({
+      userInput: input.userInput,
+      language: input.language,
+      purpose: input.purpose || 'appointment_booking',
+      history: (input.history || []).map((h, i) => ({
+        id: `h-${i}`,
+        speaker: h.speaker,
+        language: input.language,
+        timestamp: 'Just now',
+        text: h.text,
+      })),
+    });
+
+    return {
+      ...localResult,
+      providerUsed: 'hyper_real_voice_engine',
     };
   }
 }

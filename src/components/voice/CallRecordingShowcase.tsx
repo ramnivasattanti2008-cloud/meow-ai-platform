@@ -36,8 +36,8 @@ const CALL_SAMPLES: CallSample[] = [
     turns: [
       {
         speaker: 'agent',
-        text: 'నమస్కారం! డాక్టర్ రావు ఆర్థోపెడిక్ క్లినిక్ AI సహాయకురాలిని. నేను ఒక ఆటోమేటెడ్ అసిస్టెంట్‌ని. మీకు డాక్టర్‌గారితో అపాయింట్‌మెంట్ కావాలా?',
-        textEnTranslation: 'Namaskaram! I am Dr. Rao Clinic AI voice assistant. I am an automated assistant. Would you like to schedule an appointment with the doctor?',
+        text: 'నమస్కారం అండి! డాక్టర్ రావు ఆర్థోపెడిక్ క్లినిక్ కి స్వాగతం. నా పేరు ప్రియ, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ గురించి మాట్లాడుతున్నారా?',
+        textEnTranslation: 'Namaskaram! Welcome to Dr. Rao Orthopedic Care. This is Priya from the front desk. How can I help with your consultation today?',
         startSec: 0,
         endSec: 7,
       },
@@ -50,22 +50,22 @@ const CALL_SAMPLES: CallSample[] = [
       },
       {
         speaker: 'agent',
-        text: 'తప్పకుండా అండి. రేపు సాయంత్రం 5:30 లేదా 6:15 ఖాళీగా ఉన్నాయి. మీకు ఏ సమయం అనుకూలంగా ఉంటుంది?',
-        textEnTranslation: 'Certainly. Tomorrow evening 5:30 PM and 6:15 PM are open. Which time works best for you?',
+        text: 'అయ్యో మోకాళ్ళ నొప్పా అండి... తప్పకుండా చూపిద్దాం. రేపు సాయంత్రం 5:30 లేదా 6:15 ఖాళీగా ఉన్నాయి. మీకు ఏ సమయం అనుకూలంగా ఉంటుంది?',
+        textEnTranslation: 'Oh, knee pain... let us definitely get that checked. Tomorrow evening 5:30 PM and 6:15 PM are open. Which time works best for you?',
         startSec: 14,
         endSec: 20,
       },
       {
         speaker: 'caller',
         text: '5:30 సరిపోతుంది. కన్ఫర్మ్ చేయండి.',
-        textEnTranslation: '5:30 PM is perfect. Please confirm.',
+        textEnTranslation: '5:30 PM is perfect. Please confirm that slot.',
         startSec: 21,
         endSec: 24,
       },
       {
         speaker: 'agent',
-        text: 'ధన్యవాదాలు! రేపు సాయంత్రం 5:30 కి మీ అపాయింట్‌మెంట్ బుక్ చేయబడింది. కన్ఫర్మేషన్ వివరాలు వాట్సాప్‌లో పంపాము.',
-        textEnTranslation: 'Thank you! Your appointment is confirmed for tomorrow 5:30 PM. Details have been dispatched via WhatsApp.',
+        text: 'పర్ఫెక్ట్ అండి! రేపు సాయంత్రం 5:30 కి మీ అపాయింట్‌మెంట్ కన్ఫర్మ్ చేశాను. గూగుల్ మ్యాప్స్ మరియు కన్ఫర్మేషన్ వివరాలు వాట్సాప్‌లో పంపించాను. టేక్ కేర్ అండి!',
+        textEnTranslation: 'Perfect! Confirmed for tomorrow at 5:30 PM. Clinic map directions and token details have been sent to your WhatsApp. Take care!',
         startSec: 25,
         endSec: 28,
       },
@@ -84,19 +84,19 @@ const CALL_SAMPLES: CallSample[] = [
     turns: [
       {
         speaker: 'agent',
-        text: 'Good afternoon! Thank you for inquiring about Prestige Lakeside Habitat. I am MEOW AI property assistant. Are you exploring 2 BHK or 3 BHK configurations?',
+        text: 'Good afternoon! Thanks for reaching out to Prestige Lakeside Habitat. This is Ananya. Are you exploring our 2 BHK residences or our premium 3 BHK units?',
         startSec: 0,
         endSec: 6,
       },
       {
         speaker: 'caller',
-        text: 'Hi, we are looking for a 3 BHK unit on a higher floor with a lake-facing view.',
+        text: 'Hi Ananya, we are looking for a 3 BHK unit on a higher floor with a lake view.',
         startSec: 7,
         endSec: 11,
       },
       {
         speaker: 'agent',
-        text: 'Understood. We have premium 3 BHK units from 1850 square feet starting at 1.95 Crores. Would this align with your budget window?',
+        text: 'Oh wonderful! Our Tower 4 lake-facing residences start at 1.95 Crores with 1850 square feet. Does that align comfortably with your budget?',
         startSec: 12,
         endSec: 17,
       },
@@ -108,7 +108,7 @@ const CALL_SAMPLES: CallSample[] = [
       },
       {
         speaker: 'agent',
-        text: 'Excellent. I have locked your VIP site visit for Saturday at 11:30 AM with senior relationship manager Ananya.',
+        text: 'Certainly! I have reserved your VIP private site tour for this Saturday at 11:30 AM. Meeting pass has been sent to your WhatsApp.',
         startSec: 22,
         endSec: 24,
       },

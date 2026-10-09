@@ -69,5 +69,56 @@ describe('VoiceEngine (Multilingual Telugu & English)', () => {
     expect(result.intentDetected).toBe('request_human_handoff');
     expect(result.agentResponse).toContain('automated AI assistant');
   });
+
+  it('handles "are you an AI?" query with charm and transparency', () => {
+    const result = voiceEngine.processTurn({
+      userInput: 'Wait, are you a real person or an AI robot?',
+      language: 'en',
+      purpose: 'appointment_booking',
+      history: [],
+    });
+
+    expect(result.intentDetected).toBe('ai_transparency_inquiry');
+    expect(result.agentResponse).toContain('caught me');
+    expect(result.shouldEscalateToHuman).toBe(false);
+  });
+
+  it('handles knee pain symptom query with specialist empathy', () => {
+    const result = voiceEngine.processTurn({
+      userInput: 'I have severe knee pain since yesterday morning',
+      language: 'en',
+      purpose: 'appointment_booking',
+      history: [],
+    });
+
+    expect(result.intentDetected).toBe('schedule_appointment_slot_selection');
+    expect(result.agentResponse).toContain('orthopedic surgeon');
+    expect(result.actionExecuted?.toolName).toBe('query_calendar_availability');
+  });
+
+  it('handles consultation fee inquiry transparently', () => {
+    const result = voiceEngine.processTurn({
+      userInput: 'How much are the consultation fees?',
+      language: 'en',
+      purpose: 'appointment_booking',
+      history: [],
+    });
+
+    expect(result.intentDetected).toBe('inquire_consultation_fee');
+    expect(result.agentResponse).toContain('₹600');
+  });
+
+  it('handles clinic location inquiry with landmark and valet parking', () => {
+    const result = voiceEngine.processTurn({
+      userInput: 'Where is the clinic located? Is parking available?',
+      language: 'en',
+      purpose: 'appointment_booking',
+      history: [],
+    });
+
+    expect(result.intentDetected).toBe('inquire_clinic_location');
+    expect(result.agentResponse).toContain('Jubilee Hills');
+    expect(result.agentResponse).toContain('valet parking');
+  });
 });
 
