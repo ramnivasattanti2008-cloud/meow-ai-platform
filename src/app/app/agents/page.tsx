@@ -13,18 +13,22 @@ import {
   Search,
   Filter,
   ShieldAlert,
+  PhoneCall,
+  Sparkles,
   X,
 } from 'lucide-react';
 import { Agent, SupportedLanguage } from '@/lib/types';
 import { AgentSchema } from '@/lib/validation';
+import { SaraDialerModal } from '@/components/voice/SaraDialerModal';
 
 export default function WorkspaceAgentsPage() {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [languageFilter, setLanguageFilter] = useState<'all' | 'en' | 'te'>('all');
+  const [languageFilter, setLanguageFilter] = useState<'all' | SupportedLanguage>('all');
   const [modalOpen, setModalOpen] = useState(false);
   const [editingAgent, setEditingAgent] = useState<Agent | null>(null);
+  const [testCallingAgent, setTestCallingAgent] = useState<Agent | null>(null);
 
   const [form, setForm] = useState({
     name: '',
@@ -176,33 +180,35 @@ export default function WorkspaceAgentsPage() {
             />
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-zinc-400">LANGUAGE:</span>
-            <div className="flex items-center bg-zinc-900 border border-white/10 rounded-xl p-0.5 text-xs">
-              <button
-                onClick={() => setLanguageFilter('all')}
-                className={`px-3 py-1 rounded-lg ${
-                  languageFilter === 'all' ? 'bg-zinc-800 text-white' : 'text-zinc-400'
-                }`}
-              >
-                All ({agents.length})
-              </button>
-              <button
-                onClick={() => setLanguageFilter('te')}
-                className={`px-3 py-1 rounded-lg ${
-                  languageFilter === 'te' ? 'bg-violet-600 text-white' : 'text-zinc-400'
-                }`}
-              >
-                Telugu
-              </button>
-              <button
-                onClick={() => setLanguageFilter('en')}
-                className={`px-3 py-1 rounded-lg ${
-                  languageFilter === 'en' ? 'bg-violet-600 text-white' : 'text-zinc-400'
-                }`}
-              >
-                English
-              </button>
+          <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1">
+            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider shrink-0 mr-1">
+              Language:
+            </span>
+            <div className="flex items-center gap-1 text-xs">
+              {[
+                { code: 'all', label: 'All' },
+                { code: 'te', label: 'Telugu' },
+                { code: 'en', label: 'English' },
+                { code: 'hi', label: 'Hindi' },
+                { code: 'ta', label: 'Tamil' },
+                { code: 'kn', label: 'Kannada' },
+                { code: 'ml', label: 'Malayalam' },
+                { code: 'mr', label: 'Marathi' },
+                { code: 'bn', label: 'Bengali' },
+              ].map((item) => (
+                <button
+                  key={item.code}
+                  type="button"
+                  onClick={() => setLanguageFilter(item.code as any)}
+                  className={`px-2.5 py-1 rounded-lg transition-all shrink-0 font-medium ${
+                    languageFilter === item.code
+                      ? 'bg-violet-600 text-white font-bold shadow-sm'
+                      : 'bg-zinc-900 border border-white/[0.06] text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -268,10 +274,19 @@ export default function WorkspaceAgentsPage() {
                 </div>
 
                 <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs">
-                  <span className="font-mono text-[10px] text-zinc-400">
-                    Lang: {agent.language.toUpperCase()}
-                  </span>
-                  <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setTestCallingAgent(agent)}
+                    className="px-2.5 py-1 rounded-lg bg-violet-600/20 hover:bg-violet-600/30 text-violet-300 font-mono text-[11px] flex items-center gap-1.5 transition-colors"
+                  >
+                    <PhoneCall className="w-3 h-3 text-violet-400" />
+                    <span>Test Voice Call</span>
+                  </button>
+
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-mono text-[10px] text-zinc-500 mr-1 uppercase">
+                      {agent.language}
+                    </span>
                     <button
                       onClick={() => openEditModal(agent)}
                       className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
@@ -342,11 +357,34 @@ export default function WorkspaceAgentsPage() {
                     <label className="block font-medium text-zinc-300 mb-1">Primary Language</label>
                     <select
                       value={form.language}
-                      onChange={(e) => setForm({ ...form, language: e.target.value as any })}
+                      onChange={(e) => {
+                        const newLang = e.target.value as SupportedLanguage;
+                        const defaultGreetings: Record<SupportedLanguage, string> = {
+                          te: 'నమస్కారం! నేను మీ AI అసిస్టెంట్‌ని. మీకు ఏ విధంగా సహాయపడగలను?',
+                          en: 'Hi! I am your AI receptionist. How can I help you today?',
+                          hi: 'नमस्ते! मैं आपकी AI रिसेप्शनिस्ट हूँ। आज आपकी क्या मदद कर सकती हूँ?',
+                          ta: 'வணக்கம்! நான் உங்கள் AI வரவேற்பாளர். இன்று உங்களுக்கு எப்படி உதவ முடியும்?',
+                          kn: 'ನಮಸ್ಕಾರ! ನಾನು ನಿಮ್ಮ AI ಸಹಾಯಕ. ಇಂದು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಲಿ?',
+                          ml: 'നമസ്കാരം! ഞാൻ നിങ്ങളുടെ AI അസിസ്റ്റന്റാണ്. ഇന്ന് എങ്ങനെ സഹായിക്കണം?',
+                          mr: 'नमस्कार! मी आपली AI रिसेप्शनिस्ट आहे. आज मी आपल्याला कशी मदत करू शकते?',
+                          bn: 'নমস্কার! আমি আপনার AI অ্যাসিস্ট্যান্ট। আজ আপনাকে কীভাবে সাহায্য করতে পারি?',
+                        };
+                        setForm({
+                          ...form,
+                          language: newLang,
+                          greeting: defaultGreetings[newLang] || form.greeting,
+                        });
+                      }}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-white focus:outline-none focus:border-violet-500/50"
                     >
                       <option value="te">తెలుగు (Telugu - te-IN)</option>
                       <option value="en">English (Indian - en-IN)</option>
+                      <option value="hi">हिन्दी (Hindi - hi-IN)</option>
+                      <option value="ta">தமிழ் (Tamil - ta-IN)</option>
+                      <option value="kn">ಕನ್ನಡ (Kannada - kn-IN)</option>
+                      <option value="ml">മലയാളം (Malayalam - ml-IN)</option>
+                      <option value="mr">मराठी (Marathi - mr-IN)</option>
+                      <option value="bn">বাংলা (Bengali - bn-IN)</option>
                     </select>
                   </div>
                 </div>
@@ -422,6 +460,14 @@ export default function WorkspaceAgentsPage() {
             </div>
           </div>
         )}
+
+        {/* Live In-App Voice Testing Dialer */}
+        <SaraDialerModal
+          isOpen={Boolean(testCallingAgent)}
+          onClose={() => setTestCallingAgent(null)}
+          initialLanguage={testCallingAgent?.language || 'te'}
+          agentName={testCallingAgent?.name}
+        />
       </div>
     </WorkspaceLayout>
   );

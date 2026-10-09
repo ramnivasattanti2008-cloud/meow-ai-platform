@@ -20,9 +20,9 @@ import {
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'MEOW Voice AI — Multilingual Inbound & Outbound Voice Agents',
+  title: 'MEOW Voice AI — Sara: Multilingual Inbound & Outbound Voice Receptionist',
   description:
-    'Conversational voice agents speaking native Telugu and Indian English. Handles appointment bookings, lead qualification, and after-hours customer support with human handoffs.',
+    'Empathetic, hyper-realistic voice receptionist Sara speaking in 8 Indian languages (Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, English). Handles appointment bookings, lead qualification, and customer triage.',
 };
 
 export default function VoiceAiPage() {
@@ -77,7 +77,7 @@ export default function VoiceAiPage() {
           </h1>
 
           <p className="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Engineered for India’s multilingual reality. Native dialogue in Telugu (తెలుగు) and English, backed by deterministic slot reservation and responsible human escalation.
+            Engineered for India’s multilingual reality. Voiced by <strong>Sara</strong> — a cute, empathetic front-desk receptionist speaking fluently in Telugu (తెలుగు), Hindi (हिन्दी), Tamil (தமிழ்), Kannada (ಕನ್ನಡ), Malayalam (മലയാളം), Marathi (मराठी), Bengali (বাংলা), and Indian English. Backed by real calendar slot locking and safety escalation.
           </p>
         </div>
 

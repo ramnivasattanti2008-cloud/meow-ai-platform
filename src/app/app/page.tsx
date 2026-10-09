@@ -32,6 +32,7 @@ import { AppointmentsHub } from '@/components/dashboard/AppointmentsHub';
 import { PaymentLinkGenerator } from '@/components/dashboard/PaymentLinkGenerator';
 import { CustomAgentWizardModal } from '@/components/voice/CustomAgentWizardModal';
 import { WebsiteStudioModal } from '@/components/services/WebsiteStudioModal';
+import { SaraDialerModal } from '@/components/voice/SaraDialerModal';
 
 export default function WorkspaceDashboardPage() {
   const [agents, setAgents] = useState<Agent[]>([]);
@@ -43,6 +44,7 @@ export default function WorkspaceDashboardPage() {
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [wizardModalOpen, setWizardModalOpen] = useState(false);
   const [websiteStudioOpen, setWebsiteStudioOpen] = useState(false);
+  const [dialerOpen, setDialerOpen] = useState(false);
 
   // Active view tab in dashboard
   const [activeTab, setActiveTab] = useState<'appointments' | 'payments' | 'agents' | 'workflows'>('appointments');
@@ -118,13 +120,16 @@ export default function WorkspaceDashboardPage() {
               <span>Collect / Pay</span>
             </button>
 
-            <Link
-              href="/voice-ai"
-              className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-white font-mono text-xs transition-all flex items-center gap-1.5"
+            {/* Quick Action: Live Sara Dialer */}
+            <button
+              type="button"
+              onClick={() => setDialerOpen(true)}
+              className="px-3.5 py-2 rounded-xl bg-violet-600/20 hover:bg-violet-600/30 border border-violet-500/30 text-violet-200 font-mono text-xs transition-all flex items-center gap-1.5 shadow-sm"
             >
               <PhoneCall className="w-3.5 h-3.5 text-violet-400" />
               <span>Sara Web Dialer</span>
-            </Link>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            </button>
           </div>
         </div>
 
@@ -401,6 +406,13 @@ export default function WorkspaceDashboardPage() {
         onClose={() => setPaymentModalOpen(false)}
         defaultPlan="Direct Consultation / Service Advance"
         defaultAmount={600}
+      />
+
+      {/* Live In-App Sara Voice Dialer Modal */}
+      <SaraDialerModal
+        isOpen={dialerOpen}
+        onClose={() => setDialerOpen(false)}
+        initialLanguage="te"
       />
     </WorkspaceLayout>
   );

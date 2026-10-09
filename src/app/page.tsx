@@ -44,17 +44,17 @@ export default function HomePage() {
     },
     {
       id: 'voice',
-      title: 'MEOW Voice',
-      tagline: 'Multilingual inbound & outbound voice agents',
+      title: 'MEOW Voice (Sara Concierge)',
+      tagline: 'Hyper-realistic voice receptionist in 8 Indian languages',
       description:
-        'Conversational phone agents that speak natural English and Telugu (తెలుగు). Designed for Indian commercial realities—answering after-hours inquiries, qualifying leads, and locking appointment slots.',
+        'Voiced by Sara — an empathetic, cute, and human-like voice receptionist speaking Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English. Handles clinic inquiries, checks doctor schedules, locks calendar slots, and escalates emergencies.',
       icon: Mic,
       href: '/voice-ai',
       features: [
-        'Telugu & Indian English vernacular support',
-        'Direct calendar slot reservation & locking',
+        '8 Indian languages (Telugu, Hindi, Tamil, Kannada +)',
+        'Real calendar slot reservation & double-booking protection',
         'Emergency symptom detection & immediate nurse transfer',
-        'Strict AI disclosure—never pretends to be human',
+        'Live in-browser web dialer with instant speech synthesis',
       ],
     },
     {
