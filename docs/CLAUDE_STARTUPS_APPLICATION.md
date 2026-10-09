@@ -11,9 +11,9 @@
 
 - **Legal / Operational Name:** MEOW AI
 - **Founder Name:** Ram Nivas Attanti
-- **Founder Business Email:** `ramnivasattanti2008@gmail.com` (or university student email `...@jainuniversity.ac.in`)
+- **Founder Business Email:** `ramnivas@meowai.tech` (Secondary: `ramnivasattanti2008@gmail.com`)
 - **Founder Background:** Undergraduate Student in Computer Science and Business Systems (CSBS) at Jain University, Bengaluru, Karnataka, India. Active technical builder in AI engineering, agentic systems, and full-stack software.
-- **Company Website:** `https://meowai-platform.vercel.app` (Live Production Deployment)
+- **Company Website:** `https://meowai.tech` (Deployment alias: `https://meowai-platform.vercel.app`)
 - **GitHub Repository:** `https://github.com/ramnivasattanti2008-cloud/meow-ai-platform`
 - **Year Founded:** 2026
 - **Headquarters:** Bengaluru, Karnataka, India
