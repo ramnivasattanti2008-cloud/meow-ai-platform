@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { store } from '@/lib/store';
+import { db } from '@/lib/db';
 import { AgentSchema } from '@/lib/validation';
 
 export async function GET() {
-  const agents = store.getAgents();
+  const agents = await db.getAgents();
   return NextResponse.json({ agents });
 }
 
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const newAgent = store.addAgent(parseResult.data);
+    const newAgent = await db.addAgent(parseResult.data);
     return NextResponse.json({ agent: newAgent }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to create agent' }, { status: 500 });

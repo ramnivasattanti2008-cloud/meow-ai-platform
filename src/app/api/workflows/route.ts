@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { store } from '@/lib/store';
+import { db } from '@/lib/db';
 import { WorkflowSchema } from '@/lib/validation';
 
 export async function GET() {
-  const workflows = store.getWorkflows();
+  const workflows = await db.getWorkflows();
   return NextResponse.json({ workflows });
 }
 
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const newWorkflow = store.addWorkflow(parseResult.data);
+    const newWorkflow = await db.addWorkflow(parseResult.data);
     return NextResponse.json({ workflow: newWorkflow }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to create workflow' }, { status: 500 });

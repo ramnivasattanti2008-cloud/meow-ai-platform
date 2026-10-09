@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { store } from '@/lib/store';
+import { db } from '@/lib/db';
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const workflow = store.getWorkflow(params.id);
+  const workflow = await db.getWorkflow(params.id);
   if (!workflow) {
     return NextResponse.json({ error: 'Workflow not found' }, { status: 404 });
   }
@@ -18,7 +18,7 @@ export async function PATCH(
 ) {
   try {
     const body = await req.json();
-    const updated = store.updateWorkflow(params.id, body);
+    const updated = await db.updateWorkflow(params.id, body);
     if (!updated) {
       return NextResponse.json({ error: 'Workflow not found' }, { status: 404 });
     }
@@ -32,7 +32,7 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const deleted = store.deleteWorkflow(params.id);
+  const deleted = await db.deleteWorkflow(params.id);
   if (!deleted) {
     return NextResponse.json({ error: 'Workflow not found' }, { status: 404 });
   }

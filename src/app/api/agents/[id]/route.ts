@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { store } from '@/lib/store';
+import { db } from '@/lib/db';
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const agent = store.getAgent(params.id);
+  const agent = await db.getAgent(params.id);
   if (!agent) {
     return NextResponse.json({ error: 'Agent not found' }, { status: 404 });
   }
@@ -18,7 +18,7 @@ export async function PATCH(
 ) {
   try {
     const body = await req.json();
-    const updated = store.updateAgent(params.id, body);
+    const updated = await db.updateAgent(params.id, body);
     if (!updated) {
       return NextResponse.json({ error: 'Agent not found' }, { status: 404 });
     }
@@ -32,7 +32,7 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const deleted = store.deleteAgent(params.id);
+  const deleted = await db.deleteAgent(params.id);
   if (!deleted) {
     return NextResponse.json({ error: 'Agent not found' }, { status: 404 });
   }

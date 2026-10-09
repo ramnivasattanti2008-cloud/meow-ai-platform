@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { store } from '@/lib/store';
+import { db } from '@/lib/db';
 
 export async function GET() {
-  const campaigns = store.getCampaigns();
+  const campaigns = await db.getCampaigns();
   return NextResponse.json({ campaigns });
 }
 
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Campaign name and offer are required' }, { status: 400 });
     }
 
-    const newCampaign = store.addCampaign({
+    const newCampaign = await db.addCampaign({
       name: body.name,
       businessType: body.businessType || 'General SMB',
       targetAudience: body.targetAudience || 'Target Audience',

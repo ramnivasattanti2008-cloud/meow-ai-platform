@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { store } from '@/lib/store';
+import { db } from '@/lib/db';
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const campaign = store.getCampaign(params.id);
+  const campaign = await db.getCampaign(params.id);
   if (!campaign) {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
@@ -18,7 +18,7 @@ export async function PATCH(
 ) {
   try {
     const body = await req.json();
-    const updated = store.updateCampaign(params.id, body);
+    const updated = await db.updateCampaign(params.id, body);
     if (!updated) {
       return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
     }
@@ -32,7 +32,7 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const deleted = store.deleteCampaign(params.id);
+  const deleted = await db.deleteCampaign(params.id);
   if (!deleted) {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }

@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import { claudeAdapter } from '@/lib/ai/claude-client';
+import { db } from '@/lib/db';
 
 export async function GET() {
   const claudeStatus = claudeAdapter.getStatus();
+  const dbStats = await db.getStats();
 
   return NextResponse.json({
     status: 'healthy',
@@ -18,13 +20,18 @@ export async function GET() {
         model: claudeStatus.model,
       },
       voice: {
-        engine: 'meow_vernacular_v1',
-        languagesSupported: ['en-IN', 'te-IN'],
-        mode: 'browser_and_server_simulation',
+        engine: 'sara_vernacular_v2',
+        persona: 'Sara',
+        languagesSupported: ['te', 'hi', 'ta', 'kn', 'ml', 'mr', 'bn', 'en'],
+        mode: 'low_latency_edge_synthesis',
       },
+      database: dbStats,
       storage: {
-        type: 'memory_and_local_store',
-        mode: 'demo_persistence',
+        type: 'google_cloud_firestore',
+        provider: 'Firebase Cloud Firestore & Local Durable Store',
+        status: dbStats.status,
+        projectId: dbStats.projectId,
+        mode: dbStats.mode,
       },
       email: {
         configured: Boolean(process.env.EMAIL_PROVIDER_API_KEY),
@@ -33,4 +40,3 @@ export async function GET() {
     },
   });
 }
-

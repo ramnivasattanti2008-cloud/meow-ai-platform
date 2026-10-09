@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ContactSchema } from '@/lib/validation';
-import { store } from '@/lib/store';
+import { db } from '@/lib/db';
 
 // In-memory rate limiting map: IP -> timestamp array
 const rateLimitMap = new Map<string, number[]>();
@@ -41,8 +41,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Spam detected' }, { status: 400 });
     }
 
-    // Persist to store
-    const record = store.addContactRequest({
+    // Persist to unified database (Firestore / Cloud Store)
+    const record = await db.addContactRequest({
       name: validData.name,
       email: validData.email,
       company: validData.company,
