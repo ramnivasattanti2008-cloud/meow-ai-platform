@@ -11,9 +11,9 @@
 
 - **Legal / Operational Name:** MEOW AI
 - **Founder Name:** Ram Nivas Attanti
-- **Founder Email:** [FOUNDER TO COMPLETE: Use institutional or custom domain email e.g. `ramnivas@meowai.in` or university email `...@jainuniversity.ac.in`]
+- **Founder Business Email:** `ramnivas@meowai.tech` (or `founder@meowai.tech`)
 - **Founder Background:** Undergraduate Student in Computer Science and Business Systems (CSBS) at Jain University, Bengaluru, Karnataka, India. Active technical builder in AI engineering, agentic systems, and full-stack software.
-- **Company Website:** `https://jolly-maxwell-coral.vercel.app` (Live Production Deployment)
+- **Company Website:** `https://meowai.tech` (Deployment alias: `https://jolly-maxwell-coral.vercel.app`)
 - **GitHub Repository:** `https://github.com/ramnivasattanti2008-cloud/meow-ai-platform`
 - **Year Founded:** 2026
 - **Headquarters:** Bengaluru, Karnataka, India
@@ -83,11 +83,37 @@ We have architected MEOW around the Anthropic Claude API for four critical reaso
 
 ---
 
-## 7. Submission Checklist for Founder (Ram Nivas Attanti)
+## 7. Submission Checklist & Step-by-Step Guide for Founder (Ram Nivas Attanti)
 
-- [ ] Create/Sign in to Claude Console: `https://console.anthropic.com`
-- [ ] Ensure email on console matches startup domain or official university profile.
-- [ ] Review responses above and copy into the official form at `https://platform.claude.com/offers/startups-application`.
-- [ ] Provide Vercel live URL and GitHub repository link.
-- [ ] Confirm compliance with Anthropic Commercial Terms and Acceptable Use Policy.
+### Step 1: Claim Free `.tech` Domain (60 seconds)
+1. Browser is already open at [get.tech/github-student-developer-pack](https://get.tech/github-student-developer-pack).
+2. Click **"Authenticate with GitHub"** (using `ramnivasattanti2008-cloud`).
+3. Search `meowai.tech` (verified available) and proceed with **\$0.00** checkout.
+4. In domain dashboard, set Nameservers to:
+   - `ns1.vercel-dns.com`
+   - `ns2.vercel-dns.com`
+*(All website and Zoho Mail DNS records are already configured in Vercel to activate automatically upon nameserver save).*
+
+### Step 2: Create 100% Free Business Email on Zoho Mail
+1. Open [Zoho Mail Forever Free Plan](https://www.zoho.com/mail/zohomail-free.html).
+2. Select the **Forever Free Plan** (Up to 5 users, 5GB storage, ₹0 forever).
+3. Enter your domain: `meowai.tech`.
+4. Create user: `ramnivas@meowai.tech` or `founder@meowai.tech`.
+*(MX records `mx.zoho.in`, `mx2.zoho.in`, `mx3.zoho.in`, and SPF `v=spf1 include:zoho.in ~all` are already pre-added on Vercel DNS).*
+
+### Step 3: Set up Claude Console Account
+1. Open [Claude Console](https://console.anthropic.com).
+2. Sign in or register using your new business email `ramnivas@meowai.tech`.
+3. Navigate to **Settings** > **Organization Settings**.
+4. Copy your **Organization UUID** (e.g. `org_...` or alphanumeric UUID).
+
+### Step 4: Submit Claude for Startups Application
+1. Navigate to the official application: [https://platform.claude.com/offers/startups-application](https://platform.claude.com/offers/startups-application) (or [claude.com/programs/startups](https://claude.com/programs/startups)).
+2. Fill in:
+   - **Company Name:** `MEOW AI`
+   - **Website:** `https://meowai.tech` (or `https://jolly-maxwell-coral.vercel.app`)
+   - **Founder Email:** `ramnivas@meowai.tech`
+   - **Organization UUID:** Paste from Step 3.
+   - **Product Description & Claude Use Cases:** Copy directly from Sections 2, 4, 5, and 6 above.
+3. Submit and receive **\$1,000 Claude API credits** + **1 Free Year of Claude Team**!
 
