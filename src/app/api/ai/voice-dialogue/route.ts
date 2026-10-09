@@ -13,10 +13,10 @@ export async function POST(req: NextRequest) {
 
     const output = await claudeAdapter.generateVoiceDialogueTurn({
       userInput: userInput.trim(),
-      language: (language as 'te' | 'en') || 'en',
+      language: (language as SupportedLanguage) || 'en',
       purpose: purpose || 'appointment_booking',
       history: history || [],
-      personaName: personaName || 'Maya',
+      personaName: personaName || 'Sara',
       businessName: businessName || 'Dr. Rao Orthopedic Care, Hyderabad',
     });
 

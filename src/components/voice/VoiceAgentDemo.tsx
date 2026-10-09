@@ -20,62 +20,133 @@ import {
   Building2,
   Stethoscope,
   Briefcase,
+  Heart,
+  Smile,
 } from 'lucide-react';
 import { SupportedLanguage, VoiceTurn } from '@/lib/types';
 import { voiceEngine } from '@/lib/voice/engine';
 
-interface PersonaConfig {
-  id: string;
+interface LanguageOption {
+  code: SupportedLanguage;
   name: string;
-  role: string;
-  business: string;
-  greetingEn: string;
-  greetingTe: string;
-  icon: any;
+  native: string;
+  sttLang: string;
+  testPrompts: { label: string; text: string }[];
 }
 
-const PERSONAS: PersonaConfig[] = [
+const LANGUAGES: LanguageOption[] = [
   {
-    id: 'clinic_maya',
-    name: 'Maya',
-    role: 'Frontdesk Care Concierge',
-    business: 'Dr. Rao Orthopedic Care, Hyderabad',
-    greetingEn:
-      "Hello, thanks for calling Dr. Rao's Clinic! This is Maya from the front desk. How can I help you today — are you looking to book an appointment or check on existing reports?",
-    greetingTe:
-      'నమస్కారం అండి! డాక్టర్ రావు క్లినిక్ కి స్వాగతం. నా పేరు ప్రియ, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ కావాలా లేక రిపోర్ట్స్ గురించి మాట్లాడుతున్నారా?',
-    icon: Stethoscope,
+    code: 'en',
+    name: 'English',
+    native: 'Indian English',
+    sttLang: 'en-IN',
+    testPrompts: [
+      { label: 'Book Tomorrow 5:30 PM', text: 'Can I book a consultation tomorrow at 5:30 PM?' },
+      { label: 'Check Consultation Fee', text: 'How much are the consultation fees?' },
+      { label: 'Check AI Identity', text: 'Wait, are you a real person or an AI?' },
+      { label: 'Clinic Location & Parking', text: 'Where is the clinic located? Is parking available?' },
+      { label: 'Emergency Escalation', text: 'Patient is having severe chest pain and cannot breathe' },
+    ],
   },
   {
-    id: 'realestate_ananya',
-    name: 'Ananya',
-    role: 'Lead Acquisition Specialist',
-    business: 'Prestige Greenwoods Residences, Bangalore',
-    greetingEn:
-      'Good day! Thank you for inquiring about Prestige Greenwoods. This is Ananya. Are you exploring our 2 BHK lake-facing residences or our 3 BHK penthouses?',
-    greetingTe:
-      'నమస్కారం అండి! ప్రెస్టీజ్ గ్రీన్‌వుడ్స్ కి స్వాగతం. నా పేరు అనన్య. మీరు 2 BHK లేక్ వ్యూ ఫ్లాట్స్ గురించి చూస్తున్నారా లేదా 3 BHK లగ్జరీ యూనిట్స్ గురించా?',
-    icon: Building2,
+    code: 'te',
+    name: 'Telugu',
+    native: 'తెలుగు',
+    sttLang: 'te-IN',
+    testPrompts: [
+      { label: 'రేపు 5:30 అపాయింట్‌మెంట్', text: 'రేపు సాయంత్రం 5:30 స్లాట్ ఖాళీగా ఉందా?' },
+      { label: 'కన్సల్టేషన్ ఫీజు ఎంత?', text: 'డాక్టర్ గారి కన్సల్టేషన్ ఫీజు ఎంత?' },
+      { label: 'నువ్వు AI వా మనిషివా?', text: 'నువ్వు నిజమైన మనిషివా లేక AI వా?' },
+      { label: 'మోకాళ్ళ నొప్పి చెకప్', text: 'రేపు సాయంత్రం మోకాళ్ళ నొప్పికి డాక్టర్ గారిని కలవవచ్చా?' },
+      { label: 'క్లినిక్ అడ్రస్ ఎక్కడ?', text: 'క్లినిక్ అడ్రస్ ఎక్కడ ఉంది?' },
+    ],
   },
   {
-    id: 'support_rishi',
-    name: 'Rishi',
-    role: 'SLA Support & Dispatch',
-    business: 'MEOW Automated Enterprise Desk',
-    greetingEn:
-      'Hi there, thanks for reaching MEOW support. This is Rishi. Do you have a priority webhook issue or need assistance deploying a voice agent?',
-    greetingTe:
-      'నమస్కారం అండి, MEOW సపోర్ట్ కి కాల్ చేసినందుకు ధన్యవాదాలు. నా పేరు రిషి. మీకు వాయిస్ ఏజెంట్ డిప్లాయ్‌మెంట్ లో సహాయం కావాలా లేక వెబ్‌హుక్ సెటప్ గురించా?',
-    icon: Briefcase,
+    code: 'hi',
+    name: 'Hindi',
+    native: 'हिन्दी',
+    sttLang: 'hi-IN',
+    testPrompts: [
+      { label: 'कल 5:30 का अपॉइंटमेंट', text: 'क्या मुझे कल शाम 5:30 बजे का अपॉइंटमेंट मिल सकता है?' },
+      { label: 'डॉक्टर की फीस कितनी है?', text: 'डॉक्टर की कंसल्टेशन फीस कितनी है?' },
+      { label: 'क्या आप असली इंसान हैं?', text: 'क्या आप असली इंसान बोल रही हैं या AI?' },
+      { label: 'घुटनों में दर्द है', text: 'दो दिन से घुटनों में बहुत दर्द है, डॉक्टर से मिलना है' },
+      { label: 'क्लिनिक का पता कहाँ है?', text: 'क्लिनिक का पता कहाँ है और पार्किंग है क्या?' },
+    ],
+  },
+  {
+    code: 'ta',
+    name: 'Tamil',
+    native: 'தமிழ்',
+    sttLang: 'ta-IN',
+    testPrompts: [
+      { label: 'நாளை 5:30 அப்பாயிண்ட்மென்ட்', text: 'நாளை மாலை 5:30 மணிக்கு அப்பாயிண்ட்மென்ட் கிடைக்குமா?' },
+      { label: 'மருத்துவர் கட்டணம் என்ன?', text: 'டாக்டரின் கட்டணம் எவ்வளவு?' },
+      { label: 'நீங்கள் AI யா மனிதரா?', text: 'நீங்க நிஜமான மனிதரா இல்ல AI யா?' },
+      { label: 'மூட்டு வலி பரிசோதனை', text: 'மூட்டு வலிக்காக டாக்டரை பார்க்க வேண்டும்' },
+      { label: 'கிளினிக் முகவரி எங்கே?', text: 'கிளினிக் எங்கே உள்ளது? பார்க்கிங் வசதி உள்ளதா?' },
+    ],
+  },
+  {
+    code: 'kn',
+    name: 'Kannada',
+    native: 'ಕನ್ನಡ',
+    sttLang: 'kn-IN',
+    testPrompts: [
+      { label: 'ನಾಳೆ 5:30 ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್', text: 'ನಾಳೆ ಸಂಜೆ 5:30 ಕ್ಕೆ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಸಿಗುತ್ತದೆಯೇ?' },
+      { label: 'ಕನ್ಸಲ್ಟೇಶನ್ ಶುಲ್ಕ ಎಷ್ಟು?', text: 'ಡಾಕ್ಟರ್ ಅವರ ಕನ್ಸಲ್ಟೇಶನ್ ಶುಲ್ಕ ಎಷ್ಟು?' },
+      { label: 'ನೀವು ನಿಜವಾದ ವ್ಯಕ್ತಿನಾ?', text: 'ನೀವು ನಿಜವಾದ ವ್ಯಕ್ತಿನಾ ಅಥವಾ AI ನಾ?' },
+      { label: 'ಕೀಲು ನೋವು ತಪಾಸಣೆ', text: 'ಕೀಲು ನೋವಿಗೆ ಡಾಕ್ಟರ್ ಭೇಟಿ ಮಾಡಬೇಕು' },
+    ],
+  },
+  {
+    code: 'ml',
+    name: 'Malayalam',
+    native: 'മലയാളം',
+    sttLang: 'ml-IN',
+    testPrompts: [
+      { label: 'നാളെ 5:30 അപ്പോയിന്റ്മെന്റ്', text: 'നാളെ വൈകുന്നേരം 5:30 ന് അപ്പോയിന്റ്മെന്റ് ലഭിക്കുമോ?' },
+      { label: 'ഫീസ് എത്രയാണ്?', text: 'ഡോക്ടറുടെ കൺസൾട്ടേഷൻ ഫീസ് എത്രയാണ്?' },
+      { label: 'നിങ്ങൾ AI ആണോ?', text: 'നിങ്ങൾ യഥാർത്ഥ ആളാണോ അതോ AI ആണോ?' },
+    ],
+  },
+  {
+    code: 'mr',
+    name: 'Marathi',
+    native: 'मराठी',
+    sttLang: 'mr-IN',
+    testPrompts: [
+      { label: 'उद्या 5:30 ची अपॉइंटमेंट', text: 'उद्या संध्याकाळी 5:30 ची वेळ मिळेल का?' },
+      { label: 'तपासणी फी किती आहे?', text: 'डॉक्टरांची तपासणी फी किती आहे?' },
+      { label: 'तुम्ही AI आहात का?', text: 'तुम्ही खरी व्यक्ती आहात की AI?' },
+    ],
+  },
+  {
+    code: 'bn',
+    name: 'Bengali',
+    native: 'বাংলা',
+    sttLang: 'bn-IN',
+    testPrompts: [
+      { label: 'কাল 5:30 টার স্লট', text: 'কাল সন্ধ্যা 5:30 টার স্লট ফাঁকা আছে কি?' },
+      { label: 'ডাক্তারের ফি কত?', text: 'ডাক্তারের কনসালটেশন ফি কত?' },
+      { label: 'আপনি কি আসল মানুষ?', text: 'আপনি কি আসল মানুষ নাকি AI?' },
+    ],
   },
 ];
 
+const SARA_GREETINGS: Record<SupportedLanguage, string> = {
+  en: "Hi there! Thanks for calling Dr. Rao's Clinic. I'm Sara from the front desk! How can I help you today — are you looking to book an appointment or check on existing reports?",
+  te: 'నమస్కారం అండి! డాక్టర్ రావు క్లినిక్ కి స్వాగతం. నా పేరు సారా, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ కావాలా లేక రిపోర్ట్స్ గురించి మాట్లాడుతున్నారా?',
+  hi: 'नमस्ते जी! डॉक्टर राव क्लिनिक में आपका स्वागत है। मैं सारा बोल रही हूँ फ्रंट डेस्क से। बताइए, क्या आपको डॉक्टर से मिलना है या कोई रिपोर्ट चेक करनी है?',
+  ta: 'வணக்கம்! டாக்டர் ராவ் கிளினிக்கிற்கு வரவேற்கிறோம். நான் சారా, வரவேற்பறையில் இருந்து பேசுகிறேன். உங்களுக்கு டாக்டரின் அப்பாயிண்ட்மென்ட் தேவையா அல்லது ரிப்போர்ட் பார்க்க வேண்டுமா?',
+  kn: 'ನಮಸ್ಕಾರ! ಡಾಕ್ಟರ್ ರಾವ್ ಕ್ಲಿನಿಕ್‌ಗೆ ಸ್ವಾಗತ. ನಾನು ಸಾರಾ, ಫ್ರಂಟ್ ಡೆಸ್ಕ್‌ನಿಂದ ಮಾತನಾಡುತ್ತಿದ್ದೇನೆ. ಹೇಳಿ, ನಿಮಗೆ ಡಾಕ್ಟರ್ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಬೇಕಾ ಅಥವಾ ರಿಪೋರ್ಟ್ ಬಗ್ಗೆ ತಿಳಿಯಬೇಕಾ?',
+  ml: 'നമസ്കാരം! ഡോക്ടർ റാവു ക്ലിനിക്കിലേക്ക് സ്വാഗതം. ഞാൻ സാറ ആണ് ഫ്രണ്ട് ഡെസ്കിൽ നിന്ന്. നിങ്ങൾക്ക് ഡോക്ടറുടെ അപ്പോയിന്റ്മെന്റ് ബുക്ക് ചെയ്യണോ അതോ റിപ്പോർട്ട് അന്വേഷിക്കാനാണോ?',
+  mr: 'नमस्कार! डॉक्टर राव क्लिनिकमध्ये आपले स्वागत आहे. मी सारा बोलतेय फ्रंट डेस्कवरून. सांगा, आपल्याला डॉक्टरांची अपॉइंटमेंट हवी आहे की रिपोर्ट तपासायचे आहेत?',
+  bn: 'নমস্কার! ডক্টর রাও ক্লিনিকে স্বাগতম। আমি সারা বলছি ফ্রন্ট ডেস্ক থেকে। বলুন, আপনাকে ডাক্তারের অ্যাপয়েন্টমেন্ট বুক করতে সাহায্য করব নাকি কোনো রিপোর্ট দেখতে চান?',
+};
+
 export const VoiceAgentDemo: React.FC = () => {
   const [language, setLanguage] = useState<SupportedLanguage>('te');
-  const [selectedPersona, setSelectedPersona] = useState<PersonaConfig>(PERSONAS[0]);
-  const [purpose, setPurpose] = useState<
-    'appointment_booking' | 'customer_support' | 'lead_qualification' | 'order_inquiries'
-  >('appointment_booking');
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
@@ -84,7 +155,6 @@ export const VoiceAgentDemo: React.FC = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [escalated, setEscalated] = useState(false);
   const [escalationReason, setEscalationReason] = useState('');
-  const [callActive, setCallActive] = useState(false);
   const [telephonyLatency, setTelephonyLatency] = useState<number | null>(null);
 
   const [transcript, setTranscript] = useState<VoiceTurn[]>([
@@ -93,7 +163,7 @@ export const VoiceAgentDemo: React.FC = () => {
       speaker: 'agent',
       language: 'te',
       timestamp: 'Now',
-      text: PERSONAS[0].greetingTe,
+      text: SARA_GREETINGS.te,
       intent: 'initial_greeting',
     },
   ]);
@@ -101,7 +171,10 @@ export const VoiceAgentDemo: React.FC = () => {
   const transcriptEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
 
-  // Soft telephone pickup chime
+  // Current language config
+  const currentLangConfig = LANGUAGES.find((l) => l.code === language) || LANGUAGES[0];
+
+  // Soft telephonic pickup chime
   const playCallChime = () => {
     if (typeof window === 'undefined') return;
     try {
@@ -123,8 +196,8 @@ export const VoiceAgentDemo: React.FC = () => {
     } catch (e) {}
   };
 
-  // Best natural voice selection
-  const speakText = (text: string, lang: SupportedLanguage) => {
+  // Cute female voice speech synthesis
+  const speakAsSara = (text: string, langCode: SupportedLanguage) => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     try {
       window.speechSynthesis.cancel();
@@ -134,37 +207,60 @@ export const VoiceAgentDemo: React.FC = () => {
       const voices = window.speechSynthesis.getVoices();
       let chosenVoice: SpeechSynthesisVoice | undefined;
 
-      if (lang === 'te') {
+      // Search for language specific female voice
+      if (langCode === 'te') {
         chosenVoice =
           voices.find((v) => v.lang.startsWith('te') || v.name.toLowerCase().includes('telugu')) ||
           voices.find((v) => v.lang.startsWith('hi') || v.lang.includes('IN')) ||
-          voices.find((v) => v.lang.startsWith('en-IN')) ||
           voices[0];
-        utterance.lang = chosenVoice ? chosenVoice.lang : 'te-IN';
-        utterance.rate = 1.0;
-        utterance.pitch = 1.05;
+      } else if (langCode === 'hi') {
+        chosenVoice =
+          voices.find((v) => v.lang.startsWith('hi') || v.name.toLowerCase().includes('hindi')) ||
+          voices.find((v) => v.name.includes('Swara') || v.name.includes('Kavya')) ||
+          voices[0];
+      } else if (langCode === 'ta') {
+        chosenVoice =
+          voices.find((v) => v.lang.startsWith('ta') || v.name.toLowerCase().includes('tamil')) ||
+          voices[0];
+      } else if (langCode === 'kn') {
+        chosenVoice =
+          voices.find((v) => v.lang.startsWith('kn') || v.name.toLowerCase().includes('kannada')) ||
+          voices[0];
+      } else if (langCode === 'ml') {
+        chosenVoice =
+          voices.find((v) => v.lang.startsWith('ml') || v.name.toLowerCase().includes('malayalam')) ||
+          voices[0];
+      } else if (langCode === 'mr') {
+        chosenVoice =
+          voices.find((v) => v.lang.startsWith('mr') || v.name.toLowerCase().includes('marathi')) ||
+          voices[0];
+      } else if (langCode === 'bn') {
+        chosenVoice =
+          voices.find((v) => v.lang.startsWith('bn') || v.name.toLowerCase().includes('bengali')) ||
+          voices[0];
       } else {
+        // English
         chosenVoice =
           voices.find(
             (v) =>
-              v.lang === 'en-IN' ||
-              v.name.toLowerCase().includes('india') ||
-              v.name.includes('Heera') ||
               v.name.includes('Neerja') ||
-              v.name.includes('Ravi')
+              v.name.includes('Heera') ||
+              v.name.includes('Sara') ||
+              v.name.includes('Female')
           ) ||
+          voices.find((v) => v.lang === 'en-IN') ||
           voices.find((v) => v.name.includes('Natural') || v.name.includes('Online')) ||
-          voices.find((v) => v.name.includes('Google') && v.lang.startsWith('en')) ||
           voices.find((v) => v.lang.startsWith('en')) ||
           voices[0];
-        utterance.lang = chosenVoice ? chosenVoice.lang : 'en-IN';
-        utterance.rate = 1.02;
-        utterance.pitch = 1.04;
       }
 
       if (chosenVoice) {
         utterance.voice = chosenVoice;
       }
+
+      utterance.lang = chosenVoice ? chosenVoice.lang : currentLangConfig.sttLang;
+      utterance.rate = 1.02; // natural conversational rhythm
+      utterance.pitch = 1.10; // cute, warm, friendly front-desk timbre
 
       utterance.onstart = () => setIsSpeaking(true);
       utterance.onend = () => setIsSpeaking(false);
@@ -175,7 +271,7 @@ export const VoiceAgentDemo: React.FC = () => {
     }
   };
 
-  // Check Web Speech API support
+  // Configure Web Speech API Recognition
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const SpeechRecognition =
@@ -185,7 +281,7 @@ export const VoiceAgentDemo: React.FC = () => {
         const recognition = new SpeechRecognition();
         recognition.continuous = false;
         recognition.interimResults = false;
-        recognition.lang = language === 'te' ? 'te-IN' : 'en-IN';
+        recognition.lang = currentLangConfig.sttLang;
 
         recognition.onresult = (event: any) => {
           const spokenText = event.results[0][0].transcript;
@@ -205,44 +301,35 @@ export const VoiceAgentDemo: React.FC = () => {
         recognitionRef.current = recognition;
       }
     }
-  }, [language]);
+  }, [language, currentLangConfig]);
 
-  // Scroll to bottom on new message
+  // Scroll transcript to bottom
   useEffect(() => {
     transcriptEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [transcript]);
 
-  // Update greeting when language or persona changes
-  const applyGreeting = (persona: PersonaConfig, lang: SupportedLanguage) => {
+  const handleLanguageChange = (newLang: SupportedLanguage) => {
+    setLanguage(newLang);
+    setEscalated(false);
+    playCallChime();
+
+    const greeting = SARA_GREETINGS[newLang] || SARA_GREETINGS.en;
     setTranscript([
       {
         id: `turn-${Date.now()}`,
         speaker: 'agent',
-        language: lang,
+        language: newLang,
         timestamp: 'Just now',
-        text: lang === 'te' ? persona.greetingTe : persona.greetingEn,
+        text: greeting,
         intent: 'initial_greeting',
       },
     ]);
   };
 
-  const handleLanguageChange = (newLang: SupportedLanguage) => {
-    setLanguage(newLang);
-    setEscalated(false);
-    applyGreeting(selectedPersona, newLang);
-  };
-
-  const handlePersonaSelect = (persona: PersonaConfig) => {
-    setSelectedPersona(persona);
-    setEscalated(false);
-    playCallChime();
-    applyGreeting(persona, language);
-  };
-
   const handleUserDialogue = async (text: string) => {
     if (!text.trim()) return;
 
-    // Interrupt any ongoing speech
+    // Interrupt ongoing voice playback
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
@@ -258,22 +345,21 @@ export const VoiceAgentDemo: React.FC = () => {
     setTranscript((prev) => [...prev, userTurn]);
     setInputMessage('');
     setIsSpeaking(true);
-    setCallActive(true);
 
     const startTime = performance.now();
 
     try {
-      // 1. Try Live API route (Claude 3 Haiku if API key configured)
+      // Live API call with Claude Haiku fallback to local engine
       const res = await fetch('/api/ai/voice-dialogue', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userInput: text,
           language,
-          purpose,
+          purpose: 'appointment_booking',
           history: transcript.map((t) => ({ speaker: t.speaker, text: t.text })),
-          personaName: selectedPersona.name,
-          businessName: selectedPersona.business,
+          personaName: 'Sara',
+          businessName: 'Dr. Rao Orthopedic Care, Hyderabad',
         }),
       });
 
@@ -281,17 +367,16 @@ export const VoiceAgentDemo: React.FC = () => {
       if (res.ok) {
         result = await res.json();
       } else {
-        // Fallback to local VoiceEngine
         result = voiceEngine.processTurn({
           userInput: text,
           language,
-          purpose,
+          purpose: 'appointment_booking',
           history: [...transcript, userTurn],
         });
       }
 
       const elapsed = Math.round(performance.now() - startTime);
-      setTelephonyLatency(elapsed < 100 ? 285 + Math.floor(Math.random() * 30) : elapsed);
+      setTelephonyLatency(elapsed < 100 ? 285 + Math.floor(Math.random() * 25) : elapsed);
 
       const agentTurn: VoiceTurn = {
         id: `turn-a-${Date.now()}`,
@@ -320,14 +405,13 @@ export const VoiceAgentDemo: React.FC = () => {
         );
       }
 
-      // Speak response aloud with human prosody
-      speakText(result.agentResponse, language);
+      // Speak response aloud as Sara
+      speakAsSara(result.agentResponse, language);
     } catch (err) {
-      // Offline fallback to local engine
       const fallbackResult = voiceEngine.processTurn({
         userInput: text,
         language,
-        purpose,
+        purpose: 'appointment_booking',
         history: [...transcript, userTurn],
       });
 
@@ -341,7 +425,7 @@ export const VoiceAgentDemo: React.FC = () => {
       };
 
       setTranscript((prev) => [...prev, agentTurn]);
-      speakText(fallbackResult.agentResponse, language);
+      speakAsSara(fallbackResult.agentResponse, language);
     }
   };
 
@@ -359,7 +443,7 @@ export const VoiceAgentDemo: React.FC = () => {
     } else {
       if (recognitionRef.current) {
         try {
-          recognitionRef.current.lang = language === 'te' ? 'te-IN' : 'en-IN';
+          recognitionRef.current.lang = currentLangConfig.sttLang;
           recognitionRef.current.start();
           setIsListening(true);
         } catch (err) {
@@ -367,12 +451,8 @@ export const VoiceAgentDemo: React.FC = () => {
           setIsListening(false);
         }
       } else {
-        // Fallback simulation
-        handleUserDialogue(
-          language === 'te'
-            ? 'రేపు సాయంత్రం డాక్టర్ గారిని కలవవచ్చా?'
-            : 'Can I schedule a consultation tomorrow evening?'
-        );
+        // Fallback simulation if speech recognition unsupported in browser
+        handleUserDialogue(currentLangConfig.testPrompts[0]?.text || 'Hello Sara');
       }
     }
   };
@@ -383,56 +463,44 @@ export const VoiceAgentDemo: React.FC = () => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
-    applyGreeting(selectedPersona, language);
+    handleLanguageChange(language);
   };
 
   return (
     <div className="w-full max-w-4xl mx-auto rounded-3xl border border-white/[0.08] bg-zinc-950/80 backdrop-blur-2xl shadow-glass overflow-hidden text-left">
       {/* Top Telephony Control Bar */}
-      <div className="border-b border-white/[0.08] px-5 sm:px-8 py-4 bg-zinc-900/40 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet-600/30 to-indigo-600/30 border border-violet-500/30 flex items-center justify-center text-violet-300">
-            <Radio className="w-5 h-5 animate-pulse text-violet-400" />
+      <div className="border-b border-white/[0.08] px-5 sm:px-8 py-4 bg-zinc-900/50 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="relative">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500/20 via-violet-500/30 to-indigo-500/30 border border-pink-400/30 flex items-center justify-center text-pink-300 shadow-inner">
+              <Smile className="w-6 h-6 text-pink-400 animate-pulse" />
+            </div>
+            <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-zinc-950 animate-pulse" />
           </div>
+
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-semibold text-white">
-                MEOW Multilingual Voice Sandbox
+              <h3 className="text-base font-bold text-white flex items-center gap-1.5">
+                Sara <span className="text-xs font-normal text-pink-300">🌸 (Frontdesk AI)</span>
               </h3>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-                Full Duplex
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-pink-500/10 text-pink-300 border border-pink-500/20">
+                Cute &amp; Friendly Voice
               </span>
             </div>
             <p className="text-xs text-zinc-400">
-              {selectedPersona.name} ({selectedPersona.role}) • {selectedPersona.business}
+              Dr. Rao Orthopedic Care • Speaks all major Indian languages
             </p>
           </div>
         </div>
 
-        {/* Language & Reset Controls */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center bg-zinc-900 border border-white/10 rounded-xl p-0.5 text-xs">
-            <button
-              onClick={() => handleLanguageChange('te')}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
-                language === 'te'
-                  ? 'bg-violet-600 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
-              }`}
-            >
-              తెలుగు (Telugu)
-            </button>
-            <button
-              onClick={() => handleLanguageChange('en')}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
-                language === 'en'
-                  ? 'bg-violet-600 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
-              }`}
-            >
-              English
-            </button>
-          </div>
+        {/* Telemetry & Reset */}
+        <div className="flex items-center gap-2.5">
+          {telephonyLatency && (
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+              <Activity className="w-3 h-3 animate-pulse" />
+              <span>{telephonyLatency}ms turn latency</span>
+            </div>
+          )}
 
           <button
             onClick={handleReset}
@@ -444,43 +512,34 @@ export const VoiceAgentDemo: React.FC = () => {
         </div>
       </div>
 
-      {/* Persona Switcher Strip */}
-      <div className="px-5 sm:px-8 py-2.5 bg-zinc-900/60 border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
-            VOICE PERSONA:
-          </span>
-          <div className="flex items-center gap-1.5">
-            {PERSONAS.map((p) => {
-              const Icon = p.icon;
-              const isSelected = selectedPersona.id === p.id;
-              return (
-                <button
-                  key={p.id}
-                  onClick={() => handlePersonaSelect(p)}
-                  className={`px-3 py-1 rounded-xl flex items-center gap-1.5 font-medium transition-all ${
-                    isSelected
-                      ? 'bg-zinc-800 text-white border border-white/15 shadow-sm'
-                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5 text-violet-400" />
-                  <span>{p.name}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+      {/* Major Indian Languages Switcher Strip */}
+      <div className="px-5 sm:px-8 py-3 bg-zinc-900/70 border-b border-white/[0.06] flex items-center gap-2 overflow-x-auto custom-scrollbar">
+        <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider whitespace-nowrap mr-1">
+          INDIAN LANGUAGES:
+        </span>
 
-        {telephonyLatency && (
-          <div className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
-            <Activity className="w-3 h-3 animate-pulse" />
-            <span>Telemetry: {telephonyLatency}ms turn latency</span>
-          </div>
-        )}
+        <div className="flex items-center gap-1.5">
+          {LANGUAGES.map((l) => {
+            const isSelected = language === l.code;
+            return (
+              <button
+                key={l.code}
+                onClick={() => handleLanguageChange(l.code)}
+                className={`px-3 py-1.5 rounded-xl text-xs whitespace-nowrap font-medium transition-all flex items-center gap-1.5 ${
+                  isSelected
+                    ? 'bg-gradient-to-r from-violet-600 to-pink-600 text-white shadow-sm border border-white/20'
+                    : 'bg-zinc-900/90 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 border border-white/[0.04]'
+                }`}
+              >
+                <span>{l.native}</span>
+                <span className="text-[10px] opacity-75 font-mono">({l.name})</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Transcript Log Drawer */}
+      {/* Transcript Log Area */}
       <div className="p-5 sm:p-8 space-y-4 max-h-[380px] min-h-[260px] overflow-y-auto custom-scrollbar">
         {transcript.map((turn) => {
           const isAgent = turn.speaker === 'agent';
@@ -490,8 +549,8 @@ export const VoiceAgentDemo: React.FC = () => {
               className={`flex flex-col ${isAgent ? 'items-start' : 'items-end'}`}
             >
               <div className="flex items-center gap-2 mb-1 text-[11px] font-mono text-zinc-400">
-                <span className={isAgent ? 'text-violet-400 font-bold' : 'text-zinc-300'}>
-                  {isAgent ? `${selectedPersona.name} (AI Frontdesk)` : 'You (Caller)'}
+                <span className={isAgent ? 'text-pink-300 font-bold' : 'text-zinc-300'}>
+                  {isAgent ? 'Sara (Frontdesk Receptionist)' : 'You (Caller)'}
                 </span>
                 <span>•</span>
                 <span>{turn.timestamp}</span>
@@ -520,13 +579,13 @@ export const VoiceAgentDemo: React.FC = () => {
         })}
 
         {isSpeaking && (
-          <div className="flex items-center gap-2 text-xs font-mono text-violet-400 p-2 bg-violet-950/20 rounded-xl border border-violet-500/20 w-fit">
-            <Volume2 className="w-4 h-4 animate-pulse" />
-            <span>{selectedPersona.name} is speaking on the line...</span>
+          <div className="flex items-center gap-2 text-xs font-mono text-pink-300 p-2.5 bg-pink-950/20 rounded-xl border border-pink-500/20 w-fit">
+            <Volume2 className="w-4 h-4 animate-pulse text-pink-400" />
+            <span>Sara is speaking on the line...</span>
             <div className="flex items-center gap-0.5 ml-2">
-              <span className="w-1 h-3 bg-violet-400 rounded-full animate-bounce" />
-              <span className="w-1 h-4 bg-violet-400 rounded-full animate-bounce [animation-delay:0.15s]" />
-              <span className="w-1 h-2 bg-violet-400 rounded-full animate-bounce [animation-delay:0.3s]" />
+              <span className="w-1 h-3 bg-pink-400 rounded-full animate-bounce" />
+              <span className="w-1 h-4 bg-pink-400 rounded-full animate-bounce [animation-delay:0.15s]" />
+              <span className="w-1 h-2 bg-pink-400 rounded-full animate-bounce [animation-delay:0.3s]" />
             </div>
           </div>
         )}
@@ -534,7 +593,7 @@ export const VoiceAgentDemo: React.FC = () => {
         <div ref={transcriptEndRef} />
       </div>
 
-      {/* Human Escalation Alert Banner */}
+      {/* Human Escalation Alert */}
       {escalated && (
         <div className="mx-5 sm:mx-8 mb-4 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-3 text-amber-200 text-xs">
           <AlertCircle className="w-5 h-5 flex-shrink-0 text-amber-400" />
@@ -545,16 +604,16 @@ export const VoiceAgentDemo: React.FC = () => {
         </div>
       )}
 
-      {/* Audio Controls & Input Area */}
+      {/* Controls & Push-to-Talk */}
       <div className="border-t border-white/[0.08] p-5 sm:p-8 bg-zinc-900/40 space-y-4">
         <div className="flex flex-col sm:flex-row items-center gap-3">
-          {/* Main Push-to-Talk Phone Button */}
+          {/* Main Voice Button */}
           <button
             onClick={toggleMic}
             className={`w-full sm:w-auto px-6 py-3.5 rounded-2xl font-semibold text-sm flex items-center justify-center gap-3 transition-all shadow-lg ${
               isListening
                 ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse ring-4 ring-red-500/20'
-                : 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white active:scale-95'
+                : 'bg-gradient-to-r from-pink-600 via-violet-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 text-white active:scale-95'
             }`}
           >
             {isListening ? (
@@ -565,7 +624,7 @@ export const VoiceAgentDemo: React.FC = () => {
             ) : (
               <>
                 <Mic className="w-5 h-5" />
-                <span>Speak Now ({language === 'te' ? 'తెలుగు' : 'English'})</span>
+                <span>Talk to Sara ({currentLangConfig.native})</span>
               </>
             )}
           </button>
@@ -582,100 +641,32 @@ export const VoiceAgentDemo: React.FC = () => {
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder={
-                language === 'te'
-                  ? 'ఇక్కడ తెలుగులో టైప్ చేయండి (ఉదా: రేపు సాయంత్రం 5:30 స్లాట్ ఖాళీగా ఉందా?)...'
-                  : "Type your query here (e.g. 'Can I book 5:30 PM tomorrow?' or 'fees entha?')..."
-              }
-              className="flex-1 px-4 py-3 rounded-2xl bg-zinc-950 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-violet-500/50"
+              placeholder={`Ask Sara in ${currentLangConfig.native}...`}
+              className="flex-1 px-4 py-3 rounded-2xl bg-zinc-950 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-pink-500/50"
             />
             <button
               type="submit"
               disabled={!inputMessage.trim()}
               className="p-3 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-200 disabled:opacity-40 transition-all"
-              title="Send dialogue turn"
+              title="Send dialogue"
             >
               <Send className="w-4 h-4" />
             </button>
           </form>
         </div>
 
-        {/* Quick Realistic Dialogue Testing Chips */}
+        {/* Dynamic Test Prompt Chips in Current Language */}
         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
-          <span className="text-[11px] font-mono text-zinc-400">REALISTIC PROMPTS:</span>
-          {language === 'te' ? (
-            <>
-              <button
-                onClick={() =>
-                  handleUserDialogue('రేపు సాయంత్రం మోకాళ్ళ నొప్పికి డాక్టర్ గారిని కలవవచ్చా?')
-                }
-                className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
-              >
-                &quot;రేపు సాయంత్రం మోకాళ్ళ నొప్పి?&quot;
-              </button>
-              <button
-                onClick={() => handleUserDialogue('డాక్టర్ గారి కన్సల్టేషన్ ఫీజు ఎంత?')}
-                className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
-              >
-                &quot;కన్సల్టేషన్ ఫీజు ఎంత?&quot;
-              </button>
-              <button
-                onClick={() => handleUserDialogue('నువ్వు నిజమైన మనిషివా లేక రోబోట్ వా?')}
-                className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
-              >
-                &quot;నువ్వు AI వా మనిషివా?&quot;
-              </button>
-              <button
-                onClick={() => handleUserDialogue('క్లినిక్ అడ్రస్ ఎక్కడ ఉంది?')}
-                className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
-              >
-                &quot;క్లినిక్ అడ్రస్ ఎక్కడ?&quot;
-              </button>
-              <button
-                onClick={() => handleUserDialogue('నాకు తీవ్రమైన గుండె నొప్పి వస్తోంది అర్జెంట్')}
-                className="px-2.5 py-1 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 border border-red-500/30 transition-colors"
-              >
-                ⚠️ ఎమర్జెన్సీ టెస్ట్
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={() =>
-                  handleUserDialogue('I have severe knee pain since 2 days, can I see the doctor?')
-                }
-                className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
-              >
-                &quot;Severe knee pain since 2 days&quot;
-              </button>
-              <button
-                onClick={() => handleUserDialogue('How much is the consultation fee?')}
-                className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
-              >
-                &quot;Consultation fee?&quot;
-              </button>
-              <button
-                onClick={() => handleUserDialogue('Wait, are you a real person or an AI?')}
-                className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
-              >
-                &quot;Are you an AI or real?&quot;
-              </button>
-              <button
-                onClick={() => handleUserDialogue('Where is the clinic located? Is there parking?')}
-                className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
-              >
-                &quot;Location &amp; parking?&quot;
-              </button>
-              <button
-                onClick={() =>
-                  handleUserDialogue('Patient is having severe chest pain and cannot breathe')
-                }
-                className="px-2.5 py-1 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 border border-red-500/30 transition-colors"
-              >
-                ⚠️ Emergency Test
-              </button>
-            </>
-          )}
+          <span className="text-[11px] font-mono text-zinc-400">QUICK QUESTIONS IN {currentLangConfig.name.toUpperCase()}:</span>
+          {currentLangConfig.testPrompts.map((p, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleUserDialogue(p.text)}
+              className="px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 border border-white/[0.06] transition-colors"
+            >
+              &quot;{p.label}&quot;
+            </button>
+          ))}
         </div>
       </div>
 
@@ -683,23 +674,23 @@ export const VoiceAgentDemo: React.FC = () => {
       {showConsentModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
           <div className="max-w-md w-full bg-zinc-950 border border-white/15 rounded-3xl p-6 space-y-4 shadow-glass text-left">
-            <div className="w-10 h-10 rounded-2xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center text-violet-300">
+            <div className="w-10 h-10 rounded-2xl bg-pink-600/20 border border-pink-500/30 flex items-center justify-center text-pink-300">
               <Mic className="w-5 h-5" />
             </div>
             <div>
               <h4 className="text-base font-semibold text-white">Microphone Access &amp; Audio Notice</h4>
               <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                MEOW Voice converts your voice into text inside your browser to test real-time speech dialogue. We do not store, retain, or monetize raw voice data from this demonstration.
+                MEOW Voice converts your voice into text inside your browser to test real-time dialogue with Sara in {currentLangConfig.name}. We do not store, retain, or monetize raw voice data.
               </p>
             </div>
             <div className="space-y-2 text-xs text-zinc-400">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Audio is converted to text inside your browser</span>
+                <span>Supports Telugu, Hindi, Tamil, Kannada &amp; English</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Deterministic patient safety &amp; emergency escalation</span>
+                <span>Real-time appointment booking &amp; emergency escalation</span>
               </div>
             </div>
             <div className="pt-2 flex items-center justify-end gap-3">
@@ -717,7 +708,7 @@ export const VoiceAgentDemo: React.FC = () => {
                 }}
                 className="px-5 py-2 rounded-xl text-xs font-semibold bg-white text-zinc-950 hover:bg-zinc-200"
               >
-                Grant &amp; Continue
+                Talk to Sara
               </button>
             </div>
           </div>

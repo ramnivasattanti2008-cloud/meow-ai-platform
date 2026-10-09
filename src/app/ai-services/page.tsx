@@ -15,6 +15,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import Link from 'next/link';
+import { AutomationSuiteConfigurator } from '@/components/services/AutomationSuiteConfigurator';
 
 export const metadata = {
   title: 'AI Services & Bespoke Engineering | MEOW AI',
@@ -127,6 +128,11 @@ export default function AiServicesPage() {
             We partner with founders and operations leaders to design, build, and deploy genuine intelligent systems that solve measurable commercial problems.
           </p>
         </div>
+
+        {/* Interactive Automation Suite Architecture Configurator */}
+        <section id="automation-configurator" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-28">
+          <AutomationSuiteConfigurator />
+        </section>
 
         {/* Services Detail List */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">

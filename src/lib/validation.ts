@@ -32,7 +32,7 @@ export type ContactFormData = z.infer<typeof ContactSchema>;
 export const AgentSchema = z.object({
   name: z.string().min(2, 'Agent name is required').max(60),
   purpose: z.enum(['appointment_booking', 'customer_support', 'lead_qualification', 'order_inquiries']),
-  language: z.enum(['en', 'te']),
+  language: z.enum(['en', 'te', 'hi', 'ta', 'kn', 'ml', 'mr', 'bn']),
   greeting: z.string().min(5, 'Greeting message must be at least 5 characters').max(300),
   knowledgeInstructions: z.string().min(10, 'Knowledge instructions are required').max(2000),
   escalationRules: z.string().min(5, 'Escalation criteria are required').max(1000),

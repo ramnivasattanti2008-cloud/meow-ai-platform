@@ -332,16 +332,73 @@ const PAGE_GUIDES: Record<string, PageGuideConfig> = {
       },
     ],
   },
+  '/ai-services': {
+    pageTitle: 'AI Automation Services',
+    stageName: 'Stage 6 • Custom Automation Suite',
+    summary: 'Configure turnkey AI automation: Sara Voice Telephony, WhatsApp Cloud API, and CRM Webhooks.',
+    steps: [
+      {
+        id: 'services-config',
+        title: 'Step 1: Choose Automation Modules',
+        description: 'Select Voice AI, Meta WhatsApp API, 2-Way CRM Sync, or Document Extraction.',
+        actionLabel: 'Configure Stack',
+        targetId: 'automation-configurator',
+        badge: 'Interactive Configurator',
+      },
+      {
+        id: 'services-lang',
+        title: 'Step 2: Select Vernacular Languages',
+        description: 'Choose Telugu, Hindi, Tamil, Kannada, and Indian English for customer dialogue.',
+        actionLabel: 'Select Languages',
+        targetId: 'automation-configurator',
+        badge: '8 Languages',
+      },
+      {
+        id: 'services-pipeline',
+        title: 'Step 3: Review Event Pipeline Architecture',
+        description: 'Verify zero-loss ingestion triggers, Sara parsing, and human-in-the-loop guardrails.',
+        actionLabel: 'View Pipeline Diagram',
+        targetId: 'automation-configurator',
+        badge: 'Zero-Loss Bus',
+      },
+      {
+        id: 'services-book',
+        title: 'Step 4: Book Architecture & Scoping Session',
+        description: 'Connect with Founder Ram Nivas Attanti to schedule your 3–5 day turnkey deployment.',
+        actionLabel: 'Schedule 30-Min Session',
+        actionHref: '/book',
+        badge: '3–5 Day Deployment',
+      },
+    ],
+  },
 };
 
 const KNOWLEDGE_RESPONSES = [
   {
-    keywords: ['telugu', 'language', 'vernacular', 'భారతీయ', 'తెలుగు', 'మాట్లాడగలరా'],
+    keywords: ['sara', 'girl', 'cute', 'voice', 'who is sara'],
     answer:
-      'నమస్కారం! MEOW Voice AI natively supports conversational Telugu (తెలుగు) and Indian English. We handle code-mixing, dialect nuances (Andhra & Telangana colloquialisms), and sub-300ms first-token latency using Claude 3 Haiku for real-time telephone calls.',
+      "Sara is MEOW AI's cute and charming front-desk voice concierge! She speaks all 8 major Indian languages (Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English) with a warm, natural human tone. She books appointments, answers consultation fee questions, and handles clinic inquiries with sub-300ms latency.",
     links: [
-      { label: 'Step 1: Try Telugu Audio Demo', href: '/voice-ai' },
-      { label: 'Step 2: Book Telugu Discovery Call', href: '/book' },
+      { label: 'Talk to Sara in Sandbox', href: '/voice-ai' },
+      { label: 'Book Telephony Session', href: '/book' },
+    ],
+  },
+  {
+    keywords: ['services', 'automation services', 'automation', 'whatsapp', 'crm', 'ocr'],
+    answer:
+      "MEOW AI delivers 6 turnkey enterprise AI Automation Services:\n1. 🎙️ Voice AI Telephony (Sara Engine — 24/7 calls in 8 Indian languages)\n2. 💬 Meta WhatsApp Business API Cloud Automation\n3. 🔄 2-Way CRM & Database Sync (Zoho, HubSpot, Google Sheets, PostgreSQL)\n4. 📄 Multimodal Document & Prescription OCR Intelligence\n5. 🤖 Bespoke Multi-Step AI Reasoning Agents with Human Gates\n6. ⚡ Omnichannel <60s Speed-to-Call Lead Recovery\n\nTurnaround time is 3–5 business days with direct source code delivery.",
+    links: [
+      { label: 'Configure Automation Stack', href: '/ai-services' },
+      { label: 'Schedule 30-Min Scoping', href: '/book' },
+    ],
+  },
+  {
+    keywords: ['telugu', 'language', 'vernacular', 'భారతీయ', 'తెలుగు', 'మాట్లాడగలరా', 'hindi', 'tamil', 'kannada'],
+    answer:
+      'నమస్కారం! नमस्ते! MEOW Voice AI natively supports 8 major Indian languages: Telugu (తెలుగు), Hindi (हिन्दी), Tamil (தமிழ்), Kannada (ಕನ್ನಡ), Malayalam (മലയാളം), Marathi (मराठी), Bengali (বাংলা), and Indian English. Voiced by Sara, our agents handle code-mixing and sub-300ms first-token latency.',
+    links: [
+      { label: 'Step 1: Try Multilingual Sandbox', href: '/voice-ai' },
+      { label: 'Step 2: Book Discovery Call', href: '/book' },
     ],
   },
   {

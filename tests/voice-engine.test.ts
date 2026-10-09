@@ -120,5 +120,31 @@ describe('VoiceEngine (Multilingual Telugu & English)', () => {
     expect(result.agentResponse).toContain('Jubilee Hills');
     expect(result.agentResponse).toContain('valet parking');
   });
+
+  it('handles Hindi appointment booking with Sara persona', () => {
+    const result = voiceEngine.processTurn({
+      userInput: 'कल डॉक्टर का अपॉइंटमेंट बुक करना है',
+      language: 'hi',
+      purpose: 'appointment_booking',
+      history: [],
+    });
+
+    expect(result.language).toBe('hi');
+    expect(result.intentDetected).toBe('schedule_appointment_slot_selection');
+    expect(result.agentResponse).toContain('5:30');
+  });
+
+  it('handles Tamil consultation fee query with Sara persona', () => {
+    const result = voiceEngine.processTurn({
+      userInput: 'டாக்டரின் கட்டணம் எவ்வளவு?',
+      language: 'ta',
+      purpose: 'appointment_booking',
+      history: [],
+    });
+
+    expect(result.language).toBe('ta');
+    expect(result.intentDetected).toBe('inquire_consultation_fee');
+    expect(result.agentResponse).toContain('₹600');
+  });
 });
 

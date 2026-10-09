@@ -1,4 +1,4 @@
-export type SupportedLanguage = 'en' | 'te'; // English & Telugu
+export type SupportedLanguage = 'en' | 'te' | 'hi' | 'ta' | 'kn' | 'ml' | 'mr' | 'bn'; // Indian English, Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali
 
 export interface Agent {
   id: string;
