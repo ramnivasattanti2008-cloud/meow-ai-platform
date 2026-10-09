@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
             <section className="space-y-3">
               <h2 className="text-lg font-bold text-white">4. Data Retention &amp; Deletion</h2>
               <p>
-                Contact inquiries are retained in our operational inbox for up to 12 months for correspondence purposes. You may request immediate deletion of your contact information at any time by emailing <code>founder@meowai.in</code>.
+                Contact inquiries are retained in our operational inbox for up to 12 months for correspondence purposes. You may request immediate deletion of your contact information at any time by emailing <code>founder@meowai.tech</code>.
               </p>
             </section>
 
@@ -76,7 +76,7 @@ export default function PrivacyPolicyPage() {
                 MEOW AI — Data Protection Officer<br />
                 Founder: Ram Nivas Attanti<br />
                 Bengaluru, Karnataka, India<br />
-                Email: founder@meowai.in
+                Email: founder@meowai.tech
               </div>
             </section>
           </div>

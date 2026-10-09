@@ -27,7 +27,7 @@
 | **Institution** | Jain University, Bengaluru, Karnataka, India |
 | **Specialization & Focus** | AI Engineering, Full-Stack Architecture, Voice Agents, Workflow Orchestration |
 | **Developer Affiliation** | GitHub Student Developer Pack recipient |
-| **Contact Email** | `founder@meowai.in` (Placeholder pending domain configuration; direct contact: `ramnivas@example.com` / founder channel) |
+| **Contact Email** | `founder@meowai.tech` / `ramnivas@meowai.tech` |
 | **LinkedIn / GitHub** | `https://github.com/ramnivasattanti` (To be linked with active GitHub handle) |
 
 ---

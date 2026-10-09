@@ -11,15 +11,15 @@ As a student at Jain University with GitHub Student Developer Pack benefits:
    - Log into [GitHub Education Pack](https://education.github.com/pack).
    - Navigate to the **Domain Name** benefits section (e.g. Namecheap free 1-year `.me` or discount on `.in` / `.com`, or Name.com free `.live` / `.studio` / `.tech`).
    - Claim your domain registration voucher.
-   - Recommended domains for MEOW AI: `meowai.in`, `meow-ai.com`, or `meowai.tech`.
+   - Selected domain for MEOW AI: `meowai.tech`.
 2. **DNS Management:**
-   - Keep DNS managed either directly at Namecheap/Name.com or point nameservers to Cloudflare (free plan) for fast edge caching and SSL management.
+   - Nameservers pointed to Vercel: `ns1.vercel-dns.com` and `ns2.vercel-dns.com`.
 
 ---
 
 ## 2. Business Email Setup (Zoho Mail Free Tier)
 
-To qualify for the Claude Startups program, a domain-matching business email (e.g. `ramnivas@meowai.in` or `founder@meowai.in`) is highly recommended over generic Gmail.
+To qualify for the Claude Startups program, a domain-matching business email (e.g. `ramnivas@meowai.tech` or `founder@meowai.tech`) is required over generic Gmail.
 1. **Register on Zoho Mail Forever Free Plan:**
    - Visit [Zoho Mail Free Plan](https://www.zoho.com/mail/zohomail-pricing.html) (scroll down to "Forever Free Plan" for up to 5 users, 5GB/user, single domain webmail access).
    - Enter your registered custom domain.

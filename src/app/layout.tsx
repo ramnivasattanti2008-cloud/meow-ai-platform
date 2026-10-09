@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     'workflow automation Bengaluru',
     'MEOW AI',
   ],
-  authors: [{ name: 'Ram Nivas Attanti', url: 'https://github.com/ramnivasattanti' }],
+  authors: [{ name: 'Ram Nivas Attanti', url: 'https://github.com/ramnivasattanti2008-cloud' }],
   creator: 'Ram Nivas Attanti',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://meowai.tech'),
   openGraph: {

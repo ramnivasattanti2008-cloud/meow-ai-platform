@@ -120,7 +120,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-zinc-400 text-[10px]">FOUNDER DESK</div>
-                    <div className="text-white">founder@meowai.in</div>
+                    <div className="text-white">founder@meowai.tech</div>
                   </div>
                 </div>
 
