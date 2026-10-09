@@ -80,7 +80,7 @@ export default function GrowthPage() {
         </div>
 
         {/* Interactive Campaign Brief Architect */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <section id="campaign-generator-form" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28">
           <CampaignBriefBuilder />
         </section>
 

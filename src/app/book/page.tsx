@@ -145,7 +145,7 @@ export default function BookCallPage() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="booking-scheduler-container" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-28">
           <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl p-6 sm:p-10 shadow-glass">
             {confirmed ? (
               /* Booking Confirmed State */

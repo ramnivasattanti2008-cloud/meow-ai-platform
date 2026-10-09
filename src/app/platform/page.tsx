@@ -78,7 +78,7 @@ export default function PlatformPage() {
         </div>
 
         {/* Interactive Workflow Builder Canvas */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <section id="workflow-canvas-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28">
           <WorkflowBuilder />
         </section>
 

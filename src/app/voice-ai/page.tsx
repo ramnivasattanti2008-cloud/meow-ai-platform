@@ -82,12 +82,12 @@ export default function VoiceAiPage() {
         </div>
 
         {/* Live Interactive Voice Agent Demo Sandbox */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <section id="voice-agent-sandbox" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-28">
           <VoiceAgentDemo />
         </section>
 
         {/* Live Call Transcripts & Recording Showcase */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <section id="call-recording-showcase" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28">
           <CallRecordingShowcase />
         </section>
 
