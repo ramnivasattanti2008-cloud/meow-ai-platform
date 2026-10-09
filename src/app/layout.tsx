@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Ram Nivas Attanti', url: 'https://github.com/ramnivasattanti2008-cloud' }],
   creator: 'Ram Nivas Attanti',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://meowai.tech'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://meowboxai.tech'),
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    url: 'https://meowai.tech',
+    url: 'https://meowboxai.tech',
     title: 'MEOW AI — Your Business. Reimagined with AI.',
     description:
       'AI that does the work, not just talks about the work. Multilingual voice agents in Telugu and English, custom workflow automation, and marketing operations.',
