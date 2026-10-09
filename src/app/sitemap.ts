@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://meow-ai-platform.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://meowai.tech';
   const lastModified = new Date();
 
   const routes = [

@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Ram Nivas Attanti', url: 'https://github.com/ramnivasattanti' }],
   creator: 'Ram Nivas Attanti',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://meow-ai-platform.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://meowai.tech'),
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    url: 'https://meow-ai-platform.vercel.app',
+    url: 'https://meowai.tech',
     title: 'MEOW AI — Your Business. Reimagined with AI.',
     description:
       'AI that does the work, not just talks about the work. Multilingual voice agents in Telugu and English, custom workflow automation, and marketing operations.',
