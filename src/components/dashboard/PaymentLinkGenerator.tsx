@@ -17,6 +17,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { PaymentRecord } from '@/lib/db';
+import { downloadTaxInvoice } from '@/lib/invoice/generateInvoice';
 
 export const PaymentLinkGenerator: React.FC = () => {
   const [payments, setPayments] = useState<PaymentRecord[]>([]);
@@ -353,11 +354,22 @@ export const PaymentLinkGenerator: React.FC = () => {
 
                 <button
                   type="button"
-                  onClick={() => alert(`Downloaded GST Tax Invoice #${p.transactionId}`)}
-                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5"
-                  title="Download Invoice PDF"
+                  onClick={() =>
+                    downloadTaxInvoice({
+                      transactionId: p.transactionId,
+                      amount: p.amount,
+                      planTitle: p.planTitle,
+                      payerName: p.payerName,
+                      payerPhone: p.payerPhone,
+                      payerEmail: p.payerEmail,
+                      method: p.method,
+                      timestamp: p.timestamp,
+                    })
+                  }
+                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
+                  title="Download GST Tax Invoice PDF/HTML"
                 >
-                  <Download className="w-3.5 h-3.5" />
+                  <Download className="w-3.5 h-3.5 text-violet-400" />
                 </button>
               </div>
             </div>

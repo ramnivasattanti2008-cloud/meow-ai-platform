@@ -215,13 +215,67 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
     window.speechSynthesis.speak(utterance);
   };
 
+  // Web Audio API Ringing Tone
+  const playPhoneRingTone = () => {
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(440, ctx.currentTime);
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(480, ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.setValueAtTime(0, ctx.currentTime + 0.85);
+
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc1.start(ctx.currentTime);
+      osc2.start(ctx.currentTime);
+      osc1.stop(ctx.currentTime + 0.85);
+      osc2.stop(ctx.currentTime + 0.85);
+    } catch {}
+  };
+
+  const playPickupBeep = () => {
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.15);
+    } catch {}
+  };
+
   const handleStartCall = () => {
     setCallState('ringing');
     setMessages([]);
     window.speechSynthesis?.cancel();
 
-    // Ringing chime simulation
+    // Audible phone ringing tone
+    playPhoneRingTone();
+
+    // Ringing chime simulation to pickup
     setTimeout(() => {
+      playPickupBeep();
       setCallState('connected');
       const langConfig = SUPPORTED_LANGS.find((l) => l.code === language) || SUPPORTED_LANGS[0];
       const greeting = langConfig.sampleGreeting;
@@ -664,3 +718,4 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
     </div>
   );
 };
+

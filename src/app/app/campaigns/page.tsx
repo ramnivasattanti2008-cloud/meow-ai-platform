@@ -85,7 +85,7 @@ export default function WorkspaceCampaignsPage() {
       });
 
       const aiData = await aiRes.json();
-      const brief = aiData.brief;
+      const brief = aiData.brief || (aiData.headline ? aiData : null);
 
       const fullCopy = brief
         ? `🔥 HEADLINE: ${brief.headline}\n\n📝 AD / MESSAGE COPY:\n${brief.adCopy}\n\n👉 CALL TO ACTION: ${brief.callToAction}\n\n✅ CHECKLIST:\n${brief.executionChecklist?.join('\n') || ''}`

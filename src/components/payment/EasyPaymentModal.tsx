@@ -16,6 +16,7 @@ import {
   Lock,
   Phone,
 } from 'lucide-react';
+import { downloadTaxInvoice } from '@/lib/invoice/generateInvoice';
 
 export interface EasyPaymentModalProps {
   isOpen: boolean;
@@ -60,26 +61,38 @@ export const EasyPaymentModal: React.FC<EasyPaymentModalProps> = ({
     setTimeout(() => setCopiedUpi(false), 2000);
   };
 
-  const handleSimulatePayment = () => {
+  const handleSimulatePayment = async () => {
     setIsProcessing(true);
-    setTimeout(() => {
-      const generatedId = `MEOW_PAY_${Math.floor(100000 + Math.random() * 900000)}`;
-      setTransactionId(generatedId);
+    const generatedId = `MEOW_PAY_${Math.floor(100000 + Math.random() * 900000)}`;
+    setTransactionId(generatedId);
+
+    const record = {
+      transactionId: generatedId,
+      amount,
+      planTitle,
+      method,
+      payerName: payerName || 'Direct Payer',
+      payerPhone: payerPhone || '+91 98765 43210',
+      payerEmail: payerEmail || 'billing@meowai.tech',
+      status: 'settled',
+      timestamp: new Date().toISOString(),
+    };
+
+    try {
+      await fetch('/api/payments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record),
+      });
+    } catch (err) {
+      console.warn('Payment logging notice:', err);
+    } finally {
       setIsProcessing(false);
       setIsCompleted(true);
       if (onPaymentSuccess) {
-        onPaymentSuccess({
-          transactionId: generatedId,
-          amount,
-          planTitle,
-          method,
-          payerName,
-          payerPhone,
-          payerEmail,
-          timestamp: new Date().toISOString(),
-        });
+        onPaymentSuccess(record);
       }
-    }, 1200);
+    }
   };
 
   const resetAndClose = () => {
@@ -437,7 +450,15 @@ export const EasyPaymentModal: React.FC<EasyPaymentModalProps> = ({
               <button
                 type="button"
                 onClick={() => {
-                  alert(`GST Tax Invoice ${transactionId} downloaded successfully.`);
+                  downloadTaxInvoice({
+                    transactionId,
+                    amount,
+                    planTitle,
+                    payerName,
+                    payerPhone,
+                    payerEmail,
+                    method,
+                  });
                 }}
                 className="flex-1 py-2.5 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-white font-medium text-xs flex items-center justify-center gap-1.5 transition-all"
               >

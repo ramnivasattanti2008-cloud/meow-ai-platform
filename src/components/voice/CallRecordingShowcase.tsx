@@ -210,6 +210,44 @@ export const CallRecordingShowcase: React.FC = () => {
     (t) => currentTime >= t.startSec && currentTime <= t.endSec
   );
 
+  const lastSpokenTurnRef = useRef<number | null>(null);
+
+  // Play real voice audio when turns are active
+  useEffect(() => {
+    if (!isPlaying) {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      lastSpokenTurnRef.current = null;
+      return;
+    }
+
+    if (currentTurn) {
+      const turnIdx = selectedSample.turns.indexOf(currentTurn);
+      if (lastSpokenTurnRef.current !== turnIdx) {
+        lastSpokenTurnRef.current = turnIdx;
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const cleanText = currentTurn.text.replace(/\[.*?\]/g, '').trim();
+          if (cleanText) {
+            const u = new SpeechSynthesisUtterance(cleanText);
+            u.rate = 1.02 * playbackSpeed;
+            u.pitch = currentTurn.speaker === 'agent' ? 1.18 : 0.92;
+            const voices = window.speechSynthesis.getVoices();
+            const voiceMatch = voices.find(
+              (v) =>
+                v.lang.toLowerCase().includes(selectedSample.languageCode) ||
+                (selectedSample.languageCode === 'te' && (v.name.includes('Telugu') || v.lang.includes('te'))) ||
+                v.lang.includes('IN')
+            );
+            if (voiceMatch) u.voice = voiceMatch;
+            window.speechSynthesis.speak(u);
+          }
+        }
+      }
+    }
+  }, [isPlaying, currentTurn, playbackSpeed, selectedSample]);
+
   return (
     <div className="w-full rounded-3xl border border-white/[0.08] bg-zinc-950/80 backdrop-blur-xl shadow-glass overflow-hidden text-left">
       {/* Header with Case Selector */}

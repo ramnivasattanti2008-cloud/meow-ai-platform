@@ -155,19 +155,28 @@ export default function HomePage() {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-16">
               <Link
-                href="/contact"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-zinc-950 font-semibold text-sm hover:bg-zinc-200 active:scale-[0.98] transition-all shadow-subtle flex items-center justify-center gap-2"
+                href="/voice-ai"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-violet-600/25 flex items-center justify-center gap-2"
               >
-                <span>Build with MEOW</span>
+                <Mic className="w-4 h-4 text-violet-200" />
+                <span>Call Sara (8 Languages)</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              </Link>
+              <Link
+                href="/book"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-zinc-950 font-semibold text-sm hover:bg-zinc-200 active:scale-[0.98] transition-all shadow-subtle flex items-center justify-center gap-2"
+              >
+                <span>Book 30-Min Session</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/platform"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-zinc-900/80 text-zinc-300 hover:text-white border border-white/10 hover:border-white/20 active:scale-[0.98] transition-all text-sm font-medium backdrop-blur-md flex items-center justify-center gap-2"
+                href="/app"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/80 text-zinc-300 hover:text-white border border-white/10 hover:border-white/20 active:scale-[0.98] transition-all text-sm font-medium backdrop-blur-md flex items-center justify-center gap-2 font-mono"
               >
-                <span>Explore What We Do</span>
+                <Terminal className="w-4 h-4 text-violet-400" />
+                <span>Launch Console</span>
               </Link>
             </div>
 

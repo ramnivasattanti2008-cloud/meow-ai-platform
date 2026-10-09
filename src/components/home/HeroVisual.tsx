@@ -233,7 +233,7 @@ export const HeroVisual: React.FC = () => {
             <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
             <span>Claude API Adapter Ready</span>
             <span className="text-zinc-600">|</span>
-            <span>Telugu &amp; English Voice Engine v1</span>
+            <span>8 Vernacular Indian Languages • Sara Voice AI</span>
           </div>
           <div className="text-zinc-400">
             Action: <span className="text-zinc-200">Production-Ready Architecture</span>
