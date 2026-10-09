@@ -1,6 +1,8 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { voiceEngine, VoiceDialogueTurnOutput } from '../voice/engine';
 
+export type { VoiceDialogueTurnOutput as VoiceDialogueResponse };
+
 export interface ClaudeConfigStatus {
   configured: boolean;
   provider: 'anthropic';

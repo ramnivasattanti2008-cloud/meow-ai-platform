@@ -67,3 +67,4 @@ describe('Google Cloud Firestore (Firebase) Database Engine', () => {
     expect(ping.latencyMs).toBeGreaterThanOrEqual(0);
   });
 });
+

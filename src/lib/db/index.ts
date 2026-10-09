@@ -245,6 +245,25 @@ class UnifiedDatabase {
     return newBooking;
   }
 
+  async updateBooking(id: string, updates: Partial<BookingRecord>): Promise<BookingRecord | null> {
+    const idx = this.localBookings.findIndex((b) => b.id === id);
+    if (idx === -1) return null;
+    this.localBookings[idx] = { ...this.localBookings[idx], ...updates };
+    if (firestore.isConfigured()) {
+      await firestore.setDocument('bookings', id, this.localBookings[idx]);
+    }
+    return this.localBookings[idx];
+  }
+
+  async deleteBooking(id: string): Promise<boolean> {
+    const initialLen = this.localBookings.length;
+    this.localBookings = this.localBookings.filter((b) => b.id !== id);
+    if (firestore.isConfigured()) {
+      await firestore.deleteDocument('bookings', id);
+    }
+    return this.localBookings.length < initialLen;
+  }
+
   /* ---------------- PAYMENTS ---------------- */
   async getPayments(): Promise<PaymentRecord[]> {
     if (firestore.isConfigured()) {
@@ -298,3 +317,4 @@ class UnifiedDatabase {
 }
 
 export const db = new UnifiedDatabase();
+
