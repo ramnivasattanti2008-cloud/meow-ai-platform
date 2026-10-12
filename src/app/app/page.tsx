@@ -32,6 +32,7 @@ import { GoalExecutionHub } from '@/components/dashboard/GoalExecutionHub';
 import { ResumeCareerStudio } from '@/components/career/ResumeCareerStudio';
 import { MemoryVaultHub } from '@/components/dashboard/MemoryVaultHub';
 import { AiEmployeesHub } from '@/components/dashboard/AiEmployeesHub';
+import { UniversalAiCopilot } from '@/components/assistant/UniversalAiCopilot';
 
 export default function WorkspaceDashboardPage() {
   const [agents, setAgents] = useState<Agent[]>([]);
@@ -47,7 +48,7 @@ export default function WorkspaceDashboardPage() {
 
   // Active view tab in dashboard: Apple-style segmented navigation
   const [activeTab, setActiveTab] = useState<
-    'goals' | 'resume' | 'employees' | 'appointments' | 'payments' | 'memory'
+    'goals' | 'copilot' | 'resume' | 'employees' | 'appointments' | 'payments' | 'memory'
   >('goals');
 
   const loadData = async () => {
@@ -210,6 +211,19 @@ export default function WorkspaceDashboardPage() {
 
           <button
             type="button"
+            onClick={() => setActiveTab('copilot')}
+            className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
+              activeTab === 'copilot'
+                ? 'bg-zinc-800 text-white shadow-sm border border-white/10 font-bold'
+                : 'text-zinc-400 hover:text-white'
+            }`}
+          >
+            <Bot className="w-4 h-4 text-violet-400" />
+            <span>AI Copilot &amp; Assistant</span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => setActiveTab('resume')}
             className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'resume'
@@ -278,6 +292,13 @@ export default function WorkspaceDashboardPage() {
         {activeTab === 'goals' && (
           <div className="space-y-6">
             <GoalExecutionHub />
+          </div>
+        )}
+
+        {/* Tab: Universal AI Copilot & Real-Time Assistant */}
+        {activeTab === 'copilot' && (
+          <div className="space-y-6">
+            <UniversalAiCopilot />
           </div>
         )}
 

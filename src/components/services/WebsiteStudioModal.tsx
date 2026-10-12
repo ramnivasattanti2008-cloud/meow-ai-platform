@@ -15,6 +15,7 @@ import {
   X,
   Palette,
   Layers,
+  Download,
 } from 'lucide-react';
 import { EasyPaymentModal } from '@/components/payment/EasyPaymentModal';
 
@@ -47,11 +48,78 @@ export const WebsiteStudioModal: React.FC<WebsiteStudioModalProps> = ({ isOpen, 
     );
   };
 
-  const themeColors = {
-    violet: { border: 'border-violet-500', bg: 'bg-violet-600', text: 'text-violet-400' },
-    emerald: { border: 'border-emerald-500', bg: 'bg-emerald-600', text: 'text-emerald-400' },
-    blue: { border: 'border-blue-500', bg: 'bg-blue-600', text: 'text-blue-400' },
-    amber: { border: 'border-amber-500', bg: 'bg-amber-600', text: 'text-amber-400' },
+  const handleDownloadCode = () => {
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${brandName} — ${tagline}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #09090b; color: #ffffff; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+  <header class="border-b border-white/10 px-6 py-4 flex items-center justify-between max-w-7xl mx-auto w-full">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white">
+        ${brandName.charAt(0)}
+      </div>
+      <span class="font-bold text-lg">${brandName}</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="tel:+918040000001" class="text-xs text-zinc-400 hover:text-white font-mono">Sara Voice: +91 80 4000 0001</a>
+      <a href="#book" class="px-4 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs hover:bg-zinc-200 transition-all">Book Online</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-20 text-center space-y-6 flex-1">
+    <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 uppercase tracking-widest">${niche}</span>
+    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">${tagline}</h1>
+    <p class="text-zinc-400 text-sm md:text-base max-w-xl mx-auto">Experience seamless consultation scheduling, bilingual phone reception, and automated WhatsApp tokens.</p>
+    
+    <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+      <a href="#book" class="px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all">Book Consultation (₹600)</a>
+      <a href="https://wa.me/919848012345" class="px-6 py-3 rounded-full bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white text-sm transition-all">WhatsApp Direct</a>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 text-left">
+      <div class="p-4 rounded-2xl bg-zinc-900/60 border border-white/5 space-y-1">
+        <div class="font-bold text-xs text-white">Sara Voice Receptionist</div>
+        <div class="text-[11px] text-zinc-400">Telugu & English Call Handling</div>
+      </div>
+      <div class="p-4 rounded-2xl bg-zinc-900/60 border border-white/5 space-y-1">
+        <div class="font-bold text-xs text-white">Instant Calendar Lock</div>
+        <div class="text-[11px] text-zinc-400">Zero Double Bookings</div>
+      </div>
+      <div class="p-4 rounded-2xl bg-zinc-900/60 border border-white/5 space-y-1">
+        <div class="font-bold text-xs text-white">Instant UPI Payments</div>
+        <div class="text-[11px] text-zinc-400">Direct Bank Settlements</div>
+      </div>
+      <div class="p-4 rounded-2xl bg-zinc-900/60 border border-white/5 space-y-1">
+        <div class="font-bold text-xs text-white">GST Invoicing</div>
+        <div class="text-[11px] text-zinc-400">100% Tax Compliant</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-white/10 px-6 py-6 text-center text-xs text-zinc-500 font-mono">
+    © 2026 ${brandName}. Powered by MEOW AI Engine. Domain: ${targetDomain || 'yourdomain.in'}
+  </footer>
+</body>
+</html>`;
+
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${brandName.toLowerCase().replace(/[^a-z0-9]/g, '_')}_landing.html`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -179,7 +247,7 @@ export const WebsiteStudioModal: React.FC<WebsiteStudioModalProps> = ({ isOpen, 
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 space-y-2">
               <button
                 type="button"
                 onClick={() => setPaymentModalOpen(true)}
@@ -187,6 +255,15 @@ export const WebsiteStudioModal: React.FC<WebsiteStudioModalProps> = ({ isOpen, 
               >
                 <span>Submit 48-Hour Turnkey Launch (₹19,999)</span>
                 <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                type="button"
+                onClick={handleDownloadCode}
+                className="w-full py-2.5 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-zinc-300 hover:text-white font-medium text-xs transition-all flex items-center justify-center gap-2"
+              >
+                <Download className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Export Website Source Code (.html)</span>
               </button>
             </div>
           </div>
