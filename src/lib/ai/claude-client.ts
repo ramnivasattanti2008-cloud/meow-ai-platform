@@ -283,6 +283,48 @@ Do NOT wrap with markdown code blocks.`;
       providerUsed: 'hyper_real_voice_engine',
     };
   }
+
+  /**
+   * Generates a conversational response for specialized agents (Alex, Maya, Rishi) using Claude.
+   */
+  public async generateClaudeAgentResponse(input: {
+    systemPrompt: string;
+    userMessage: string;
+    history?: Array<{ role: 'user' | 'assistant'; content: string }>;
+    model?: string;
+  }): Promise<{ reply: string; providerUsed: 'anthropic_claude' | 'deterministic_agent' }> {
+    if (this.client && this.apiKey) {
+      try {
+        const messages: Array<{ role: 'user' | 'assistant'; content: string }> = [
+          ...(input.history || []).slice(-6),
+          { role: 'user', content: input.userMessage },
+        ];
+
+        const response = await this.client.messages.create({
+          model: input.model || this.fallbackModel,
+          max_tokens: 800,
+          temperature: 0.7,
+          system: input.systemPrompt,
+          messages,
+        });
+
+        const reply = response.content[0]?.type === 'text' ? response.content[0].text : '';
+        if (reply && reply.trim().length > 0) {
+          return {
+            reply: reply.trim(),
+            providerUsed: 'anthropic_claude',
+          };
+        }
+      } catch (err) {
+        console.warn('[ClaudeAdapter] Live agent message call failed, falling back:', err);
+      }
+    }
+
+    return {
+      reply: '',
+      providerUsed: 'deterministic_agent',
+    };
+  }
 }
 
 export const claudeAdapter = new ClaudeAdapter();
