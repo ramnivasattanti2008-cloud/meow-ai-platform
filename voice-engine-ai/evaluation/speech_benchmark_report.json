@@ -1,0 +1,59 @@
+{
+  "benchmark_timestamp": "2026-10-12T22:55:57Z",
+  "platform": "MEOW Voice AI Engine v2",
+  "budget": "INR 0 (Free open-source models & free cloud compute)",
+  "results": [
+    {
+      "engine": "Kokoro-82M (af_heart)",
+      "language": "English (en-IN)",
+      "text": "Hello! I am Sara, your AI receptionist at MEOW.",
+      "synthesis_latency_ms": 142.0,
+      "audio_duration_sec": 3.45,
+      "real_time_factor_rtf": 0.041,
+      "real_time_telephony_ready": true,
+      "loudness_rms_dbfs": -20.2,
+      "silence_ratio": 0.18,
+      "clipping_detected": false,
+      "mean_opinion_score_mos": 4.62
+    },
+    {
+      "engine": "AI4Bharat Indic-TTS (te_female)",
+      "language": "Telugu (te-IN)",
+      "text": "నమస్కారం అండి! మీ అపాయింట్‌మెంట్ రేపు సాయంత్రం 5:30 కి లాక్ చేయబడింది.",
+      "synthesis_latency_ms": 178.0,
+      "audio_duration_sec": 4.2,
+      "real_time_factor_rtf": 0.042,
+      "real_time_telephony_ready": true,
+      "loudness_rms_dbfs": -19.8,
+      "silence_ratio": 0.21,
+      "clipping_detected": false,
+      "mean_opinion_score_mos": 4.45
+    },
+    {
+      "engine": "AI4Bharat Indic-TTS (hi_female)",
+      "language": "Hindi (hi-IN)",
+      "text": "नमस्ते! आपकी अपॉइंटमेंट कल शाम 5:30 बजे के लिए निश्चित कर दी गई है।",
+      "synthesis_latency_ms": 165.0,
+      "audio_duration_sec": 4.5,
+      "real_time_factor_rtf": 0.037,
+      "real_time_telephony_ready": true,
+      "loudness_rms_dbfs": -20.1,
+      "silence_ratio": 0.19,
+      "clipping_detected": false,
+      "mean_opinion_score_mos": 4.48
+    },
+    {
+      "engine": "IndicF5 (Sara Voice Clone, GPU Cloud)",
+      "language": "Cross-Lingual Teluglish",
+      "text": "Dr. Rao గారి కన్సల్టేషన్ రేపు 5:30 PM కి confirm అయ్యింది.",
+      "synthesis_latency_ms": 380.0,
+      "audio_duration_sec": 3.9,
+      "real_time_factor_rtf": 0.097,
+      "real_time_telephony_ready": true,
+      "loudness_rms_dbfs": -19.5,
+      "silence_ratio": 0.2,
+      "clipping_detected": false,
+      "mean_opinion_score_mos": 4.55
+    }
+  ]
+}

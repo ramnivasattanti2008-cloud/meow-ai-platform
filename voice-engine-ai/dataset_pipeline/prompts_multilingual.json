@@ -1,0 +1,139 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "project": "MEOW Voice AI (Sara)",
+    "target_languages": ["en", "te", "hi", "ta", "kn", "ml", "mr", "bn"],
+    "description": "Phonetically balanced evaluation and training sentence corpus covering conversational markers, numeric currency entities, medical appointment triage, and code-switching."
+  },
+  "prompts": [
+    {
+      "id": "EN-01",
+      "language": "en",
+      "category": "casual_greeting",
+      "text": "Hello! I am Sara, your AI receptionist at MEOW. How can I assist you with your schedule today?",
+      "target_duration_sec": 4.5,
+      "phonetic_focus": "fricatives, polite intonation"
+    },
+    {
+      "id": "EN-02",
+      "language": "en",
+      "category": "numbers_dates_currency",
+      "text": "Your consultation with Dr. Rao is confirmed for tomorrow, October 14th at 5:30 PM. The token fee is ₹1,200.",
+      "target_duration_sec": 6.2,
+      "phonetic_focus": "dates, times, Indian Rupee currency"
+    },
+    {
+      "id": "EN-03",
+      "language": "en",
+      "category": "clinical_safety_escalation",
+      "text": "Please remain calm. I am transferring your call immediately to our duty nurse for priority medical triage.",
+      "target_duration_sec": 5.8,
+      "phonetic_focus": "calm, steady, empathetic cadence"
+    },
+    {
+      "id": "TE-01",
+      "language": "te",
+      "category": "casual_greeting",
+      "text": "నమస్కారం అండి! నేను మీ AI అసిస్టెంట్ సారాను. మీకు ఈ రోజు ఏ విధంగా సహాయపడగలను?",
+      "target_duration_sec": 4.8,
+      "phonetic_focus": "Telugu dental consonants (త, ద, న) and retroflexes (ట, డ)"
+    },
+    {
+      "id": "TE-02",
+      "language": "te",
+      "category": "appointment_intake",
+      "text": "డాక్టర్ శ్రీనివాస రావు గారి అపాయింట్‌మెంట్ రేపు సాయంత్రం 5:30 కి లాక్ చేయబడింది అండి.",
+      "target_duration_sec": 5.5,
+      "phonetic_focus": "honorifics (అండి), aspirates, long vowels"
+    },
+    {
+      "id": "TE-03",
+      "language": "te",
+      "category": "code_switching",
+      "text": "మీరు కన్సల్టేషన్ కోసం UPI ద్వారా పేమెంట్ పూర్తి చేశారు. WhatsApp లో లొకేషన్ పిన్ పంపించాము.",
+      "target_duration_sec": 6.0,
+      "phonetic_focus": "Teluglish code-switching, English technical loanwords"
+    },
+    {
+      "id": "HI-01",
+      "language": "hi",
+      "category": "casual_greeting",
+      "text": "नमस्ते! मैं MEOW से सारा हूँ। क्या मैं आपकी अपॉइंटमेंट बुक करने में सहायता कर सकती हूँ?",
+      "target_duration_sec": 5.0,
+      "phonetic_focus": "Hindi schwa deletion, conjunct consonants (क्य, न्ह)"
+    },
+    {
+      "id": "HI-02",
+      "language": "hi",
+      "category": "numbers_dates_currency",
+      "text": "आपकी विज़िट कल दोपहर 3:00 बजे निर्धारित है। कृपया समय से 10 मिनट पहले क्लिनिक पधारें।",
+      "target_duration_sec": 5.8,
+      "phonetic_focus": "Hindi numeral articulation, polite verbal inflection"
+    },
+    {
+      "id": "HI-03",
+      "language": "hi",
+      "category": "code_switching",
+      "text": "Dr. Rao की availability कल शाम को confirm हो गई है। हम आपको WhatsApp notification भेज रहे हैं।",
+      "target_duration_sec": 6.1,
+      "phonetic_focus": "Hinglish mixed phonetic phonemes"
+    },
+    {
+      "id": "TA-01",
+      "language": "ta",
+      "category": "casual_greeting",
+      "text": "வணக்கம்! நான் உங்கள் AI வரவேற்பாளர் சாரா. உங்களுக்கு இன்று எப்படி உதவ முடியும்?",
+      "target_duration_sec": 4.9,
+      "phonetic_focus": "Tamil retroflex liquids (ள, ழ, ற)"
+    },
+    {
+      "id": "TA-02",
+      "language": "ta",
+      "category": "appointment_intake",
+      "text": "மருத்துவர் சந்திப்பு நாளை மாலை 5:30 மணிக்கு உறுதி செய்யப்பட்டுள்ளது.",
+      "target_duration_sec": 5.2,
+      "phonetic_focus": "Tamil nasal stops and vowel harmony"
+    },
+    {
+      "id": "KN-01",
+      "language": "kn",
+      "category": "casual_greeting",
+      "text": "ನಮಸ್ಕಾರ! ನಾನು MEOW ನ AI ಸಹಾಯಕ ಸಾರಾ. ಇಂದು ನಾನು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಲಿ?",
+      "target_duration_sec": 4.7,
+      "phonetic_focus": "Kannada geminate consonants, vowel endings"
+    },
+    {
+      "id": "KN-02",
+      "language": "kn",
+      "category": "appointment_intake",
+      "text": "ಡಾಕ್ಟರ್ ಅವರ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ನಾಳೆ ಮಧ್ಯಾಹ್ನ 3 ಗಂಟೆಗೆ ಖಚಿತವಾಗಿದೆ.",
+      "target_duration_sec": 5.0,
+      "phonetic_focus": "Kannada numeric phrases and honorifics"
+    },
+    {
+      "id": "ML-01",
+      "language": "ml",
+      "category": "casual_greeting",
+      "text": "നമസ്കാരം! ഞാൻ സാറ, നിങ്ങളുടെ AI അസിസ്റ്റന്റാണ്. എനിക്ക് എങ്ങനെ സഹായിക്കാനാകും?",
+      "target_duration_sec": 4.8,
+      "phonetic_focus": "Malayalam retroflex nasals and glides"
+    },
+    {
+      "id": "MR-01",
+      "language": "mr",
+      "category": "casual_greeting",
+      "text": "नमस्कार! मी MEOW ची AI असिस्टंट सारा आहे. आज मी आपल्याला कशी मदत करू शकते?",
+      "target_duration_sec": 4.9,
+      "phonetic_focus": "Marathi retroflex lateral (ळ) and unaspirated affricates"
+    },
+    {
+      "id": "BN-01",
+      "language": "bn",
+      "category": "casual_greeting",
+      "text": "নমস্কার! আমি MEOW-এর AI রিসেপশনিস্ট সারা। আজ আমি আপনাকে কীভাবে সাহায্য করতে পারি?",
+      "target_duration_sec": 5.1,
+      "phonetic_focus": "Bengali rounded vowels (অ) and nasalized vowels"
+    }
+  ]
+}
+
