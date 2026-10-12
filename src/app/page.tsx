@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
@@ -13,265 +15,320 @@ import {
   CheckCircle2,
   Lock,
   Headphones,
-  FileSpreadsheet,
   Calendar,
   Layers,
   Sparkles,
   HelpCircle,
   Building2,
-  Stethoscope,
   GraduationCap,
-  Store,
+  Briefcase,
   Terminal,
+  Bot,
+  Brain,
+  FileText,
+  CreditCard,
+  Target,
+  ChevronRight,
 } from 'lucide-react';
 
 export default function HomePage() {
-  const pillars = [
+  const [activeSegment, setActiveSegment] = useState<'personal' | 'pro' | 'business' | 'enterprise'>('personal');
+
+  const segments = [
     {
-      id: 'automate',
-      title: 'MEOW Automate',
-      tagline: 'Custom business workflow automation & internal systems',
+      id: 'personal',
+      name: 'MEOW Personal',
+      badge: 'Students & Professionals',
+      icon: GraduationCap,
+      headline: 'Explain, learn, and turn goals into career outcomes.',
       description:
-        'Bridge your fragmented software into self-operating pipelines. From document extraction to multi-step CRM updates, MEOW replaces manual spreadsheet copying with reliable event-driven systems.',
-      icon: Workflow,
-      href: '/platform',
-      features: [
-        'Document intelligence (Invoices, records, PDFs)',
-        'Custom internal copilots & RAG assistants',
-        'CRM, Google Sheets, & WhatsApp synchronizations',
-        'Human-in-the-loop approval thresholds',
+        'Ask questions, summarize research papers, prepare customized study schedules, and tailor high-impact resumes for top internships and jobs.',
+      bulletPoints: [
+        'ATS Resume Tailor & Recruiter Vector PDF export',
+        'Internship & application deadline auto-tracker',
+        'Conceptual explanations & academic paper synthesis',
+        'Personal memory vault for long-term goal continuity',
       ],
+      samplePrompt: '“Help me find internships, organize the application deadlines, and prepare my resume for the best opportunities.”',
+      cta: 'Explore Personal Studio',
+      ctaHref: '/app',
     },
     {
-      id: 'voice',
-      title: 'MEOW Voice (Sara Concierge)',
-      tagline: 'Hyper-realistic voice receptionist in 8 Indian languages',
+      id: 'pro',
+      name: 'MEOW Pro',
+      badge: 'Freelancers & Creators',
+      icon: Briefcase,
+      headline: 'Research clients, generate proposals, and track deliverables.',
       description:
-        'Voiced by Sara — an empathetic, cute, and human-like voice receptionist speaking Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English. Handles clinic inquiries, checks doctor schedules, locks calendar slots, and escalates emergencies.',
-      icon: Mic,
-      href: '/voice-ai',
-      features: [
-        '8 Indian languages (Telugu, Hindi, Tamil, Kannada +)',
-        'Real calendar slot reservation & double-booking protection',
-        'Emergency symptom detection & immediate nurse transfer',
-        'Live in-browser web dialer with instant speech synthesis',
+        'Spend less time writing estimates and chasing invoices. MEOW creates commercial client proposals, schedules milestone deliverables, and generates instant UPI payment links.',
+      bulletPoints: [
+        'Commercial statement-of-work (SOW) & proposal generator',
+        'Milestone deliverable trackers & reminder alerts',
+        'WhatsApp business copy in localized regional vernacular',
+        'Dynamic UPI QR code & GST invoice generation',
       ],
+      samplePrompt: '“Draft freelance client proposal for clinic website redesign with milestone deliverables and ₹25k advance link.”',
+      cta: 'Explore Pro Tools',
+      ctaHref: '/app',
     },
     {
-      id: 'growth',
-      title: 'MEOW Growth',
-      tagline: 'AI-assisted marketing operations & campaign velocity',
+      id: 'business',
+      name: 'MEOW Business',
+      badge: 'Clinics, SMBs & Startups',
+      icon: Building2,
+      headline: 'Conversational phone receptionists, patient triage, and payment ops.',
       description:
-        'Systematize your lead generation. Generate structured campaign briefs, localized WhatsApp & Meta copy, and automated nurture sequences tailored specifically to your business archetype.',
-      icon: Zap,
-      href: '/growth',
-      features: [
-        'Deterministic & Claude-powered campaign briefs',
-        'Channel-specific copy (WhatsApp, Meta, Email)',
-        'Automated lead qualification checklists',
-        'Attribution tracking without spam tactics',
+        'Voiced by Sara — an empathetic voice receptionist speaking 8 Indian languages. Handles inbound phone calls, checks doctor schedules, locks calendar slots, and issues token links.',
+      bulletPoints: [
+        'Sara Voice Concierge in 8 Indian languages (Telugu, Hindi, Tamil +)',
+        'Zero-double-booking calendar slot reservation engine',
+        'Automated WhatsApp appointment confirmations with UPI tokens',
+        'Google Cloud Firestore live database synchronization',
       ],
+      samplePrompt: '“Audit uncontacted clinic inquiries, draft Telugu WhatsApp followups & issue ₹500 token link.”',
+      cta: 'Launch Business Console',
+      ctaHref: '/app',
+    },
+    {
+      id: 'enterprise',
+      name: 'MEOW Enterprise',
+      badge: 'Teams & Organizations',
+      icon: ShieldCheck,
+      headline: 'Coordinated AI employees, strict human oversight, and full auditability.',
+      description:
+        'Orchestrate multi-agent teams across departments with deterministic safety boundaries, private cloud infrastructure, and verifiable outcomes.',
+      bulletPoints: [
+        'Multi-agent orchestration (Sara, Alex, Maya, Rishi)',
+        'Human-in-the-loop review gates on consequential decisions',
+        'Full audit logs and verifiable deliverable artifacts',
+        'Custom internal database & API connector integrations',
+      ],
+      samplePrompt: '“Coordinate department intake, enforce supervisor review gates, and generate audit reports.”',
+      cta: 'Contact Enterprise Team',
+      ctaHref: '/contact',
     },
   ];
 
-  const processSteps = [
-    {
-      step: '01',
-      name: 'Discover & Map',
-      description:
-        'We audit your current inquiry flow, identify where manual repetitive friction occurs, and isolate high-ROI automation targets.',
-    },
-    {
-      step: '02',
-      name: 'Architect & Guardrail',
-      description:
-        'We configure prompt instructions, connect your CRM/calendar tools, and set deterministic human-in-the-loop escalation gates.',
-    },
-    {
-      step: '03',
-      name: 'Deploy & Test',
-      description:
-        'The system is deployed into staging. We test vernacular speech latency, verify booking locks, and run edge-case scenarios.',
-    },
-    {
-      step: '04',
-      name: 'Supervise & Optimize',
-      description:
-        'Your team receives unified logs, supervisor alerts, and ongoing tuning to ensure accuracy improves as inquiry volume grows.',
-    },
-  ];
+  const currentSegmentData = segments.find((s) => s.id === activeSegment)!;
 
   const faqs = [
     {
-      q: 'Does MEOW Voice replace our human receptionists or frontdesk team?',
-      a: 'No. MEOW Voice acts as an indefatigable frontline assistant. It handles repetitive calls during peak rush hours or after 7 PM, captures inquiries, and immediately escalates complex or urgent matters to your human staff.',
+      q: 'What is MEOW?',
+      a: 'MEOW is an AI platform designed to help people and businesses get work done by combining a conversational assistant, specialized AI employees, task automation, personal/business memory, and integrations with the apps they already use.',
     },
     {
-      q: 'Which languages are supported right now?',
-      a: 'We currently provide native conversational agents in Telugu (తెలుగు) and English (Indian context). Our modular voice adapter is architected to roll out Hindi, Kannada, and Tamil in upcoming releases.',
+      q: 'What does "Turns instructions into outcomes" mean?',
+      a: 'MEOW never claims work is complete merely because an AI generated a response. When you ask it to find internships and prepare your resume, it performs verified research (Step 1), generates the tailored document (Step 2), schedules deadlines in an active tracker (Step 3), and requires your human approval before final dispatch (Step 4).',
     },
     {
-      q: 'Can the AI voice agent make unauthorized bookings or financial commitments?',
-      a: 'Never. Our system follows strict deterministic rules. It checks actual calendar availability before confirming appointments, and any action involving payments, refunds, or medical decisions requires human supervisor approval.',
+      q: 'Does MEOW Voice support Indian regional languages?',
+      a: 'Yes. Voiced by Sara, our conversational voice agent supports 8 Indian languages: Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English with natural cadence and browser-native Web Audio telephony.',
     },
     {
-      q: 'How does MEOW integrate with our existing tools?',
-      a: 'We integrate via standard REST webhooks and secure API connectors with Google Calendar, WhatsApp Business API, HubSpot, Zoho CRM, Google Sheets, and custom internal SQL databases.',
-    },
-    {
-      q: 'Do you fabricate case studies or customer counts?',
-      a: 'No. MEOW AI is an early-stage startup founded in Bengaluru. We do not display fake logos, made-up metrics, or invented testimonials. We let our working product demonstrations speak for themselves.',
+      q: 'How does payment and billing work?',
+      a: 'MEOW provides instant UPI QR generation, card checkouts, and generates printable Indian GST tax invoices compliant with domestic regulations.',
     },
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-white selection:bg-violet-600/30">
+    <div className="flex flex-col min-h-screen bg-zinc-950 text-white selection:bg-violet-600/30 font-sans antialiased">
       <Navbar />
 
       <main className="flex-1">
-        {/* HERO SECTION */}
+        {/* HERO SECTION: Apple Clean Minimalist */}
         <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
-          {/* Subtle Apple-style background illumination */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-violet-600/10 via-zinc-800/10 to-transparent blur-3xl rounded-full pointer-events-none -z-10" />
+          {/* Subtle Ambient Illumination */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-tr from-violet-600/15 via-indigo-600/10 to-transparent blur-3xl rounded-full pointer-events-none -z-10" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            {/* Mission Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs text-zinc-300 font-mono mb-8 backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-              <span>AI that does the work, not just talks about the work.</span>
+            {/* Mission Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs text-zinc-300 font-mono mb-8 backdrop-blur-xl">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>MEOW: The AI Command Center</span>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-4xl mx-auto leading-[1.1] mb-6">
-              Your business.{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 via-zinc-300 to-zinc-500">
-                Reimagined with AI.
+            {/* Apple Minimalist Headline */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.08] mb-6">
+              One AI.{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 via-zinc-400 to-zinc-600">
+                Every part of life and work.
               </span>
             </h1>
 
             {/* Supporting Copy */}
-            <p className="text-base sm:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10">
-              From multilingual voice agents to intelligent workflows and AI-powered growth, MEOW helps businesses turn repetitive work into reliable systems.
+            <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10">
+              MEOW combines an everyday conversational assistant, specialized AI employees, persistent personal memory, and voice phone agents into one unified platform that turns instructions into verified outcomes.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-16">
               <Link
-                href="/voice-ai"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-violet-600/25 flex items-center justify-center gap-2"
+                href="/app"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-zinc-950 font-bold text-sm hover:bg-zinc-200 active:scale-[0.98] transition-all shadow-subtle flex items-center justify-center gap-2"
               >
-                <Mic className="w-4 h-4 text-violet-200" />
-                <span>Call Sara (8 Languages)</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              </Link>
-              <Link
-                href="/book"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-zinc-950 font-semibold text-sm hover:bg-zinc-200 active:scale-[0.98] transition-all shadow-subtle flex items-center justify-center gap-2"
-              >
-                <span>Book 30-Min Session</span>
+                <Sparkles className="w-4 h-4 text-violet-600" />
+                <span>Launch Command Center</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/app"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/80 text-zinc-300 hover:text-white border border-white/10 hover:border-white/20 active:scale-[0.98] transition-all text-sm font-medium backdrop-blur-md flex items-center justify-center gap-2 font-mono"
+                href="/voice-ai"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/90 text-zinc-300 hover:text-white border border-white/10 hover:border-white/20 active:scale-[0.98] transition-all text-sm font-medium backdrop-blur-xl flex items-center justify-center gap-2 font-mono"
               >
-                <Terminal className="w-4 h-4 text-violet-400" />
-                <span>Launch Console</span>
+                <Mic className="w-4 h-4 text-violet-400" />
+                <span>Call Sara (8 Languages)</span>
+              </Link>
+              <Link
+                href="/pricing"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/60 text-zinc-400 hover:text-zinc-200 border border-white/[0.06] active:scale-[0.98] transition-all text-sm font-medium flex items-center justify-center gap-2"
+              >
+                <span>View Plans (From ₹0)</span>
               </Link>
             </div>
 
-            {/* Hero Interactive Visualization */}
-            <div className="max-w-5xl mx-auto pt-4">
+            {/* Interactive Hero Visual */}
+            <div className="max-w-5xl mx-auto pt-2">
               <HeroVisual />
             </div>
           </div>
         </section>
 
-        {/* THREE CORE PRODUCT PILLARS */}
-        <section className="py-24 border-t border-white/[0.08] bg-zinc-950/60 relative">
+        {/* CUSTOMER SEGMENTS INTERACTIVE SHOWCASE */}
+        <section className="py-24 border-t border-white/[0.08] bg-zinc-950/70 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
-                INTEGRATED SERVICE SUITE
+                BUILT FOR EVERY STAGE OF WORK
               </h2>
-              <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                Three Connected Engines. One Resilient Foundation.
+              <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                Who MEOW Serves
               </h3>
-              <p className="text-zinc-400 text-sm sm:text-base mt-4 leading-relaxed">
-                Rather than disjointed point solutions, MEOW unifies conversational voice, automated backend execution, and marketing intelligence into an integrated operating system.
+              <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
+                One execution engine adapted for students, creators, local businesses, and modern enterprises.
               </p>
+
+              {/* Segment Toggle Bar (Apple Style) */}
+              <div className="mt-8 inline-flex items-center p-1.5 rounded-2xl bg-zinc-900/80 border border-white/[0.08] backdrop-blur-xl max-w-full overflow-x-auto">
+                {segments.map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => setActiveSegment(s.id as any)}
+                    className={`py-2 px-4 rounded-xl text-xs font-semibold transition-all shrink-0 flex items-center gap-2 ${
+                      activeSegment === s.id
+                        ? 'bg-zinc-800 text-white shadow-sm border border-white/10'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>{s.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {pillars.map((pillar) => {
-                const Icon = pillar.icon;
-                return (
-                  <div
-                    key={pillar.id}
-                    className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 hover:bg-zinc-900/70 p-8 flex flex-col justify-between transition-all group backdrop-blur-sm"
-                  >
-                    <div>
-                      <div className="w-12 h-12 rounded-2xl bg-zinc-800 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-violet-500/40 transition-colors">
-                        <Icon className="w-6 h-6 text-violet-400" />
-                      </div>
-                      <h4 className="text-xl font-bold text-white mb-2">{pillar.title}</h4>
-                      <p className="text-xs font-mono text-zinc-400 mb-4">{pillar.tagline}</p>
-                      <p className="text-zinc-300 text-sm leading-relaxed mb-6">{pillar.description}</p>
-
-                      <ul className="space-y-2.5 mb-8 text-xs text-zinc-400">
-                        {pillar.features.map((feat, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <Link
-                      href={pillar.href}
-                      className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-violet-300 transition-colors pt-4 border-t border-white/[0.06]"
-                    >
-                      <span>Explore {pillar.title}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
+            {/* Active Segment Feature Showcase Box */}
+            <div className="max-w-4xl mx-auto p-8 sm:p-10 rounded-3xl bg-zinc-900/40 border border-white/[0.08] backdrop-blur-2xl space-y-6 text-left">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.08] pb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-zinc-800 border border-white/10 flex items-center justify-center text-violet-400">
+                    <currentSegmentData.icon className="w-6 h-6" />
                   </div>
-                );
-              })}
+                  <div>
+                    <h4 className="text-xl font-bold text-white tracking-tight">
+                      {currentSegmentData.name}
+                    </h4>
+                    <span className="text-xs font-mono text-zinc-400">
+                      {currentSegmentData.badge}
+                    </span>
+                  </div>
+                </div>
+
+                <Link
+                  href={currentSegmentData.ctaHref}
+                  className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+                >
+                  <span>{currentSegmentData.cta}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="space-y-2">
+                <div className="text-base font-semibold text-white">
+                  {currentSegmentData.headline}
+                </div>
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                  {currentSegmentData.description}
+                </p>
+              </div>
+
+              {/* Sample User Prompt */}
+              <div className="p-4 rounded-2xl bg-zinc-950/80 border border-white/[0.06] space-y-1 font-mono">
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">
+                  Sample Goal Instruction:
+                </div>
+                <div className="text-xs text-violet-300">
+                  {currentSegmentData.samplePrompt}
+                </div>
+              </div>
+
+              {/* Feature Checklist */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                {currentSegmentData.bulletPoints.map((pt, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5 text-xs text-zinc-300">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>{pt}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* WORKFLOW DEMO CALLOUT */}
-        <section className="py-20 border-t border-white/[0.08] bg-zinc-900/20">
+        {/* FLAGSHIP FEATURE: TURNS INSTRUCTIONS INTO OUTCOMES */}
+        <section className="py-24 border-t border-white/[0.08] bg-zinc-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-white/[0.08] bg-gradient-to-b from-zinc-900/60 to-zinc-950 p-8 sm:p-12 flex flex-col lg:flex-row items-center justify-between gap-8">
-              <div className="max-w-xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-xs font-mono mb-4">
-                  <Terminal className="w-3 h-3" />
-                  <span>Real Interactive Sandbox</span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                  Test the MEOW Voice AI &amp; Workflow Builders Live
-                </h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  Experience how our Telugu and English dialogue engines respond in real time, or test custom workflow step reordering and validation without needing an enterprise sales call.
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
+                THE FLAGSHIP EXECUTION ENGINE
+              </h2>
+              <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                How MEOW Turns Instructions Into Outcomes
+              </h3>
+              <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
+                Most AI merely generates text advice. MEOW breaks goals down, coordinates tools and specialized agents, and produces tangible, verified work.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl space-y-3 text-left">
+                <div className="font-mono text-xs text-violet-400 uppercase font-bold">Step 01</div>
+                <h4 className="text-base font-bold text-white">Research &amp; Validate</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Scrapes and verifies external facts, active job openings, or inbound patient inquiries with zero hallucination.
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-4">
-                <Link
-                  href="/voice-ai"
-                  className="px-6 py-3 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-all shadow-sm"
-                >
-                  Test Voice Sandbox
-                </Link>
-                <Link
-                  href="/platform"
-                  className="px-6 py-3 rounded-full bg-zinc-800 text-white font-medium text-xs hover:bg-zinc-700 border border-white/10 transition-all"
-                >
-                  Open Workflow Canvas
-                </Link>
+              <div className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl space-y-3 text-left">
+                <div className="font-mono text-xs text-violet-400 uppercase font-bold">Step 02</div>
+                <h4 className="text-base font-bold text-white">Prepare Deliverable</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Tailors an ATS 95+ resume draft, generates commercial statement-of-work copy, or drafts localized WhatsApp tokens.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl space-y-3 text-left">
+                <div className="font-mono text-xs text-violet-400 uppercase font-bold">Step 03</div>
+                <h4 className="text-base font-bold text-white">Organize &amp; Track</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Assembles application deadlines, locks calendar slots to prevent double-bookings, and creates instant UPI links.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl space-y-3 text-left">
+                <div className="font-mono text-xs text-violet-400 uppercase font-bold">Step 04</div>
+                <h4 className="text-base font-bold text-white">Review and Approve</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Places human-in-the-loop review checkpoints before any consequential action, invoice dispatch, or export.
+                </p>
               </div>
             </div>
           </div>
@@ -282,64 +339,17 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-14">
               <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
-                AUTHENTIC AUDIO DEMONSTRATIONS
+                SARA CONCIERGE AUDIO
               </h2>
-              <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                Hear Multilingual AI in Genuine Indian SMB Contexts
+              <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                Listen to Multilingual Voice Calls
               </h3>
               <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
-                Experience actual conversational turns in Telugu and English. No robotic cadence—natural pacing, sub-300ms response times, and deterministic slot locking.
+                Natural speech synthesis across Telugu, Hindi, and Indian English with Web Audio dual-tone telephone simulation.
               </p>
             </div>
 
             <CallRecordingShowcase />
-          </div>
-        </section>
-
-        {/* IMPLEMENTATION PROCESS */}
-        <section className="py-24 border-t border-white/[0.08] bg-zinc-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
-                PRAGMATIC DELIVERY
-              </h2>
-              <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                How We Build and Ship Systems
-              </h3>
-              <p className="text-zinc-400 text-sm mt-3">
-                No endless slide decks or multi-year contracts. We deliver verifiable automation in tight sprints.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {processSteps.map((step) => (
-                <div
-                  key={step.step}
-                  className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/30 space-y-3"
-                >
-                  <div className="font-mono text-2xl font-bold text-violet-400/80">{step.step}</div>
-                  <h4 className="text-base font-semibold text-white">{step.name}</h4>
-                  <p className="text-xs text-zinc-400 leading-relaxed">{step.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SECURITY & HUMAN OVERSIGHT */}
-        <section className="py-20 border-t border-white/[0.08] bg-zinc-900/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-zinc-800 border border-white/10 mx-auto flex items-center justify-center text-violet-400">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                Engineered with Guardrails &amp; Human Supervision
-              </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Autonomous AI is only as useful as its safety boundaries. MEOW enforces strict protocol checks: voice agents disclose their automated identity on turn one, emergency medical keywords transfer to human duty nurses, and financial commitments require supervisor confirmation.
-              </p>
-            </div>
           </div>
         </section>
 
@@ -350,14 +360,14 @@ export default function HomePage() {
               <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
                 COMMON QUESTIONS
               </h2>
-              <h3 className="text-3xl font-bold text-white">Honest Answers Before You Begin</h3>
+              <h3 className="text-3xl font-extrabold text-white">Honest Answers</h3>
             </div>
 
             <div className="space-y-4">
               {faqs.map((faq, idx) => (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/40 text-left space-y-2"
+                  className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 text-left space-y-2 backdrop-blur-xl"
                 >
                   <h4 className="text-base font-semibold text-white flex items-center gap-2">
                     <HelpCircle className="w-4 h-4 text-violet-400 shrink-0" />
@@ -373,24 +383,25 @@ export default function HomePage() {
         {/* FINAL CALL TO ACTION */}
         <section className="py-24 border-t border-white/[0.08] bg-zinc-950 text-center relative">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-              Ready to automate the work that matters?
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Ready to accomplish more with less work?
             </h2>
             <p className="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-              Schedule a 30-minute discovery session with our engineering team in Bengaluru to explore a tailor-made deployment for your business.
+              Open the AI Command Center to test the instruction-to-outcome pipeline, build your tailored resume, or test Sara Voice.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/book"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-zinc-950 font-semibold text-sm hover:bg-zinc-200 transition-all shadow-subtle"
+                href="/app"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-zinc-950 font-bold text-sm hover:bg-zinc-200 transition-all shadow-subtle flex items-center justify-center gap-2"
               >
-                Book a Discovery Call
+                <span>Launch MEOW Platform</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/app"
+                href="/pricing"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white transition-all text-sm font-medium"
               >
-                Launch Workspace Demo
+                Explore Pricing (From ₹0)
               </Link>
             </div>
           </div>
@@ -401,4 +412,3 @@ export default function HomePage() {
     </div>
   );
 }
-

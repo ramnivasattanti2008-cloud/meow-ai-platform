@@ -102,3 +102,86 @@ export interface VoiceTurn {
   };
 }
 
+export type ProjectSegment = 'personal' | 'pro' | 'business' | 'enterprise';
+
+export type StepStatus = 'pending' | 'in_progress' | 'completed' | 'requires_review' | 'failed';
+
+export interface ProjectStep {
+  id: string;
+  order: number;
+  title: string;
+  description: string;
+  status: StepStatus;
+  outputSummary?: string;
+  data?: Record<string, any>;
+}
+
+export interface ProjectArtifact {
+  id: string;
+  type: 'resume' | 'proposal' | 'campaign' | 'appointments' | 'task_list' | 'report';
+  title: string;
+  content: string;
+  downloadable?: boolean;
+  downloadName?: string;
+}
+
+export interface ProjectRecord {
+  id: string;
+  title: string;
+  prompt: string;
+  segment: ProjectSegment;
+  assignedEmployee: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  status: 'planning' | 'in_progress' | 'awaiting_review' | 'completed';
+  steps: ProjectStep[];
+  artifacts: ProjectArtifact[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserMemoryItem {
+  id: string;
+  key: string;
+  value: string;
+  category: 'profile' | 'career' | 'business' | 'preference';
+  updatedAt: string;
+}
+
+export interface CareerResume {
+  id: string;
+  fullName: string;
+  title: string;
+  email: string;
+  phone: string;
+  location: string;
+  linkedin?: string;
+  github?: string;
+  summary: string;
+  targetRole: string;
+  atsScore: number;
+  skills: string[];
+  experience: {
+    role: string;
+    company: string;
+    duration: string;
+    bullets: string[];
+  }[];
+  education: {
+    degree: string;
+    institution: string;
+    year: string;
+    grade?: string;
+  }[];
+  projects: {
+    name: string;
+    description: string;
+    technologies: string[];
+    link?: string;
+  }[];
+  createdAt: string;
+  updatedAt: string;
+}
+

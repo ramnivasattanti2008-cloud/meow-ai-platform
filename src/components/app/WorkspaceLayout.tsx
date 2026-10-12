@@ -156,11 +156,11 @@ export const WorkspaceLayout: React.FC<WorkspaceLayoutProps> = ({ children }) =>
         <div className="bg-zinc-900/60 backdrop-blur-xl border-b border-white/[0.08] px-6 py-3 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="font-semibold text-white">Production Workspace</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-semibold text-white">MEOW Command Workspace</span>
             </div>
             <span className="text-zinc-600">|</span>
-            <span className="text-zinc-400 font-mono">Dr. Rao Orthopedic Care</span>
+            <span className="text-zinc-400 font-mono">Personal • Pro • Business Suite</span>
           </div>
 
           <div className="flex items-center gap-3">
