@@ -3,10 +3,10 @@ import { Agent, Workflow, Campaign, ContactRequest } from './types';
 export const initialAgents: Agent[] = [
   {
     id: 'agent-telugu-clinic',
-    name: 'Dr. Rao Clinic Frontdesk AI',
+    name: 'City Care Frontdesk AI',
     purpose: 'appointment_booking',
     language: 'te',
-    greeting: 'నమస్కారం! డాక్టర్ రావు క్లినిక్ సహాయకురాలిని. మీకు ఏ సమయానికి అపాయింట్‌మెంట్ కావాలి? (Namaskaram! Welcome to Dr. Rao Clinic. How can I assist with your appointment?)',
+    greeting: 'నమస్కారం! సిటీ కేర్ క్లినిక్ సహాయకురాలిని. మీకు ఏ సమయానికి అపాయింట్‌మెంట్ కావాలి? (Namaskaram! Welcome to City Care Clinic. How can I assist with your appointment?)',
     knowledgeInstructions: 'Handles clinic appointment scheduling for general medicine, cardiology, and pediatrics. Working hours: 9 AM to 7 PM IST, Monday to Saturday. Validates patient name, preferred doctor, and time slot. Escalates emergency medical queries immediately to on-call duty nurse.',
     escalationRules: 'If caller mentions chest pain, severe shortness of breath, acute trauma, or requests emergency care, immediately transfer to emergency duty nurse (+91 80 4000 0001).',
     enabled: true,
@@ -120,7 +120,7 @@ export const initialWorkflows: Workflow[] = [
         id: 'step-11',
         type: 'voice_call_initiation',
         title: 'Telugu/English Outbound Call-Back',
-        description: 'Calls back within 60 seconds with Dr. Rao Clinic Frontdesk AI.',
+        description: 'Calls back within 60 seconds with City Care Frontdesk AI.',
         config: { retryCount: 2, languagePriority: ['te', 'en'] },
         order: 2,
       },
@@ -129,7 +129,7 @@ export const initialWorkflows: Workflow[] = [
         type: 'calendar_slot_reserve',
         title: 'Clinic Calendar Slot Lock',
         description: 'Reserves tentative 15-minute consultation slot pending morning staff confirmation.',
-        config: { calendar: 'Dr_Rao_General_Medicine', holdDurationHours: 12 },
+        config: { calendar: 'Clinic_General_Medicine', holdDurationHours: 12 },
         order: 3,
       },
     ],
@@ -144,7 +144,7 @@ export const initialCampaigns: Campaign[] = [
     targetAudience: 'Families and working professionals in Whitefield & Bellandur (Ages 25-50)',
     offer: 'Comprehensive Smile Health Checkup + Digital X-Ray at ₹499 (Save 60%)',
     primaryChannel: 'whatsapp',
-    draftContent: `*Bengaluru Smile Month at Dr. Rao Dental Clinic* ✨
+    draftContent: `*Bengaluru Smile Month at City Dental Clinic* ✨
 
 Has it been more than 6 months since your last dental checkup? Don't wait for a toothache!
 

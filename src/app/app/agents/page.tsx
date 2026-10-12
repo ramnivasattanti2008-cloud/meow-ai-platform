@@ -666,7 +666,7 @@ export default function WorkspaceAgentsPage() {
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="e.g. Dr. Rao Clinic Frontdesk AI"
+                    placeholder="e.g. City Frontdesk Voice AI"
                     className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500/50"
                   />
                   {formErrors.name && <p className="text-red-400 mt-1">{formErrors.name[0]}</p>}

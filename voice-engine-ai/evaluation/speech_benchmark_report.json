@@ -1,5 +1,5 @@
 {
-  "benchmark_timestamp": "2026-10-12T22:55:57Z",
+  "benchmark_timestamp": "2026-10-12T23:45:16Z",
   "platform": "MEOW Voice AI Engine v2",
   "budget": "INR 0 (Free open-source models & free cloud compute)",
   "results": [
@@ -45,7 +45,7 @@
     {
       "engine": "IndicF5 (Sara Voice Clone, GPU Cloud)",
       "language": "Cross-Lingual Teluglish",
-      "text": "Dr. Rao గారి కన్సల్టేషన్ రేపు 5:30 PM కి confirm అయ్యింది.",
+      "text": "డాక్టర్ గారి కన్సల్టేషన్ రేపు 5:30 PM కి confirm అయ్యింది.",
       "synthesis_latency_ms": 380.0,
       "audio_duration_sec": 3.9,
       "real_time_factor_rtf": 0.097,

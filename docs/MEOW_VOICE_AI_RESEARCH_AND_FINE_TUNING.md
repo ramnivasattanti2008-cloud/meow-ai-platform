@@ -92,10 +92,10 @@ To build a high-fidelity speaker identity for "Sara", all audio recordings must 
 The recording script must avoid repetitive declarative statements and include:
 1. **Conversational Greetings:** Casual, warm, and professional greetings in English, Telugu, Hindi, Tamil, and Kannada.
 2. **Numeric and Alphanumeric Entities:** Phone numbers (`+91 98490 12345`), monetary amounts (`₹1,499`, `₹25,000`), times (`5:30 PM IST`), dates (`13th October 2026`).
-3. **Clinical / Appointment Intake:** Symptoms, doctor names (`Dr. Srinivas Rao`), confirmation tokens, clinic addresses.
+3. **Clinical / Appointment Intake:** Symptoms, clinician names (`Dr. Sharma`), confirmation tokens, clinic addresses.
 4. **Natural Code-Switching:** Common Indian conversational blending:
    * *Telugu + English:* "మీ appointment రేపు evening 5:30 PM కి confirm అయ్యింది అండి."
-   * *Hindi + English:* "नमस्ते! आपकी consultation Dr. Rao के साथ schedule हो गई है."
+   * *Hindi + English:* "नमस्ते! आपकी consultation Doctor के साथ schedule हो गई है."
    * *Tamil + English:* "வணக்கம்! உங்கள் appointment confirm செய்யப்பட்டது."
 
 ### 4.3. Automated Dataset Sanitation Pipeline

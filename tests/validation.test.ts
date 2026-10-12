@@ -62,10 +62,10 @@ describe('Validation Schemas', () => {
   describe('AgentSchema', () => {
     it('validates a correct Telugu appointment agent', () => {
       const agentData = {
-        name: 'Dr. Rao Clinic Frontdesk AI',
+        name: 'City Care Frontdesk AI',
         purpose: 'appointment_booking',
         language: 'te',
-        greeting: 'నమస్కారం! డాక్టర్ రావు క్లినిక్ సహాయకురాలిని.',
+        greeting: 'నమస్కారం! సిటీ కేర్ క్లినిక్ సహాయకురాలిని.',
         knowledgeInstructions: 'Handles clinic appointment scheduling for general medicine.',
         escalationRules: 'If caller reports chest pain, route to emergency nurse.',
         enabled: true,

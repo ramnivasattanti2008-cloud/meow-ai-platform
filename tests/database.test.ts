@@ -28,7 +28,7 @@ describe('Google Cloud Firestore (Firebase) Database Engine', () => {
 
   it('correctly deserializes Firestore REST representation back to plain JavaScript objects', () => {
     const firestoreFields = {
-      title: { stringValue: 'Dr. Rao Orthopedic Care' },
+      title: { stringValue: 'City Care Orthopedic Center' },
       fee: { integerValue: '600' },
       verified: { booleanValue: true },
       tags: {
@@ -40,7 +40,7 @@ describe('Google Cloud Firestore (Firebase) Database Engine', () => {
 
     const decoded = fromFirestoreFields(firestoreFields);
 
-    expect(decoded.title).toBe('Dr. Rao Orthopedic Care');
+    expect(decoded.title).toBe('City Care Orthopedic Center');
     expect(decoded.fee).toBe(600);
     expect(decoded.verified).toBe(true);
     expect(decoded.tags).toEqual(['ortho', 'telugu']);

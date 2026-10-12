@@ -133,7 +133,7 @@ def run_benchmark_suite(output_report_path: str = "speech_benchmark_report.json"
         {
             "engine": "IndicF5 (Sara Voice Clone, GPU Cloud)",
             "language": "Cross-Lingual Teluglish",
-            "text": "Dr. Rao గారి కన్సల్టేషన్ రేపు 5:30 PM కి confirm అయ్యింది.",
+            "text": "డాక్టర్ గారి కన్సల్టేషన్ రేపు 5:30 PM కి confirm అయ్యింది.",
             "simulated_synth_ms": 380.0,
             "simulated_dur_sec": 3.90,
             "rms_dbfs": -19.5,

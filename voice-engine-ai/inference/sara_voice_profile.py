@@ -194,7 +194,7 @@ if __name__ == "__main__":
     profile = SaraVoiceProfile(domain_mode="clinical_healthcare")
 
     test_samples = [
-        ("en", "Hello! Your consultation with Dr. Rao is confirmed for tomorrow at 5:30 PM."),
+        ("en", "Hello! Your consultation with the specialist is confirmed for tomorrow at 5:30 PM."),
         ("te", "నమస్కారం అండి! మీ అపాయింట్‌మెంట్ రేపు సాయంత్రం 5:30 కి లాక్ చేయబడింది."),
         ("hi", "नमस्ते! आपकी अपॉइंटमेंट कल शाम 5:30 बजे के लिए निश्चित कर दी गई है।"),
     ]

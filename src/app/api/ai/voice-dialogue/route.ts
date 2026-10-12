@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
       purpose: purpose || 'appointment_booking',
       history: history || [],
       personaName: personaName || 'Sara',
-      businessName: businessName || 'Dr. Rao Orthopedic Care, Hyderabad',
+      businessName: businessName || 'City Care Clinic, Hyderabad',
     });
 
     return NextResponse.json(output);

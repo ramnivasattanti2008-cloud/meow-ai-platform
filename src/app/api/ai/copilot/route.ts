@@ -123,7 +123,7 @@ Provide pragmatic commercial proposals in INR (₹) with milestone breakdowns, W
 Total Value: ₹60,000 + 18% GST. Would you like me to package this into an official proposal?`;
         } else if (lower.includes('whatsapp') || lower.includes('message') || lower.includes('copy')) {
           reply = `Here is a high-converting localized WhatsApp nurture script:
-"Namaste! 🙏 Thank you for reaching out to us. Dr. Rao has opened 4 priority consultation slots for tomorrow afternoon.
+"Namaste! 🙏 Thank you for reaching out to us. We have opened 4 priority consultation slots for tomorrow afternoon.
 👉 Tap here to lock your token with instant UPI: https://meowboxai.tech/book
 Reply 'CALL' to speak with Sara in Telugu or English immediately."`;
         } else {

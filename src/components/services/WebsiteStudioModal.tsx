@@ -26,11 +26,11 @@ interface WebsiteStudioModalProps {
 
 export const WebsiteStudioModal: React.FC<WebsiteStudioModalProps> = ({ isOpen, onClose }) => {
   const [devicePreview, setDevicePreview] = useState<'desktop' | 'mobile'>('desktop');
-  const [brandName, setBrandName] = useState('Dr. Rao Orthopedic Care');
-  const [tagline, setTagline] = useState('Advanced Joint & Knee Replacement Center');
-  const [niche, setNiche] = useState('Healthcare & Orthopedics');
-  const [targetDomain, setTargetDomain] = useState('drraoorthocare.in');
-  const [emailRequirement, setEmailRequirement] = useState('reception@drraoorthocare.in (2 Inboxes)');
+  const [brandName, setBrandName] = useState('City Care Clinic');
+  const [tagline, setTagline] = useState('Modern Multispeciality & Wellness Center');
+  const [niche, setNiche] = useState('Healthcare & Clinical Services');
+  const [targetDomain, setTargetDomain] = useState('citycareclinic.in');
+  const [emailRequirement, setEmailRequirement] = useState('reception@citycareclinic.in (2 Inboxes)');
   const [themeColor, setThemeColor] = useState<'violet' | 'emerald' | 'blue' | 'amber'>('violet');
   const [features, setFeatures] = useState<string[]>([
     'sara_voice_widget',

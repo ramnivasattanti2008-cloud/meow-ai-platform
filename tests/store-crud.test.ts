@@ -29,9 +29,9 @@ describe('DataStore Operations', () => {
 
   it('records contact requests safely', () => {
     const lead = store.addContactRequest({
-      name: 'Ananya Rao',
+      name: 'Ananya Sharma',
       email: 'ananya@example.com',
-      company: 'Rao Enterprises',
+      company: 'Sharma Technologies',
       businessType: 'startup_tech',
       serviceOfInterest: 'voice_ai',
       currentChallenge: 'Testing lead intake persistence',

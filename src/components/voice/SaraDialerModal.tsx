@@ -35,56 +35,56 @@ const SUPPORTED_LANGS: { code: SupportedLanguage; label: string; native: string;
     label: 'Telugu',
     native: 'తెలుగు',
     sampleGreeting:
-      'నమస్కారం అండి! డాక్టర్ రావు క్లినిక్ కి స్వాగతం. నా పేరు సారా, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ కావాలా లేక రిపోర్ట్స్ గురించి మాట్లాడుతున్నారా?',
+      'నమస్కారం అండి! సిటీ కేర్ క్లినిక్ కి స్వాగతం. నా పేరు సారా, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ కావాలా లేక రిపోర్ట్స్ గురించి మాట్లాడుతున్నారా?',
   },
   {
     code: 'en',
     label: 'English',
     native: 'Indian English',
     sampleGreeting:
-      "Hi there! Thanks for calling Dr. Rao's Clinic. I'm Sara from the front desk! How can I help you today — are you looking to book an appointment or check on existing reports?",
+      "Hi there! Welcome to City Care Clinic. I'm Sara from the front desk! How can I help you today — are you looking to book an appointment or check on existing reports?",
   },
   {
     code: 'hi',
     label: 'Hindi',
     native: 'हिन्दी',
     sampleGreeting:
-      'नमस्ते जी! डॉक्टर राव क्लिनिक में आपका स्वागत है। मैं सारा बोल रही हूँ फ्रंट डेस्क से। बताइए, क्या आपको डॉक्टर से मिलना है या कोई रिपोर्ट चेक करनी है?',
+      'नमस्ते जी! सिटी केयर क्लिनिक में आपका स्वागत है। मैं सारा बोल रही हूँ फ्रंट डेस्क से। बताइए, क्या आपको डॉक्टर से मिलना है या कोई रिपोर्ट चेक करनी है?',
   },
   {
     code: 'ta',
     label: 'Tamil',
     native: 'தமிழ்',
     sampleGreeting:
-      'வணக்கம்! டாக்டர் ராவ் கிளினிக்கிற்கு வரவேற்கிறோம். நான் சாரா, வரவேற்பறையில் இருந்து பேசுகிறேன். உங்களுக்கு டாக்டரின் அப்பாயிண்ட்மென்ட் தேவையா அல்லது ரிப்போர்ட் பார்க்க வேண்டுமா?',
+      'வணக்கம்! சிட்டி கேர் கிளினிக்கிற்கு வரவேற்கிறோம். நான் சாரா, வரவேற்பறையில் இருந்து பேசுகிறேன். உங்களுக்கு டாக்டரின் அப்பாயிண்ட்மென்ட் தேவையா அல்லது ரிப்போர்ட் பார்க்க வேண்டுமா?',
   },
   {
     code: 'kn',
     label: 'Kannada',
     native: 'ಕನ್ನಡ',
     sampleGreeting:
-      'ನಮಸ್ಕಾರ! ಡಾಕ್ಟರ್ ರಾವ್ ಕ್ಲಿನಿಕ್‌ಗೆ ಸ್ವಾಗತ. ನಾನು ಸಾರಾ, ಫ್ರಂಟ್ ಡೆಸ್ಕ್‌ನಿಂದ ಮಾತನಾಡುತ್ತಿದ್ದೇನೆ. ಹೇಳಿ, ನಿಮಗೆ ಡಾಕ್ಟರ್ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಬೇಕಾ లేదా ರಿಪೋರ್ಟ್ ಬಗ್ಗೆ ತಿಳಿಯಬೇಕಾ?',
+      'ನಮಸ್ಕಾರ! ಸಿಟಿ ಕೇರ್ ಕ್ಲಿನಿಕ್‌ಗೆ ಸ್ವಾಗತ. ನಾನು ಸಾರಾ, ಫ್ರಂಟ್ ಡೆಸ್ಕ್‌ನಿಂದ ಮಾತನಾಡುತ್ತಿದ್ದೇನೆ. ಹೇಳಿ, ನಿಮಗೆ ಡಾಕ್ಟರ್ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಬೇಕಾ లేదా ರಿಪೋರ್ಟ್ ಬಗ್ಗೆ ತಿಳಿಯಬೇಕಾ?',
   },
   {
     code: 'ml',
     label: 'Malayalam',
     native: 'മലയാളം',
     sampleGreeting:
-      'നമസ്കാരം! ഡോക്ടർ റാവു ക്ലിനിക്കിലേക്ക് സ്വാഗതം. ഞാൻ സാറ ആണ് ഫ്രണ്ട് ഡെസ്കിൽ നിന്ന്. നിങ്ങൾക്ക് ഡോക്ടറുടെ അപ്പോയിന്റ്മെന്റ് ബുക്ക് ചെയ്യണോ അതോ റിപ്പോർട്ട് അന്വേഷിക്കാനാണോ?',
+      'നമസ്കാരം! സിറ്റി കെയർ ക്ലിനിക്കിലേക്ക് സ്വാഗതം. ഞാൻ സാറ ആണ് ഫ്രണ്ട് ഡെസ്കിൽ നിന്ന്. നിങ്ങൾക്ക് ഡോക്ടറുടെ അപ്പോയിന്റ്മെന്റ് ബുക്ക് ചെയ്യണോ അതോ റിപ്പോർട്ട് അന്വേഷിക്കാനാണോ?',
   },
   {
     code: 'mr',
     label: 'Marathi',
     native: 'मराठी',
     sampleGreeting:
-      'नमस्कार! डॉक्टर राव क्लिनिकमध्ये आपले स्वागत आहे. मी सारा बोलतेय फ्रंट डेस्कवरून. सांगा, आपल्याला डॉक्टरांची अपॉइंटमेंट हवी आहे की रिपोर्ट तपासायचे आहेत?',
+      'नमस्कार! सिटी केअर क्लिनिकमध्ये आपले स्वागत आहे. मी सारा बोलतेय फ्रंट डेस्कवरून. सांगा, आपल्याला डॉक्टरांची अपॉइंटमेंट हवी आहे की रिपोर्ट तपासायचे आहेत?',
   },
   {
     code: 'bn',
     label: 'Bengali',
     native: 'বাংলা',
     sampleGreeting:
-      'নমস্কার! ডক্টর রাও ক্লিনিকে স্বাগতম। আমি সারা বলছি ফ্রন্ট ডেস্ক থেকে। বলুন, আপনাকে ডাক্তারের অ্যাপয়েন্টমেন্ট বুক করতে সাহায্য করব নাকি কোনো রিপোর্ট দেখতে চান?',
+      'নমস্কার! সিটি কেয়ার ক্লিনিকে স্বাগতম। আমি সারা বলছি ফ্রন্ট ডেস্ক থেকে। বলুন, আপনাকে ডাক্তারের অ্যাপয়েন্টমেন্ট বুক করতে সাহায্য করব নাকি কোনো রিপোর্ট দেখতে চান?',
   },
 ];
 
@@ -141,7 +141,7 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
   onClose,
   initialLanguage = 'te',
   agentName = 'Sara (Front Desk Concierge)',
-  businessName = 'Dr. Rao Orthopedic Care, Hyderabad',
+  businessName = 'City Care Clinic, Hyderabad',
 }) => {
   const [language, setLanguage] = useState<SupportedLanguage>(initialLanguage);
   const [callState, setCallState] = useState<'idle' | 'ringing' | 'connected' | 'ended'>('idle');
@@ -188,24 +188,30 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
     };
   }, [callState]);
 
-  // TTS Speech Synthesis
+  // TTS Speech Synthesis — Fluent Expressive Prosody Modeling
   const speakUtterance = (text: string) => {
     if (audioMuted || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.pitch = 1.15; // cute, friendly, natural tone
-    utterance.rate = 1.02;
+    const cleanText = text.replace(/[*_#`[\]()]/g, '');
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.pitch = 1.04; // Natural, articulate feminine pitch (210 Hz fundamental)
+    utterance.rate = 0.98;  // Deliberate conversational cadence
 
     const voices = window.speechSynthesis.getVoices();
-    // Match best Indian language voice if available
+    // Prioritize natural female Indian language voices
     const voiceMatch = voices.find(
+      (v) =>
+        (v.name.includes('Female') || v.name.includes('Natural') || v.name.includes('Online')) &&
+        (v.lang.toLowerCase().includes(language) || v.lang.includes('IN'))
+    ) || voices.find(
       (v) =>
         v.lang.toLowerCase().includes(language) ||
         (language === 'te' && (v.name.includes('Telugu') || v.lang.includes('te'))) ||
         (language === 'hi' && (v.name.includes('Hindi') || v.lang.includes('hi'))) ||
         v.lang.includes('IN')
-    );
+    ) || voices.find((v) => v.lang.startsWith('en')) || voices[0];
+
     if (voiceMatch) utterance.voice = voiceMatch;
 
     utterance.onstart = () => setIsSpeaking(true);

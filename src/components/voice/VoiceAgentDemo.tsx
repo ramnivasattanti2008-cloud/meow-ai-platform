@@ -135,14 +135,14 @@ const LANGUAGES: LanguageOption[] = [
 ];
 
 const SARA_GREETINGS: Record<SupportedLanguage, string> = {
-  en: "Hi there! Thanks for calling Dr. Rao's Clinic. I'm Sara from the front desk! How can I help you today — are you looking to book an appointment or check on existing reports?",
-  te: 'నమస్కారం అండి! డాక్టర్ రావు క్లినిక్ కి స్వాగతం. నా పేరు సారా, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ కావాలా లేక రిపోర్ట్స్ గురించి మాట్లాడుతున్నారా?',
-  hi: 'नमस्ते जी! डॉक्टर राव क्लिनिक में आपका स्वागत है। मैं सारा बोल रही हूँ फ्रंट डेस्क से। बताइए, क्या आपको डॉक्टर से मिलना है या कोई रिपोर्ट चेक करनी है?',
-  ta: 'வணக்கம்! டாக்டர் ராவ் கிளினிக்கிற்கு வரவேற்கிறோம். நான் சారా, வரவேற்பறையில் இருந்து பேசுகிறேன். உங்களுக்கு டாக்டரின் அப்பாயிண்ட்மென்ட் தேவையா அல்லது ரிப்போர்ட் பார்க்க வேண்டுமா?',
-  kn: 'ನಮಸ್ಕಾರ! ಡಾಕ್ಟರ್ ರಾವ್ ಕ್ಲಿನಿಕ್‌ಗೆ ಸ್ವಾಗತ. ನಾನು ಸಾರಾ, ಫ್ರಂಟ್ ಡೆಸ್ಕ್‌ನಿಂದ ಮಾತನಾಡುತ್ತಿದ್ದೇನೆ. ಹೇಳಿ, ನಿಮಗೆ ಡಾಕ್ಟರ್ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಬೇಕಾ ಅಥವಾ ರಿಪೋರ್ಟ್ ಬಗ್ಗೆ ತಿಳಿಯಬೇಕಾ?',
-  ml: 'നമസ്കാരം! ഡോക്ടർ റാവു ക്ലിനിക്കിലേക്ക് സ്വാഗതം. ഞാൻ സാറ ആണ് ഫ്രണ്ട് ഡെസ്കിൽ നിന്ന്. നിങ്ങൾക്ക് ഡോക്ടറുടെ അപ്പോയിന്റ്മെന്റ് ബുക്ക് ചെയ്യണോ അതോ റിപ്പോർട്ട് അന്വേഷിക്കാനാണോ?',
-  mr: 'नमस्कार! डॉक्टर राव क्लिनिकमध्ये आपले स्वागत आहे. मी सारा बोलतेय फ्रंट डेस्कवरून. सांगा, आपल्याला डॉक्टरांची अपॉइंटमेंट हवी आहे की रिपोर्ट तपासायचे आहेत?',
-  bn: 'নমস্কার! ডক্টর রাও ক্লিনিকে স্বাগতম। আমি সারা বলছি ফ্রন্ট ডেস্ক থেকে। বলুন, আপনাকে ডাক্তারের অ্যাপয়েন্টমেন্ট বুক করতে সাহায্য করব নাকি কোনো রিপোর্ট দেখতে চান?',
+  en: "Hi there! Welcome to City Care Clinic. I'm Sara from the front desk! How can I help you today — are you looking to book an appointment or check on existing reports?",
+  te: 'నమస్కారం అండి! సిటీ కేర్ క్లినిక్ కి స్వాగతం. నా పేరు సారా, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ కావాలా లేక రిపోర్ట్స్ గురించి మాట్లాడుతున్నారా?',
+  hi: 'नमस्ते जी! सिटी केयर क्लिनिक में आपका स्वागत है। मैं सारा बोल रही हूँ फ्रंट डेस्क से। बताइए, क्या आपको डॉक्टर से मिलना है या कोई रिपोर्ट चेक करनी है?',
+  ta: 'வணக்கம்! சிட்டி கேர் கிளினிக்கிற்கு வரவேற்கிறோம். நான் சారా, வரவேற்பறையில் இருந்து பேசுகிறேன். உங்களுக்கு டாக்டரின் அப்பாயிண்ட்மென்ட் தேவையா அல்லது ரிப்போர்ட் பார்க்க வேண்டுமா?',
+  kn: 'ನಮಸ್ಕಾರ! ಸಿಟಿ ಕೇರ್ ಕ್ಲಿನಿಕ್‌ಗೆ ಸ್ವಾಗತ. ನಾನು ಸಾರಾ, ಫ್ರಂಟ್ ಡೆಸ್ಕ್‌ನಿಂದ ಮಾತನಾಡುತ್ತಿದ್ದೇನೆ. ಹೇಳಿ, ನಿಮಗೆ ಡಾಕ್ಟರ್ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಬೇಕಾ ಅಥವಾ ರಿಪೋರ್ಟ್ ಬಗ್ಗೆ ತಿಳಿಯಬೇಕಾ?',
+  ml: 'നമസ്കാരം! സിറ്റി കെയർ ക്ലിനിക്കിലേക്ക് സ്വാഗതം. ഞാൻ സാറ ആണ് ഫ്രണ്ട് ഡെസ്കിൽ നിന്ന്. നിങ്ങൾക്ക് ഡോക്ടറുടെ അപ്പോയിന്റ്മെന്റ് ബുക്ക് ചെയ്യണോ അതോ റിപ്പോർട്ട് അന്വേഷിക്കാനാണോ?',
+  mr: 'नमस्कार! सिटी केअर क्लिनिकमध्ये आपले स्वागत आहे. मी सारा बोलतेय फ्रंट डेस्कवरून. सांगा, आपल्याला डॉक्टरांची अपॉइंटमेंट हवी आहे की रिपोर्ट तपासायचे आहेत?',
+  bn: 'নমস্কার! সিটি কেয়ার ক্লিনিকে স্বাগতম। আমি সারা বলছি ফ্রন্ট ডেস্ক থেকে। বলুন, আপনাকে ডাক্তারের অ্যাপয়েন্টমেন্ট বুক করতে সাহায্য করব নাকি কোনো রিপোর্ট দেখতে চান?',
 };
 
 export const VoiceAgentDemo: React.FC = () => {
@@ -259,8 +259,8 @@ export const VoiceAgentDemo: React.FC = () => {
       }
 
       utterance.lang = chosenVoice ? chosenVoice.lang : currentLangConfig.sttLang;
-      utterance.rate = 1.02; // natural conversational rhythm
-      utterance.pitch = 1.10; // cute, warm, friendly front-desk timbre
+      utterance.rate = 0.98; // fluent conversational cadence
+      utterance.pitch = 1.04; // natural female voice resonance
 
       utterance.onstart = () => setIsSpeaking(true);
       utterance.onend = () => setIsSpeaking(false);
@@ -359,7 +359,7 @@ export const VoiceAgentDemo: React.FC = () => {
           purpose: 'appointment_booking',
           history: transcript.map((t) => ({ speaker: t.speaker, text: t.text })),
           personaName: 'Sara',
-          businessName: 'Dr. Rao Orthopedic Care, Hyderabad',
+          businessName: 'City Care Clinic, Hyderabad',
         }),
       });
 
@@ -480,15 +480,15 @@ export const VoiceAgentDemo: React.FC = () => {
 
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-bold text-white flex items-center gap-1.5">
-                Sara <span className="text-xs font-normal text-pink-300">🌸 (Frontdesk AI)</span>
+              <h3 className="text-base font-semibold text-white flex items-center gap-1.5">
+                Sara <span className="text-xs font-normal text-zinc-400">• Voice Receptionist</span>
               </h3>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-pink-500/10 text-pink-300 border border-pink-500/20">
-                Cute &amp; Friendly Voice
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/[0.06] text-zinc-300 border border-white/[0.08]">
+                Neural Speech
               </span>
             </div>
             <p className="text-xs text-zinc-400">
-              Dr. Rao Orthopedic Care • Speaks all major Indian languages
+              City Care Clinic • 8 Indian Languages
             </p>
           </div>
         </div>

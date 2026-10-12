@@ -18,7 +18,7 @@
       "id": "EN-02",
       "language": "en",
       "category": "numbers_dates_currency",
-      "text": "Your consultation with Dr. Rao is confirmed for tomorrow, October 14th at 5:30 PM. The token fee is ₹1,200.",
+      "text": "Your consultation with the specialist is confirmed for tomorrow, October 14th at 5:30 PM. The token fee is ₹1,200.",
       "target_duration_sec": 6.2,
       "phonetic_focus": "dates, times, Indian Rupee currency"
     },
@@ -42,7 +42,7 @@
       "id": "TE-02",
       "language": "te",
       "category": "appointment_intake",
-      "text": "డాక్టర్ శ్రీనివాస రావు గారి అపాయింట్‌మెంట్ రేపు సాయంత్రం 5:30 కి లాక్ చేయబడింది అండి.",
+      "text": "డాక్టర్ గారి అపాయింట్‌మెంట్ రేపు సాయంత్రం 5:30 కి లాక్ చేయబడింది అండి.",
       "target_duration_sec": 5.5,
       "phonetic_focus": "honorifics (అండి), aspirates, long vowels"
     },
@@ -74,7 +74,7 @@
       "id": "HI-03",
       "language": "hi",
       "category": "code_switching",
-      "text": "Dr. Rao की availability कल शाम को confirm हो गई है। हम आपको WhatsApp notification भेज रहे हैं।",
+      "text": "Doctor की availability कल शाम को confirm हो गई है। हम आपको WhatsApp notification भेज रहे हैं।",
       "target_duration_sec": 6.1,
       "phonetic_focus": "Hinglish mixed phonetic phonemes"
     },

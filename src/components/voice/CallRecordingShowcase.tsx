@@ -26,18 +26,18 @@ const CALL_SAMPLES: CallSample[] = [
   {
     id: 'clinic-telugu',
     title: 'Clinic Appointment Booking',
-    business: 'Dr. Rao Orthopedic Care, Hyderabad',
+    business: 'City Care Clinic, Hyderabad',
     vertical: 'Healthcare',
     languageLabel: 'Telugu (తెలుగు)',
     languageCode: 'te',
     durationSeconds: 28,
     latencyMs: 295,
-    toolExecuted: 'calendar_lock_slot("Dr. Rao", "Tomorrow 5:30 PM")',
+    toolExecuted: 'calendar_lock_slot("Specialist", "Tomorrow 5:30 PM")',
     turns: [
       {
         speaker: 'agent',
-        text: 'నమస్కారం అండి! డాక్టర్ రావు ఆర్థోపెడిక్ క్లినిక్ కి స్వాగతం. నా పేరు ప్రియ, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ గురించి మాట్లాడుతున్నారా?',
-        textEnTranslation: 'Namaskaram! Welcome to Dr. Rao Orthopedic Care. This is Priya from the front desk. How can I help with your consultation today?',
+        text: 'నమస్కారం అండి! సిటీ కేర్ క్లినిక్ కి స్వాగతం. నా పేరు ప్రియ, ఫ్రంట్ డెస్క్ నుండి మాట్లాడుతున్నాను. చెప్పండి, డాక్టర్ గారి అపాయింట్‌మెంట్ గురించి మాట్లాడుతున్నారా?',
+        textEnTranslation: 'Namaskaram! Welcome to City Care Clinic. This is Priya from the front desk. How can I help with your consultation today?',
         startSec: 0,
         endSec: 7,
       },

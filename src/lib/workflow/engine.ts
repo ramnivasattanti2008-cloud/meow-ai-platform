@@ -70,7 +70,7 @@ export class WorkflowExecutionEngine {
           break;
 
         case 'calendar_slot_reserve':
-          outputText = `Slot locked on Clinic Master Calendar: Dr. Rao (17:30 - 18:00 IST). Reservation ID: #SLOT-9842.`;
+          outputText = `Slot locked on Clinic Master Calendar: Specialist (17:30 - 18:00 IST). Reservation ID: #SLOT-9842.`;
           break;
 
         case 'crm_contact_update':

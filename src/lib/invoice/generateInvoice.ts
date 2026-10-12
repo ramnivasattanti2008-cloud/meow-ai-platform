@@ -199,7 +199,7 @@ export function downloadTaxInvoice(data: InvoiceData) {
       <div class="details" style="text-align: right;">
         <div class="section-title">Service Provider</div>
         <p><strong>MEOW AI Telephony &amp; Automation</strong></p>
-        <p>Branch / Center: ${data.clinicOrBusinessName || 'Dr. Rao Healthcare & Technology'}</p>
+        <p>Branch / Center: ${data.clinicOrBusinessName || 'City Care Health & Diagnostics'}</p>
         <p>Payment Mode: ${(data.method || 'UPI').toUpperCase()}</p>
         <p>Bank Ref / Txn: ${data.transactionId}</p>
       </div>
