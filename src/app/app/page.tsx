@@ -93,6 +93,16 @@ export default function WorkspaceDashboardPage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
+            {/* Quick Action: Generate AI Receptionist */}
+            <button
+              type="button"
+              onClick={() => setWizardModalOpen(true)}
+              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-xs transition-all flex items-center gap-1.5 shadow-md active:scale-95"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Generate Receptionist</span>
+            </button>
+
             {/* Quick Action: Live Sara Dialer */}
             <button
               type="button"

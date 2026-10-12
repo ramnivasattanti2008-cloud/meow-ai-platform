@@ -145,6 +145,23 @@ export default function PricingPage() {
       ],
       ctaText: 'Deploy Automation (₹45,000)',
     },
+    {
+      name: 'All-in-One Startup Tech Stack',
+      badge: 'Best Value',
+      price: '₹59,999',
+      period: 'full package',
+      amount: 59999,
+      description:
+        'The complete technology and AI package to launch your modern clinic, startup, or business with maximum conversion authority.',
+      features: [
+        'Sara Multilingual Voice AI Telephony (24/7 inbound & missed call recovery)',
+        'Bespoke High-Converting Next.js Website + Mobile App UI',
+        'Official Meta WhatsApp Business Cloud API setup',
+        'Turnkey Payment Gateway (Razorpay + UPI + Cards + GST Tax Invoices)',
+        'Complete Cloud Infra, Domain DNS, Business Emails & CRM Auto-Sync',
+      ],
+      ctaText: 'Lock Full Stack (₹59,999)',
+    },
   ];
 
   return (
@@ -277,7 +294,7 @@ export default function PricingPage() {
 
         {/* Tab 2: Turnkey Engineering Services */}
         {activeTab === 'services' && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {serviceTiers.map((tier) => (
               <div
                 key={tier.name}

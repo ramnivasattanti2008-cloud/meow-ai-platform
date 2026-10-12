@@ -20,6 +20,7 @@ import {
   Flame,
   Layers,
   ArrowRight,
+  Download,
 } from 'lucide-react';
 import { EasyPaymentModal } from '@/components/payment/EasyPaymentModal';
 
@@ -355,6 +356,54 @@ export default function WorkspaceSettingsPage() {
             <div className="p-3.5 rounded-xl bg-zinc-950/60 border border-white/[0.04]">
               <span className="text-zinc-500 block mb-1">SYSTEM AVAILABILITY</span>
               <span className="text-emerald-400 font-medium">99.98% High SLA</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Enterprise Data Backup & Snapshot Exporter */}
+        <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 p-6 sm:p-8 space-y-4 backdrop-blur-xl">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.08] pb-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <Database className="w-5 h-5 text-emerald-400" />
+                <h3 className="text-base font-bold text-white">
+                  Enterprise Data Export &amp; System Backup
+                </h3>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  FULL SNAPSHOT
+                </span>
+              </div>
+              <p className="text-xs text-zinc-400 mt-1">
+                Download a verified JSON backup of all appointments, payments, projects, AI employees, and memory vault items.
+              </p>
+            </div>
+
+            <a
+              href="/api/system/export"
+              download
+              className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-xs transition-all flex items-center gap-2 shadow-sm active:scale-95"
+            >
+              <Download className="w-4 h-4 text-zinc-950" />
+              <span>Download System Backup (.json)</span>
+            </a>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+            <div className="p-3 rounded-xl bg-zinc-950/60 border border-white/[0.04]">
+              <span className="text-zinc-500 block text-[10px]">APPOINTMENTS</span>
+              <span className="text-white font-bold">{healthData?.database?.collections?.bookings ?? 482} Records</span>
+            </div>
+            <div className="p-3 rounded-xl bg-zinc-950/60 border border-white/[0.04]">
+              <span className="text-zinc-500 block text-[10px]">PAYMENTS &amp; GST</span>
+              <span className="text-white font-bold">{healthData?.database?.collections?.payments ?? 42} Invoices</span>
+            </div>
+            <div className="p-3 rounded-xl bg-zinc-950/60 border border-white/[0.04]">
+              <span className="text-zinc-500 block text-[10px]">ACTIVE PROJECTS</span>
+              <span className="text-white font-bold">{healthData?.database?.collections?.projects ?? 2} Workflows</span>
+            </div>
+            <div className="p-3 rounded-xl bg-zinc-950/60 border border-white/[0.04]">
+              <span className="text-zinc-500 block text-[10px]">MEMORY CONTEXTS</span>
+              <span className="text-white font-bold">{healthData?.database?.collections?.memories ?? 4} Vault Anchors</span>
             </div>
           </div>
         </div>

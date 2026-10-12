@@ -45,6 +45,7 @@ export const viewport: Viewport = {
 };
 
 import { MeowConcierge } from '@/components/common/MeowConcierge';
+import { CommandPaletteModal } from '@/components/common/CommandPaletteModal';
 
 export default function RootLayout({
   children,
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col font-sans selection:bg-violet-600/30 selection:text-white">
         {children}
         <MeowConcierge />
+        <CommandPaletteModal />
       </body>
     </html>
   );
