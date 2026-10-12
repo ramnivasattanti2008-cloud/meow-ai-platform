@@ -129,7 +129,7 @@ export const MemoryVaultHub: React.FC = () => {
             <textarea
               value={newValue}
               onChange={(e) => setNewValue(e.target.value)}
-              placeholder="e.g. Ram Nivas specializes in Next.js 14 and Web Audio systems..."
+              placeholder="e.g. Lead engineer specializing in Next.js 14 and Web Audio systems..."
               rows={3}
               className="w-full px-3 py-2 rounded-xl bg-zinc-950 border border-white/10 text-xs text-white focus:outline-none focus:border-violet-500 resize-none"
               required

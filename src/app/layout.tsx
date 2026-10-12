@@ -14,22 +14,22 @@ export const metadata: Metadata = {
     'workflow automation Bengaluru',
     'MEOW AI',
   ],
-  authors: [{ name: 'Ram Nivas Attanti', url: 'https://github.com/ramnivasattanti2008-cloud' }],
-  creator: 'Ram Nivas Attanti',
+  authors: [{ name: 'MEOW Engineering Group', url: 'https://meowboxai.tech' }],
+  creator: 'MEOW Engineering Group',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://meowboxai.tech'),
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     url: 'https://meowboxai.tech',
-    title: 'MEOW AI — Your Business. Reimagined with AI.',
+    title: 'MEOW AI — One AI. Every part of life and work.',
     description:
-      'AI that does the work, not just talks about the work. Multilingual voice agents in Telugu and English, custom workflow automation, and marketing operations.',
+      'AI that turns instructions into verified outcomes. Conversational assistant, multilingual voice agents, and deterministic workflow automation.',
     siteName: 'MEOW AI',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MEOW AI — AI Automation & Multilingual Voice Platform',
-    description: 'Transforming Indian SMB operations with multilingual voice agents and deterministic workflow automation.',
+    title: 'MEOW AI — One AI. Every part of life and work.',
+    description: 'Autonomous AI execution engine combining conversational assistant, multilingual voice, and workflow automation.',
   },
   robots: {
     index: true,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#09090b',
+  themeColor: '#000000',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
@@ -57,7 +57,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col font-sans selection:bg-violet-600/30 selection:text-white">
+      <body className="min-h-screen bg-black text-zinc-100 flex flex-col font-sans selection:bg-white/20 selection:text-white">
         {children}
         <MeowConcierge />
         <CommandPaletteModal />

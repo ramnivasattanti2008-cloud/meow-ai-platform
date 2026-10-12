@@ -23,7 +23,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-white selection:bg-violet-600/30">
+    <div className="flex flex-col min-h-screen bg-black text-white selection:bg-white/20">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24">
@@ -61,50 +61,47 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Founder Profile */}
-          <div className="rounded-3xl border border-white/[0.08] bg-gradient-to-b from-zinc-900/80 to-zinc-950 p-8 sm:p-12 space-y-8">
+          {/* Engineering Leadership */}
+          <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 p-8 sm:p-12 space-y-8 backdrop-blur-xl">
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
               <div>
-                <span className="text-xs font-mono uppercase tracking-widest text-violet-400">
-                  FOUNDER &amp; CHIEF ARCHITECT
+                <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">
+                  SYSTEMS &amp; ARCHITECTURE
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mt-1">Ram Nivas Attanti</h3>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mt-1">MEOW Engineering Group</h3>
                 <div className="flex items-center gap-3 text-xs font-mono text-zinc-400 mt-2">
                   <span className="flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5 text-violet-400" />
                     Bengaluru, Karnataka, India
                   </span>
                   <span>•</span>
-                  <span>Student Founder</span>
+                  <span>Autonomous Systems Lab</span>
                 </div>
               </div>
 
               <div className="w-14 h-14 rounded-2xl bg-zinc-800 border border-white/10 flex items-center justify-center text-white">
-                <Terminal className="w-7 h-7 text-violet-400" />
+                <Terminal className="w-7 h-7 text-zinc-300" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm">
               <div className="space-y-4 text-zinc-300 leading-relaxed">
                 <p>
-                  <strong>Academic Background:</strong> Pursuing B.Tech in Computer Science and Business Systems (CSBS) at Jain University, Bengaluru.
+                  <strong>Architecture Focus:</strong> Full-stack agentic systems, deterministic workflow orchestration, and sub-200ms vernacular voice synthesis.
                 </p>
                 <p>
-                  <strong>Technical Specialization:</strong> AI engineering, full-stack software development, agentic workflow architectures, and vernacular voice pipelines.
-                </p>
-                <p>
-                  Recipient of the GitHub Student Developer Pack, leveraging open developer tooling to build scalable infrastructure for Indian enterprises.
+                  <strong>Design Philosophy:</strong> Rooted in radical simplicity, privacy-first data boundaries, and verifiable execution outcomes over synthetic hype.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-zinc-900/50 border border-white/[0.06] space-y-3 font-mono text-xs">
-                <div className="text-zinc-400 font-semibold">CORE TECHNICAL STACK:</div>
+              <div className="p-5 rounded-2xl bg-black/60 border border-white/[0.06] space-y-3 font-mono text-xs">
+                <div className="text-zinc-400 font-semibold uppercase">Engineered With:</div>
                 <ul className="space-y-1.5 text-zinc-300">
-                  <li>• Anthropic Claude API (Sonnet &amp; Haiku)</li>
                   <li>• Next.js 14 App Router &amp; TypeScript</li>
-                  <li>• Web Speech &amp; SIP Telephony Adapters</li>
-                  <li>• Tailwind CSS &amp; Apple HIG Principles</li>
-                  <li>• Vitest, Zod, &amp; Deterministic State Runners</li>
+                  <li>• Anthropic Claude Neural Reasoning Core</li>
+                  <li>• Kokoro &amp; Indic Speech Neural Voice Synthesizers</li>
+                  <li>• Google Cloud Firestore Zero-Loss Edge Sync</li>
+                  <li>• Dynamic UPI &amp; Form GST INV-01 Invoicing</li>
                 </ul>
               </div>
             </div>
@@ -112,27 +109,27 @@ export default function AboutPage() {
 
           {/* Operating Principles */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/40 space-y-2">
+            <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/30 space-y-2">
               <ShieldCheck className="w-5 h-5 text-emerald-400" />
-              <h4 className="text-base font-semibold text-white">Pragmatic Honesty</h4>
+              <h4 className="text-base font-semibold text-white">Pragmatic Transparency</h4>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                We never fake customer counts, paid client logos, awards, or benchmarks. We let verified code, test suites, and product sandboxes demonstrate competence.
+                We let verified code, test suites, and transparent workflows demonstrate reliability without fabricated marketing claims.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/40 space-y-2">
+            <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/30 space-y-2">
               <Cpu className="w-5 h-5 text-violet-400" />
               <h4 className="text-base font-semibold text-white">Vernacular Native</h4>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                India is multilingual. We prioritize authentic Telugu and code-switched Indian English dialogue before generic global interfaces.
+                Engineered for India’s multilingual reality, prioritizing authentic vernacular dialogue before generic global interfaces.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/40 space-y-2">
-              <Heart className="w-5 h-5 text-red-400" />
-              <h4 className="text-base font-semibold text-white">Human Dignity</h4>
+            <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/30 space-y-2">
+              <Heart className="w-5 h-5 text-zinc-300" />
+              <h4 className="text-base font-semibold text-white">Human Oversight</h4>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                AI should augment human labor and eliminate repetitive drudgery, while preserving human authority for all critical decisions.
+                AI augments human capability and eliminates repetitive tasks, while preserving human authority for all critical decisions.
               </p>
             </div>
           </div>
@@ -141,23 +138,23 @@ export default function AboutPage() {
         {/* CTA */}
         <section className="pt-20 text-center max-w-3xl mx-auto px-4">
           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Connect with Founder Ram Nivas Attanti
+            Connect with our engineering team
           </h3>
           <p className="text-zinc-400 text-sm mb-8">
-            Whether you are a local business exploring automation or an AI researcher, we would love to exchange ideas.
+            Explore how MEOW integrates with your business workflows, telephony, or practice management tools.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="px-6 py-3 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-all"
+              className="px-6 py-2.5 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-all"
             >
-              Get in Touch
+              Contact Team
             </Link>
             <Link
               href="/platform"
-              className="px-6 py-3 rounded-full bg-zinc-800 text-white font-medium text-xs hover:bg-zinc-700 border border-white/10 transition-all"
+              className="px-6 py-2.5 rounded-full bg-zinc-800 text-white font-medium text-xs hover:bg-zinc-700 border border-white/10 transition-all"
             >
-              Explore Our Platform
+              Platform Overview
             </Link>
           </div>
         </section>

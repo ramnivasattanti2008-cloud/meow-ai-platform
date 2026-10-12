@@ -131,7 +131,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-white selection:bg-violet-600/30 font-sans antialiased">
+    <div className="flex flex-col min-h-screen bg-black text-white selection:bg-white/20 font-sans antialiased">
       <Navbar />
 
       <main className="flex-1">
@@ -378,9 +378,9 @@ export default function HomePage() {
                     <Mic className="w-6 h-6 text-violet-400" />
                   </div>
                   <h4 className="text-xl font-bold text-white mb-2">MEOW Voice (Sara Concierge)</h4>
-                  <p className="text-xs font-mono text-zinc-400 mb-4">Hyper-realistic voice receptionist in 8 Indian languages</p>
+                  <p className="text-xs font-mono text-zinc-400 mb-4">Expressive conversational voice agent in 8 Indian languages</p>
                   <p className="text-zinc-300 text-sm leading-relaxed mb-6">
-                    Voiced by Sara — an empathetic, cute, and human-like voice receptionist speaking Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English. Handles inquiries, checks doctor schedules, and escalates emergencies.
+                    Voiced by Sara — a natural, responsive voice receptionist speaking Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English. Handles inquiries, checks doctor schedules, and resolves questions in real-time.
                   </p>
                   <ul className="space-y-2.5 mb-8 text-xs text-zinc-400">
                     <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>8 Indian languages (Telugu, Hindi, Tamil, Kannada +)</span></li>

@@ -105,7 +105,7 @@ export const HeroVisual: React.FC = () => {
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white">Inbound Call: Dr. Rao Clinic</h4>
+                  <h4 className="text-sm font-semibold text-white">Inbound Call: City Care Clinic</h4>
                   <p className="text-xs text-zinc-400 font-mono">Caller: Hyderabad (+91 98490 *****) • Telugu/English</p>
                 </div>
               </div>
@@ -119,8 +119,8 @@ export const HeroVisual: React.FC = () => {
             <div className="space-y-3 font-sans text-xs sm:text-sm">
               <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/[0.06] text-zinc-300">
                 <span className="text-xs font-mono text-zinc-400 block mb-1">CALLER (AUDIO TRANSCRIPTION)</span>
-                &quot;నమస్కారం అండి, రేపు సాయంత్రం డాక్టర్ రావు గారి కన్సల్టేషన్ దొరుకుతుందా?&quot;
-                <div className="text-xs text-zinc-400 mt-1 italic">&quot;Namaskaram, is Dr. Rao consultation available tomorrow evening?&quot;</div>
+                &quot;నమస్కారం అండి, రేపు సాయంత్రం డాక్టర్ గారి కన్సల్టేషన్ దొరుకుతుందా?&quot;
+                <div className="text-xs text-zinc-400 mt-1 italic">&quot;Namaskaram, is doctor consultation available tomorrow evening?&quot;</div>
               </div>
 
               <div className="p-3 rounded-xl bg-violet-950/30 border border-violet-500/20 text-zinc-200">
@@ -169,7 +169,7 @@ export const HeroVisual: React.FC = () => {
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                 </div>
                 <div className="text-sm font-medium text-white">Calendar Synchronization</div>
-                <p className="text-xs text-zinc-400">Locked Dr. Rao slot #9842 on Google Calendar with zero double-booking.</p>
+                <p className="text-xs text-zinc-400">Locked appointment slot #9842 on Google Calendar with zero double-booking.</p>
               </div>
 
               <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-1.5">

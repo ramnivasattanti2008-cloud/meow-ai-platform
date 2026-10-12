@@ -79,48 +79,48 @@ export default function WorkspaceDashboardPage() {
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
           <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+              <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">
                 MEOW Command Center
               </h1>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-white/[0.06] text-zinc-300 border border-white/[0.08] flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                FIREBASE SYNCED
+                Live Sync
               </span>
             </div>
             <p className="text-xs text-zinc-400">
-              One AI. Every part of life and work — turning instructions into verified outcomes across personal, freelance, and business workflows.
+              One execution engine for goals, voice agents, career deliverables, and client operations.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5">
-            {/* Quick Action: Generate AI Receptionist */}
-            <button
-              type="button"
-              onClick={() => setWizardModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-xs transition-all flex items-center gap-1.5 shadow-md active:scale-95"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Generate Receptionist</span>
-            </button>
-
+          <div className="flex flex-wrap items-center gap-2">
             {/* Quick Action: Live Sara Dialer */}
             <button
               type="button"
               onClick={() => setDialerOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-violet-600/20 hover:bg-violet-600/30 border border-violet-500/30 text-violet-200 font-mono text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+              className="px-3.5 py-1.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all flex items-center gap-1.5 active:scale-95 shadow-sm"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-violet-400" />
-              <span>Sara Web Dialer</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <PhoneCall className="w-3.5 h-3.5" />
+              <span>Sara Dialer</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            </button>
+
+            {/* Quick Action: Generate AI Receptionist */}
+            <button
+              type="button"
+              onClick={() => setWizardModalOpen(true)}
+              className="px-3.5 py-1.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 text-zinc-200 text-xs transition-all flex items-center gap-1.5 active:scale-95"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
+              <span>New Receptionist</span>
             </button>
 
             {/* Quick Action: Website Studio */}
             <button
               type="button"
               onClick={() => setWebsiteStudioOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-white font-medium text-xs transition-all flex items-center gap-1.5 active:scale-95"
+              className="px-3.5 py-1.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 text-zinc-200 text-xs transition-all flex items-center gap-1.5 active:scale-95"
             >
-              <Globe className="w-3.5 h-3.5 text-indigo-400" />
+              <Globe className="w-3.5 h-3.5 text-zinc-400" />
               <span>Website Studio</span>
             </button>
 
@@ -128,10 +128,10 @@ export default function WorkspaceDashboardPage() {
             <button
               type="button"
               onClick={() => setPaymentModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-white font-medium text-xs transition-all flex items-center gap-1.5 active:scale-95"
+              className="px-3.5 py-1.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 text-zinc-200 text-xs transition-all flex items-center gap-1.5 active:scale-95"
             >
-              <CreditCard className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Collect / Pay</span>
+              <CreditCard className="w-3.5 h-3.5 text-zinc-400" />
+              <span>Payment Link</span>
             </button>
           </div>
         </div>
@@ -205,95 +205,95 @@ export default function WorkspaceDashboardPage() {
         </div>
 
         {/* Tab Switcher: Apple-style Segmented Control */}
-        <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-zinc-900/70 border border-white/[0.08] backdrop-blur-xl overflow-x-auto text-xs font-medium">
+        <div className="flex items-center gap-1 p-1 rounded-full bg-zinc-900/70 border border-white/[0.08] backdrop-blur-2xl overflow-x-auto text-xs">
           <button
             type="button"
             onClick={() => setActiveTab('goals')}
-            className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'goals'
-                ? 'bg-zinc-800 text-white shadow-sm border border-white/10 font-bold'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
-            <Sparkles className="w-4 h-4 text-amber-400" />
-            <span>Goal Engine &amp; Projects</span>
+            <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
+            <span>Goal Engine</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('copilot')}
-            className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'copilot'
-                ? 'bg-zinc-800 text-white shadow-sm border border-white/10 font-bold'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
-            <Bot className="w-4 h-4 text-violet-400" />
-            <span>AI Copilot &amp; Assistant</span>
+            <Bot className="w-3.5 h-3.5 text-zinc-300" />
+            <span>AI Copilot</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('resume')}
-            className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'resume'
-                ? 'bg-zinc-800 text-white shadow-sm border border-white/10 font-bold'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
-            <FileText className="w-4 h-4 text-blue-400" />
-            <span>Resume &amp; Career Studio</span>
+            <FileText className="w-3.5 h-3.5 text-zinc-300" />
+            <span>Resume Studio</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('employees')}
-            className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'employees'
-                ? 'bg-zinc-800 text-white shadow-sm border border-white/10 font-bold'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
-            <Bot className="w-4 h-4 text-violet-400" />
-            <span>AI Employees (4)</span>
+            <Bot className="w-3.5 h-3.5 text-zinc-300" />
+            <span>AI Employees</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('appointments')}
-            className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'appointments'
-                ? 'bg-zinc-800 text-white shadow-sm border border-white/10 font-bold'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
-            <Calendar className="w-4 h-4 text-indigo-400" />
-            <span>Appointments &amp; CRM</span>
+            <Calendar className="w-3.5 h-3.5 text-zinc-300" />
+            <span>Appointments</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('payments')}
-            className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'payments'
-                ? 'bg-zinc-800 text-white shadow-sm border border-white/10 font-bold'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
-            <CreditCard className="w-4 h-4 text-emerald-400" />
-            <span>UPI &amp; GST Invoicing</span>
+            <CreditCard className="w-3.5 h-3.5 text-zinc-300" />
+            <span>Invoicing &amp; UPI</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('memory')}
-            className={`py-2 px-4 rounded-xl flex items-center gap-2 transition-all shrink-0 ${
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'memory'
-                ? 'bg-zinc-800 text-white shadow-sm border border-white/10 font-bold'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
-            <Brain className="w-4 h-4 text-pink-400" />
+            <Brain className="w-3.5 h-3.5 text-zinc-300" />
             <span>Memory Vault</span>
           </button>
         </div>

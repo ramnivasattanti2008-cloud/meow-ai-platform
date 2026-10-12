@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
 
           <div className="space-y-6 text-sm text-zinc-300 leading-relaxed">
             <div className="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.08] text-xs text-zinc-400 space-y-1">
-              <strong>Notice &amp; Disclaimer:</strong> This document reflects the actual data handling practices of MEOW AI (Founder: Ram Nivas Attanti, Bengaluru, Karnataka, India). This starter policy is subject to formal legal review upon corporate incorporation.
+              <strong>Notice &amp; Disclaimer:</strong> This document reflects the data handling practices of MEOW AI (MEOW Systems Group, Bengaluru, Karnataka, India).
             </div>
 
             <section className="space-y-3">
@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
             <section className="space-y-3">
               <h2 className="text-lg font-bold text-white">4. Data Retention &amp; Deletion</h2>
               <p>
-                Contact inquiries are retained in our operational inbox for up to 12 months for correspondence purposes. You may request immediate deletion of your contact information at any time by emailing <code>founder@meowboxai.tech</code>.
+                Contact inquiries are retained in our operational inbox for up to 12 months for correspondence purposes. You may request immediate deletion of your contact information at any time by emailing <code>support@meowboxai.tech</code>.
               </p>
             </section>
 
@@ -73,10 +73,10 @@ export default function PrivacyPolicyPage() {
                 For privacy inquiries or data removal requests:
               </p>
               <div className="p-4 rounded-xl bg-zinc-900 border border-white/10 font-mono text-xs text-zinc-300">
-                MEOW AI — Data Protection Officer<br />
-                Founder: Ram Nivas Attanti<br />
+                MEOW AI — Data Protection &amp; Security Office<br />
+                MEOW Systems Group<br />
                 Bengaluru, Karnataka, India<br />
-                Email: founder@meowboxai.tech
+                Email: support@meowboxai.tech
               </div>
             </section>
           </div>

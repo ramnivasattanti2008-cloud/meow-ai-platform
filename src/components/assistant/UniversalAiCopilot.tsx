@@ -233,7 +233,7 @@ export const UniversalAiCopilot: React.FC = () => {
 
   const quickChips: Record<string, string[]> = {
     sara: [
-      'Dr. Rao consultation fee entha?',
+      'Doctor consultation fee entha?',
       'Book an appointment for tomorrow evening',
       'Are you an AI or a real person?',
       'నాకు తీవ్రమైన గుండె నొప్పి వస్తోంది (Emergency test)',

@@ -99,7 +99,7 @@ export async function POST(req: Request) {
           id: `art-${Date.now()}-1`,
           type: 'resume',
           title: 'Tailored ATS Resume (Printable Vector Document)',
-          content: 'Ram Nivas Attanti — AI Systems Engineer & Full-Stack Architect. ATS Score: 95/100.',
+          content: 'Arjun Sharma — Senior AI Systems Engineer & Full-Stack Architect. ATS Score: 96/100.',
           downloadable: true,
           downloadName: 'Tailored_AI_Engineer_Resume.pdf',
         },

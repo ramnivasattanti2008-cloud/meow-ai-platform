@@ -56,7 +56,7 @@ export default function PlatformPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-white selection:bg-violet-600/30">
+    <div className="flex flex-col min-h-screen bg-black text-white selection:bg-white/20">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24">

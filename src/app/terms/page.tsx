@@ -48,7 +48,7 @@ export default function TermsOfServicePage() {
             <section className="space-y-3">
               <h2 className="text-lg font-bold text-white">4. Intellectual Property</h2>
               <p>
-                All software code, custom prompt architectures, UI design tokens, brand marks, and documentation of MEOW AI are the intellectual property of Ram Nivas Attanti, unless otherwise specified.
+                All software code, custom prompt architectures, UI design tokens, brand marks, and documentation of MEOW AI are the intellectual property of MEOW Systems Group, unless otherwise specified.
               </p>
             </section>
 

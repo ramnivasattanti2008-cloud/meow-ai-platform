@@ -4,7 +4,7 @@ import { ShieldCheck, Heart, Globe, Terminal, ArrowUpRight } from 'lucide-react'
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="border-t border-white/[0.08] bg-zinc-950 text-zinc-400 text-sm">
+    <footer className="border-t border-white/[0.08] bg-black text-zinc-400 text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand & Purpose */}
@@ -142,15 +142,15 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-14 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
-          <p>© {new Date().getFullYear()} MEOW AI. Engineered by Ram Nivas Attanti. All rights reserved.</p>
+        <div className="mt-14 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+          <p>© {new Date().getFullYear()} MEOW AI. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-zinc-400">
-              <ShieldCheck className="w-3.5 h-3.5 text-violet-400" />
-              <span>Human-in-the-Loop Safeguards</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Enterprise Security &amp; Oversight</span>
             </span>
             <span className="text-zinc-700">•</span>
-            <span>Indian SMB Focus</span>
+            <span>Privacy First</span>
           </div>
         </div>
       </div>

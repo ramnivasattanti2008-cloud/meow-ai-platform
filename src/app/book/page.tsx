@@ -114,7 +114,7 @@ export default function BookCallPage() {
   // Generate real downloadable .ics calendar invite file
   const downloadICS = () => {
     const title = 'MEOW AI — 30-Min Architecture Discovery';
-    const description = `Discovery session with Ram Nivas Attanti (Founder, MEOW AI) for ${company || fullName}. Google Meet Link: https://meet.google.com/meow-arch-session`;
+    const description = `Discovery session with MEOW Architecture Lead for ${company || fullName}. Google Meet Link: https://meet.google.com/meow-arch-session`;
     const location = 'Google Meet (https://meet.google.com/meow-arch-session)';
     
     // Format date string for ICS (YYYYMMDDTHHMMSSZ)
@@ -150,7 +150,7 @@ export default function BookCallPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-white selection:bg-violet-600/30">
+    <div className="flex flex-col min-h-screen bg-black text-white selection:bg-white/20">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24">
@@ -166,7 +166,7 @@ export default function BookCallPage() {
           </h1>
 
           <p className="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Direct 1-on-1 discovery with our founder &amp; engineering lead in Bengaluru. We audit your current workflows, assess multilingual voice feasibility, and provide a concrete deployment roadmap.
+            Direct 1-on-1 architecture discovery. We audit your current workflows, assess multilingual voice feasibility, and provide a concrete deployment roadmap.
           </p>
         </div>
 
@@ -194,7 +194,7 @@ export default function BookCallPage() {
                 <div className="max-w-lg mx-auto p-5 rounded-2xl bg-zinc-950/70 border border-white/[0.08] text-left space-y-3 font-mono text-xs">
                   <div className="flex justify-between border-b border-white/[0.06] pb-2.5">
                     <span className="text-zinc-400">Host Engineer:</span>
-                    <span className="text-white font-semibold">Ram Nivas Attanti (Founder)</span>
+                    <span className="text-white font-semibold">MEOW Architecture Lead</span>
                   </div>
                   <div className="flex justify-between border-b border-white/[0.06] pb-2.5">
                     <span className="text-zinc-400">Meeting Room:</span>
@@ -460,7 +460,7 @@ export default function BookCallPage() {
                     )}
                   </button>
                   <p className="text-[11px] text-zinc-500 text-center mt-2 font-mono">
-                    Direct video session with Founder Ram Nivas Attanti • Instant calendar invite (.ics) provided
+                    Direct 1-on-1 video session • Instant calendar invite (.ics) provided
                   </p>
                 </div>
               </form>

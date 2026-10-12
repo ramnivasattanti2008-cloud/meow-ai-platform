@@ -66,14 +66,14 @@ export default function ContactPage() {
         });
       }
     } catch {
-      setErrorMsg('Network error. Please check your connection or contact founder directly.');
+      setErrorMsg('Network error. Please check your connection or contact support directly.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-white selection:bg-violet-600/30">
+    <div className="flex flex-col min-h-screen bg-black text-white selection:bg-white/20">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24">
@@ -100,7 +100,7 @@ export default function ContactPage() {
             <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 p-8 space-y-6">
               <h3 className="text-xl font-bold text-white">Direct Communications</h3>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                We are an engineering-driven team based in Bengaluru. Every inquiry is reviewed directly by our founder and lead technical architects.
+                We are an engineering team based in Bengaluru. Every inquiry is reviewed directly by our lead technical architects.
               </p>
 
               <div className="space-y-4 text-xs font-mono">
@@ -119,8 +119,8 @@ export default function ContactPage() {
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-zinc-400 text-[10px]">FOUNDER DESK</div>
-                    <div className="text-white">founder@meowboxai.tech</div>
+                    <div className="text-zinc-400 text-[10px]">ENGINEERING DESK</div>
+                    <div className="text-white">engineering@meowboxai.tech</div>
                   </div>
                 </div>
 

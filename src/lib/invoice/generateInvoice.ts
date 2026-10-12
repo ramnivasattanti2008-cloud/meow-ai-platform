@@ -178,7 +178,7 @@ export function downloadTaxInvoice(data: InvoiceData) {
     <div class="header">
       <div>
         <div class="brand-title">MEOW AI PLATFORM</div>
-        <div class="brand-sub">Attanti Technologies Pvt. Ltd. • Bengaluru, Karnataka</div>
+        <div class="brand-sub">MEOW Technologies Pvt. Ltd. • Bengaluru, Karnataka</div>
         <div class="brand-sub">GSTIN: 29AABCA9102K1Z9 • PAN: AABCA9102K</div>
       </div>
       <div style="text-align: right;">

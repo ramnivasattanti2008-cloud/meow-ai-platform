@@ -36,9 +36,9 @@ export const EasyPaymentModal: React.FC<EasyPaymentModalProps> = ({
   const [method, setMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
   const [amount, setAmount] = useState<number>(defaultAmount);
   const [planTitle, setPlanTitle] = useState<string>(defaultPlan);
-  const [payerName, setPayerName] = useState('Dr. Rao Healthcare / Ram Nivas');
+  const [payerName, setPayerName] = useState('Acme Healthcare / Client');
   const [payerPhone, setPayerPhone] = useState('+91 98765 43210');
-  const [payerEmail, setPayerEmail] = useState('billing@meowai.tech');
+  const [payerEmail, setPayerEmail] = useState('billing@meowboxai.tech');
 
   // Form states
   const [upiId, setUpiId] = useState('client@okaxis');

@@ -150,9 +150,9 @@ class UnifiedDatabase {
           id: 'art-1',
           type: 'resume',
           title: 'ATS-Optimized AI Engineer Resume (Print & PDF ready)',
-          content: 'Ram Nivas Attanti — Software & AI Systems Engineer. ATS Score: 94/100.',
+          content: 'Senior AI Systems Engineer & Full-Stack Architect. ATS Score: 96/100.',
           downloadable: true,
-          downloadName: 'Ram_Nivas_Tailored_AI_Resume.pdf',
+          downloadName: 'Tailored_AI_Engineer_Resume.pdf',
         },
         {
           id: 'art-2',
@@ -220,7 +220,7 @@ class UnifiedDatabase {
     {
       id: 'mem-1',
       key: 'User Identity',
-      value: 'Ram Nivas Attanti, Founder & AI Systems Engineer, Bengaluru, India.',
+      value: 'Arjun Sharma, Senior AI Systems Engineer, Bengaluru, India.',
       category: 'profile',
       updatedAt: new Date().toISOString(),
     },
@@ -250,13 +250,13 @@ class UnifiedDatabase {
   private localResumes: CareerResume[] = [
     {
       id: 'res-1',
-      fullName: 'Ram Nivas Attanti',
+      fullName: 'Arjun Sharma',
       title: 'AI Systems Engineer & Full-Stack Architect',
-      email: 'ramnivas@meowboxai.tech',
+      email: 'arjun@meowboxai.tech',
       phone: '+91 98480 12345',
       location: 'Bengaluru, Karnataka, India',
-      linkedin: 'https://linkedin.com/in/ramnivasattanti',
-      github: 'https://github.com/ramnivasattanti2008-cloud',
+      linkedin: 'https://linkedin.com/in/arjun-sharma-ai',
+      github: 'https://github.com/meow-ai-platform',
       summary:
         'Product-minded Full-Stack & AI Systems Engineer with proven experience designing real-time voice copilots, deterministic workflow automation engines, and high-concurrency cloud applications. Architect of MEOW AI, combining Web Speech/Web Audio telephony, multi-agent orchestration, and sub-second payment workflows.',
       targetRole: 'AI Software Engineer / Full-Stack Engineer',

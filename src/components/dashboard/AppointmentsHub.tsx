@@ -161,7 +161,7 @@ export const AppointmentsHub: React.FC = () => {
   const sendWhatsAppReminder = (appt: Appointment) => {
     const cleanPhone = appt.phone.replace(/[^0-9]/g, '');
     const message = encodeURIComponent(
-      `Hello ${appt.name}! This is Sara from Dr. Rao Orthopedic Care. Confirming your appointment on ${appt.date} at ${appt.timeSlot}. Clinic Location: Road No. 36, Jubilee Hills (Metro Pillar 1420), Hyderabad. For valet parking or directions, reply here or call back.`
+      `Hello ${appt.name}! This is Sara from City Care Clinic. Confirming your appointment on ${appt.date} at ${appt.timeSlot}. Clinic Location: Road No. 36, Jubilee Hills (Metro Pillar 1420), Hyderabad. For parking or directions, reply here or call back.`
     );
     window.open(`https://wa.me/${cleanPhone}?text=${message}`, '_blank');
   };

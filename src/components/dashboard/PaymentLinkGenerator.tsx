@@ -125,7 +125,7 @@ export const PaymentLinkGenerator: React.FC = () => {
     if (!generatedPayload) return;
     const cleanPhone = payerPhone.replace(/[^0-9]/g, '');
     const msg = encodeURIComponent(
-      `Hello ${payerName}! Here is your digital invoice for ${serviceName} from MEOW AI / Dr. Rao Clinic.\n\nTotal Due: ₹${amount.toLocaleString(
+      `Hello ${payerName}! Here is your digital invoice for ${serviceName} from MEOW Platform.\n\nTotal Due: ₹${amount.toLocaleString(
         'en-IN'
       )}\n\nPay instantly via UPI (Google Pay, PhonePe, Paytm): pay@meowai.tech\nOr Online Gateway: ${
         generatedPayload.link

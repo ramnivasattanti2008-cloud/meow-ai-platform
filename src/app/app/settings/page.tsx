@@ -342,8 +342,8 @@ export default function WorkspaceSettingsPage() {
           <h3 className="text-sm font-semibold text-white">Organization &amp; Deployment Profile</h3>
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs font-mono">
             <div className="p-3.5 rounded-xl bg-zinc-950/60 border border-white/[0.04]">
-              <span className="text-zinc-500 block mb-1">FOUNDER &amp; LEAD</span>
-              <span className="text-white font-medium">Ram Nivas Attanti</span>
+              <span className="text-zinc-500 block mb-1">ENGINEERING LEAD</span>
+              <span className="text-white font-medium">MEOW Systems Group</span>
             </div>
             <div className="p-3.5 rounded-xl bg-zinc-950/60 border border-white/[0.04]">
               <span className="text-zinc-500 block mb-1">PRIMARY DOMAIN</span>

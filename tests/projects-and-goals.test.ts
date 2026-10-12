@@ -88,7 +88,7 @@ describe('MEOW Projects, Memory Vault & Resume Engine', () => {
     expect(resumes.length).toBeGreaterThanOrEqual(1);
 
     const first = resumes[0];
-    expect(first.fullName).toBe('Ram Nivas Attanti');
+    expect(first.fullName).toBe('Arjun Sharma');
     expect(first.atsScore).toBeGreaterThanOrEqual(90);
     expect(first.skills.length).toBeGreaterThan(5);
     expect(first.experience.length).toBeGreaterThan(0);

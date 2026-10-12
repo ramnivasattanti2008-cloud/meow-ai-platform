@@ -60,7 +60,7 @@ export default function VoiceAiPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-white selection:bg-violet-600/30">
+    <div className="flex flex-col min-h-screen bg-black text-white selection:bg-white/20">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24">
@@ -77,7 +77,7 @@ export default function VoiceAiPage() {
           </h1>
 
           <p className="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Engineered for India’s multilingual reality. Voiced by <strong>Sara</strong> — a cute, empathetic front-desk receptionist speaking fluently in Telugu (తెలుగు), Hindi (हिन्दी), Tamil (தமிழ்), Kannada (ಕನ್ನಡ), Malayalam (മലയാളം), Marathi (मराठी), Bengali (বাংলা), and Indian English. Backed by real calendar slot locking and safety escalation.
+            Engineered for multilingual communication. Voiced by <strong>Sara</strong> — a responsive, natural voice agent speaking fluently in Telugu (తెలుగు), Hindi (हिन्दी), Tamil (தமிழ்), Kannada (ಕನ್ನಡ), Malayalam (മലയാളം), Marathi (मराठी), Bengali (বাংলা), and Indian English. Backed by real calendar slot locking and safety escalation.
           </p>
         </div>
 

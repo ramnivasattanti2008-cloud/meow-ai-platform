@@ -83,8 +83,8 @@ const PAGE_GUIDES: Record<string, PageGuideConfig> = {
       },
       {
         id: 'home-book',
-        title: 'Step 3: Schedule Founder Discovery Session',
-        description: 'Pick an IST slot with founder Ram Nivas Attanti and download a verified .ics calendar invite.',
+        title: 'Step 3: Schedule Architecture Session',
+        description: 'Pick an IST slot with MEOW Engineering and download a verified .ics calendar invite.',
         actionLabel: 'Book 30-Min Call',
         actionHref: '/book',
         badge: 'Free Architecture Call',
@@ -99,7 +99,7 @@ const PAGE_GUIDES: Record<string, PageGuideConfig> = {
       {
         id: 'voice-sample',
         title: 'Step 1: Listen to Live Audio Call Sample',
-        description: 'Play the 28-second Dr. Rao Clinic booking call with waveform audio & turn-by-turn Telugu transcript.',
+        description: 'Play the 28-second clinic booking call with waveform audio & turn-by-turn Telugu transcript.',
         actionLabel: 'Listen to Sample Audio',
         targetId: 'call-recording-showcase',
         badge: 'Telugu Call Demo',
@@ -203,7 +203,7 @@ const PAGE_GUIDES: Record<string, PageGuideConfig> = {
   '/book': {
     pageTitle: 'Session Booking Engine',
     stageName: 'Stage 5 • Architecture Consultation',
-    summary: 'Schedule a direct 30-minute discovery call with founder Ram Nivas Attanti.',
+    summary: 'Schedule a direct 30-minute discovery call with the MEOW engineering team.',
     steps: [
       {
         id: 'book-date',
@@ -364,7 +364,7 @@ const PAGE_GUIDES: Record<string, PageGuideConfig> = {
       {
         id: 'services-book',
         title: 'Step 4: Book Architecture & Scoping Session',
-        description: 'Connect with Founder Ram Nivas Attanti to schedule your 3–5 day turnkey deployment.',
+        description: 'Connect with MEOW Engineering to schedule your 3–5 day turnkey deployment.',
         actionLabel: 'Schedule 30-Min Session',
         actionHref: '/book',
         badge: '3–5 Day Deployment',
@@ -463,15 +463,15 @@ const KNOWLEDGE_RESPONSES = [
     links: [{ label: 'Explore Workflow Canvas', href: '/platform' }],
   },
   {
-    keywords: ['founder', 'team', 'who', 'about', 'ram', 'ram nivas'],
+    keywords: ['founder', 'team', 'who', 'about', 'engineering', 'creators'],
     answer:
-      'MEOW AI was founded by Ram Nivas Attanti, an AI engineer and Computer Science student at Jain University, Bengaluru. We operate with radical transparency: zero fabricated testimonials, zero fake client logos, and verifiable open software on GitHub.',
-    links: [{ label: 'Founder Story & Background', href: '/about' }],
+      'MEOW AI is built by engineers focused on vernacular intelligence and agentic workflows. We operate with radical transparency: zero fabricated testimonials, zero fake client logos, and verifiable open software on GitHub.',
+    links: [{ label: 'About MEOW AI', href: '/about' }],
   },
   {
     keywords: ['book', 'schedule', 'demo', 'call', 'contact', 'calendar', 'ics'],
     answer:
-      'You can schedule a direct 30-minute architecture discovery call with Founder Ram Nivas Attanti. We provide an instant downloadable .ics calendar invite for Google Calendar, Outlook, and Apple Calendar with Google Meet details.',
+      'You can schedule a direct 30-minute architecture discovery call with the MEOW engineering team. We provide an instant downloadable .ics calendar invite for Google Calendar, Outlook, and Apple Calendar with Google Meet details.',
     links: [{ label: 'Schedule 30-Min Session', href: '/book' }],
   },
 ];
@@ -1146,7 +1146,7 @@ export const MeowConcierge: React.FC = () => {
                       </span>
                       <p className="text-white font-medium">30-Min Engineering Consultation</p>
                       <p className="text-zinc-400 text-[11px]">
-                        Connect with Founder Ram Nivas Attanti and receive an instant .ics calendar
+                        Connect with MEOW Engineering and receive an instant .ics calendar
                         invitation.
                       </p>
                       <Link
