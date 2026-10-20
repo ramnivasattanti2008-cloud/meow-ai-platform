@@ -3,7 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, CheckCircle2, Clock, Zap, ArrowRight, UserCheck, Database, Calendar, MessageSquare, Play, RefreshCw } from 'lucide-react';
 
-export const HeroVisual: React.FC = () => {
+interface HeroVisualProps {
+  onCallSara?: () => void;
+}
+
+export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
   const [activeTab, setActiveTab] = useState<'voice' | 'tools' | 'growth'>('voice');
   const [isSimulating, setIsSimulating] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
@@ -133,6 +137,23 @@ export const HeroVisual: React.FC = () => {
                 <Clock className="w-4 h-4 text-emerald-400" />
                 <span className="text-xs font-mono text-zinc-300">Latency: 380ms STT → Claude Intent → 220ms Natural Telugu TTS</span>
               </div>
+
+              {onCallSara && (
+                <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-2xl bg-zinc-900/60 border border-white/[0.06]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-xs text-zinc-300 font-medium">Want to test hands-free dialogue in real time?</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={onCallSara}
+                    className="px-3.5 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+                  >
+                    <Phone className="w-3.5 h-3.5 fill-current" />
+                    <span>Talk to Sara Now</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

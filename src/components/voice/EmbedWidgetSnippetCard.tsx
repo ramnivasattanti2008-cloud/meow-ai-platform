@@ -13,12 +13,14 @@ import {
   ShieldCheck,
   ExternalLink,
 } from 'lucide-react';
+import { SaraDialerModal } from '@/components/voice/SaraDialerModal';
 
 export const EmbedWidgetSnippetCard: React.FC = () => {
   const [businessName, setBusinessName] = useState('City Care Clinic');
   const [selectedLang, setSelectedLang] = useState('te');
   const [primaryColor, setPrimaryColor] = useState('#7c3aed');
   const [copied, setCopied] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   const snippet = `<script 
   src="https://meowboxai.tech/widget.js" 
@@ -50,23 +52,34 @@ export const EmbedWidgetSnippetCard: React.FC = () => {
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={handleCopy}
-          className="px-4 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-all font-semibold text-xs flex items-center gap-2 active:scale-95 shadow-sm"
-        >
-          {copied ? (
-            <>
-              <Check className="w-4 h-4 text-emerald-600" />
-              <span>Copied Embed Script!</span>
-            </>
-          ) : (
-            <>
-              <Copy className="w-4 h-4" />
-              <span>Copy Embed Code</span>
-            </>
-          )}
-        </button>
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setPreviewOpen(true)}
+            className="px-4 py-2.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-white border border-white/10 transition-all font-semibold text-xs flex items-center gap-2 active:scale-95 shadow-sm"
+          >
+            <Play className="w-3.5 h-3.5 text-violet-400 fill-violet-400" />
+            <span>Test Configured Widget</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="px-4 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-all font-semibold text-xs flex items-center gap-2 active:scale-95 shadow-sm"
+          >
+            {copied ? (
+              <>
+                <Check className="w-4 h-4 text-emerald-600" />
+                <span>Copied Embed Script!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4" />
+                <span>Copy Embed Code</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Configuration Grid */}
@@ -152,6 +165,15 @@ export const EmbedWidgetSnippetCard: React.FC = () => {
           <span>Native TTS across 8 Indian languages</span>
         </div>
       </div>
+
+      {/* Live Configured Widget Preview Modal */}
+      <SaraDialerModal
+        isOpen={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+        initialLanguage={selectedLang as any}
+        agentName="Sara (Front Desk Concierge)"
+        businessName={businessName}
+      />
     </div>
   );
 };

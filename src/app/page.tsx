@@ -6,6 +6,7 @@ import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
 import { HeroVisual } from '@/components/home/HeroVisual';
 import { CallRecordingShowcase } from '@/components/voice/CallRecordingShowcase';
+import { SaraDialerModal } from '@/components/voice/SaraDialerModal';
 import {
   Mic,
   Workflow,
@@ -22,6 +23,7 @@ import {
 
 export default function HomePage() {
   const [activeSegment, setActiveSegment] = useState<'personal' | 'pro' | 'business' | 'enterprise'>('personal');
+  const [dialerOpen, setDialerOpen] = useState(false);
 
   const segments = [
     {
@@ -159,13 +161,15 @@ export default function HomePage() {
                 <span>Launch Command Center</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link
-                href="/voice-ai"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/90 text-zinc-300 hover:text-white border border-white/10 hover:border-white/20 active:scale-[0.98] transition-all text-sm font-medium backdrop-blur-xl flex items-center justify-center gap-2 font-mono"
+              <button
+                type="button"
+                onClick={() => setDialerOpen(true)}
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/90 text-zinc-300 hover:text-white border border-white/10 hover:border-violet-500/40 active:scale-[0.98] transition-all text-sm font-medium backdrop-blur-xl flex items-center justify-center gap-2 font-mono group shadow-lg"
               >
-                <Mic className="w-4 h-4 text-violet-400" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <Mic className="w-4 h-4 text-violet-400 group-hover:scale-110 transition-transform" />
                 <span>Call Sara (8 Languages)</span>
-              </Link>
+              </button>
               <Link
                 href="/pricing"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/60 text-zinc-400 hover:text-zinc-200 border border-white/[0.06] active:scale-[0.98] transition-all text-sm font-medium flex items-center justify-center gap-2"
@@ -176,7 +180,7 @@ export default function HomePage() {
 
             {/* Interactive Hero Visual */}
             <div className="max-w-5xl mx-auto pt-2">
-              <HeroVisual />
+              <HeroVisual onCallSara={() => setDialerOpen(true)} />
             </div>
           </div>
         </section>
@@ -470,6 +474,33 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Apple Minimalist Floating Voice Call Pill */}
+        <div className="fixed bottom-6 right-6 z-40">
+          <button
+            onClick={() => setDialerOpen(true)}
+            className="px-4 py-2.5 rounded-full bg-zinc-950/90 hover:bg-zinc-900 text-white border border-white/15 hover:border-violet-500/50 shadow-2xl backdrop-blur-2xl transition-all flex items-center gap-2.5 group active:scale-95 text-xs font-medium"
+            title="Talk to Sara (Voice Receptionist)"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="font-semibold text-zinc-200 group-hover:text-white">Talk to Sara</span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-violet-300">
+              Live Voice
+            </span>
+          </button>
+        </div>
+
+        {/* Live Standalone Dialer Modal */}
+        <SaraDialerModal
+          isOpen={dialerOpen}
+          onClose={() => setDialerOpen(false)}
+          initialLanguage="te"
+          agentName="Sara (Front Desk Concierge)"
+          businessName="City Care Clinic, Hyderabad"
+        />
       </main>
 
       <Footer />
