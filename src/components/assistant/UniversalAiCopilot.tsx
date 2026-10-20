@@ -111,12 +111,27 @@ export const UniversalAiCopilot: React.FC = () => {
       utterance.lang = langMap[langCode] || 'en-IN';
 
       if (selectedAgent === 'sara') {
-        utterance.pitch = 1.15; // cute, friendly, human tone
-        utterance.rate = 1.0;
+        utterance.pitch = 1.04; // Calibrated natural female fundamental frequency
+        utterance.rate = 0.98;  // Relaxed human conversational cadence
       } else {
         utterance.pitch = 1.0;
-        utterance.rate = 1.05;
+        utterance.rate = 1.02;
       }
+
+      const voices = window.speechSynthesis.getVoices();
+      const voiceMatch = voices.find(
+        (v) =>
+          (v.name.includes('Female') || v.name.includes('Natural') || v.name.includes('Online')) &&
+          (v.lang.toLowerCase().includes(langCode) || v.lang.includes('IN'))
+      ) || voices.find(
+        (v) =>
+          v.lang.toLowerCase().includes(langCode) ||
+          (langCode === 'te' && (v.name.includes('Telugu') || v.lang.includes('te'))) ||
+          (langCode === 'hi' && (v.name.includes('Hindi') || v.lang.includes('hi'))) ||
+          v.lang.includes('IN')
+      ) || voices.find((v) => v.lang.startsWith('en')) || voices[0];
+
+      if (voiceMatch) utterance.voice = voiceMatch;
 
       window.speechSynthesis.speak(utterance);
     } catch (e) {

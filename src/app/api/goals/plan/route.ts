@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { claudeAdapter } from '@/lib/ai/claude-client';
 import { ProjectRecord, ProjectStep, ProjectArtifact, ProjectSegment } from '@/lib/types';
 
 export async function POST(req: Request) {
@@ -11,6 +12,27 @@ export async function POST(req: Request) {
         { success: false, error: 'A clear instruction or goal prompt is required.' },
         { status: 400 }
       );
+    }
+
+    // Attempt live Claude multi-agent planning if API key is active
+    const claudePlan = await claudeAdapter.generateGoalPlan(prompt, userSegment);
+    if (claudePlan) {
+      const newProject = await db.addProject({
+        title: claudePlan.title,
+        prompt,
+        segment: claudePlan.segment,
+        assignedEmployee: claudePlan.assignedEmployee,
+        status: 'awaiting_review',
+        steps: claudePlan.steps,
+        artifacts: claudePlan.artifacts,
+      });
+
+      return NextResponse.json({
+        success: true,
+        project: newProject,
+        providerUsed: 'anthropic_claude',
+        message: 'Plan autonomously synthesized and executed with Claude 3.5 Sonnet.',
+      });
     }
 
     const lower = prompt.toLowerCase();

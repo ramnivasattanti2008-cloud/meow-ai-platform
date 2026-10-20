@@ -243,7 +243,7 @@ export default function WorkspaceSettingsPage() {
                 </span>
               </div>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                Tuned speech synthesis with real human pickup chime, pitch 1.10 prosody, and dual-language SIP trunk routing.
+                Tuned speech synthesis with real human pickup chime, calibrated natural prosody (pitch 1.04, rate 0.98), and 8 Indian language voice routing.
               </p>
             </div>
 
