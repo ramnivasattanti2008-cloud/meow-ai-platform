@@ -1,6 +1,6 @@
 import { store } from '@/lib/store';
 import { firestore } from './firebase';
-import { Agent, Workflow, Campaign, ContactRequest, ProjectRecord, UserMemoryItem, CareerResume, WebhookConfig, WebhookDeliveryLog, TelephonyInboundCall } from '@/lib/types';
+import { Agent, Workflow, Campaign, ContactRequest, ProjectRecord, UserMemoryItem, CareerResume, WebhookConfig, WebhookDeliveryLog, TelephonyInboundCall, AgentKnowledgeDoc } from '@/lib/types';
 
 export interface BookingRecord {
   id: string;
@@ -418,6 +418,42 @@ class UnifiedDatabase {
       outcome: 'inquiry_answered',
       durationSeconds: 98,
       timestamp: new Date(Date.now() - 28800000).toISOString(),
+    },
+  ];
+
+  private localKnowledgeDocs: AgentKnowledgeDoc[] = [
+    {
+      id: 'kdoc-1',
+      agentId: 'agent-telugu-clinic',
+      title: 'Doctor Roster & OPD Consultation Schedule',
+      category: 'roster',
+      content:
+        'Dr. Rajesh Rao (Senior Orthopedic Surgeon & Joint Replacement): Mon-Sat 5:00 PM - 8:30 PM. Dr. Priya Sharma (General Physician & Diabetologist): Mon-Sat 9:30 AM - 1:30 PM. Dr. K. V. Reddy (Cardiologist): Tue, Thu, Sat 2:00 PM - 5:00 PM. Sunday clinic is open for scheduled dressings and emergency triage only.',
+      keywords: ['doctor', 'roster', 'timing', 'schedule', 'orthopedic', 'physician', 'cardiology', 'dr rao'],
+      createdAt: new Date(Date.now() - 172800000).toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    {
+      id: 'kdoc-2',
+      agentId: 'agent-telugu-clinic',
+      title: 'Consultation Fees, UPI & Cashless Insurance TPA',
+      category: 'pricing',
+      content:
+        'First-time OPD Consultation fee is ₹600. Follow-up consultation within 7 days is ₹300. We accept UPI (Google Pay, PhonePe, Paytm), credit/debit cards, and cash. Cashless mediclaim TPA processing is supported for Star Health, Care Health, HDFC ERGO, and ICICI Lombard.',
+      keywords: ['fee', 'consultation fee', 'cost', 'upi', 'insurance', 'cashless', 'tpa', 'price', 'charges'],
+      createdAt: new Date(Date.now() - 172800000).toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    {
+      id: 'kdoc-3',
+      agentId: 'agent-telugu-clinic',
+      title: 'Telugu Emergency Protocol & Home Sample Collection',
+      category: 'policy',
+      content:
+        'అత్యవసర చికిత్సలకు 24/7 ఎమర్జెన్సీ హెల్ప్‌లైన్ నెంబర్ +91 80 4000 0001 అందుబాటులో ఉంది. ల్యాబ్ బ్లడ్ టెస్ట్ శాంపిల్స్ ఇంటి వద్ద నుంచే సేకరించే సదుపాయం ఉంది (Home Blood Sample Collection). రిపోర్ట్స్ 12 గంటల్లో వాట్సాప్‌కి పిడిఎఫ్ రూపంలో పంపబడతాయి.',
+      keywords: ['emergency', 'blood test', 'home sample', 'lab', 'telugu', 'రక్తం', 'ఎమర్జెన్సీ', 'రిపోర్ట్'],
+      createdAt: new Date(Date.now() - 86400000).toISOString(),
+      updatedAt: new Date().toISOString(),
     },
   ];
 
@@ -866,9 +902,74 @@ class UnifiedDatabase {
     return newCall;
   }
 
+  /* ---------------- AGENT KNOWLEDGE BASE & TRAINING ---------------- */
+  async getKnowledgeDocs(agentId?: string): Promise<AgentKnowledgeDoc[]> {
+    if (firestore.isConfigured()) {
+      const docs = await firestore.getDocuments<AgentKnowledgeDoc>('knowledge_docs');
+      if (docs && docs.length > 0) {
+        return agentId ? docs.filter((d) => d.agentId === agentId) : docs;
+      }
+    }
+    return agentId
+      ? this.localKnowledgeDocs.filter((d) => d.agentId === agentId)
+      : this.localKnowledgeDocs;
+  }
+
+  async addKnowledgeDoc(doc: Omit<AgentKnowledgeDoc, 'id' | 'createdAt' | 'updatedAt'>): Promise<AgentKnowledgeDoc> {
+    const newDoc: AgentKnowledgeDoc = {
+      ...doc,
+      id: `kdoc-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    this.localKnowledgeDocs.unshift(newDoc);
+    if (firestore.isConfigured()) {
+      await firestore.setDocument('knowledge_docs', newDoc.id, newDoc);
+    }
+    return newDoc;
+  }
+
+  async deleteKnowledgeDoc(id: string): Promise<boolean> {
+    const idx = this.localKnowledgeDocs.findIndex((d) => d.id === id);
+    if (idx === -1) return false;
+    this.localKnowledgeDocs.splice(idx, 1);
+    return true;
+  }
+
+  async queryKnowledge(agentId: string, query: string): Promise<AgentKnowledgeDoc[]> {
+    const docs = await this.getKnowledgeDocs(agentId);
+    const qLower = query.toLowerCase().trim();
+    const qWords = qLower.split(/\s+/).filter(Boolean);
+
+    // Score docs based on keyword and content match
+    const scored = docs.map((doc) => {
+      let score = 0;
+      const contentLower = doc.content.toLowerCase();
+      const titleLower = doc.title.toLowerCase();
+
+      // Check keywords
+      doc.keywords.forEach((kw) => {
+        if (qLower.includes(kw.toLowerCase())) score += 10;
+      });
+
+      // Check title match
+      qWords.forEach((word) => {
+        if (titleLower.includes(word)) score += 5;
+        if (contentLower.includes(word)) score += 2;
+      });
+
+      return { doc, score };
+    });
+
+    return scored
+      .filter((s) => s.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map((s) => s.doc);
+  }
+
   /* ---------------- HEALTH & STATS ---------------- */
   async getStats() {
-    const [agents, workflows, campaigns, leads, bookings, payments, projects, memories, resumes, webhooks, webhookLogs, telephonyCalls, ping] = await Promise.all([
+    const [agents, workflows, campaigns, leads, bookings, payments, projects, memories, resumes, webhooks, webhookLogs, telephonyCalls, knowledgeDocs, ping] = await Promise.all([
       this.getAgents(),
       this.getWorkflows(),
       this.getCampaigns(),
@@ -881,6 +982,7 @@ class UnifiedDatabase {
       this.getWebhooks(),
       this.getWebhookLogs(),
       this.getTelephonyCalls(),
+      this.getKnowledgeDocs(),
       firestore.ping(),
     ]);
 
@@ -903,6 +1005,7 @@ class UnifiedDatabase {
         webhooks: webhooks.length,
         webhookLogs: webhookLogs.length,
         telephonyCalls: telephonyCalls.length,
+        knowledgeDocs: knowledgeDocs.length,
       },
     };
   }

@@ -231,3 +231,23 @@ export interface TelephonyInboundCall {
   durationSeconds: number;
   timestamp: string;
 }
+
+export interface AgentKnowledgeDoc {
+  id: string;
+  agentId: string;
+  title: string;
+  category: 'faq' | 'pricing' | 'policy' | 'roster' | 'general';
+  content: string;
+  keywords: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WhatsAppTemplatePayload {
+  templateName: 'appointment_confirmed' | 'payment_link' | 'lead_followup' | 'doctor_prescription';
+  recipientPhone: string;
+  recipientName: string;
+  language: SupportedLanguage;
+  variables: Record<string, string>;
+  quickReplyButtons: { id: string; title: string; actionType: 'url' | 'quick_reply' | 'phone' }[];
+}

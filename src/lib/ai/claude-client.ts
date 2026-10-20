@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { voiceEngine, VoiceDialogueTurnOutput } from '../voice/engine';
+import { db } from '../db';
 
 export type { VoiceDialogueTurnOutput as VoiceDialogueResponse };
 
@@ -208,8 +209,15 @@ Do not wrap in markdown quotes. Return strictly valid JSON.`;
         const business = input.businessName || 'City Care Clinic, Hyderabad';
         const lang = input.language || 'en';
 
+        // Retrieve grounded custom knowledge base for this business
+        const knowledgeMatches = await db.queryKnowledge('agent-telugu-clinic', input.userInput).catch(() => []);
+        const knowledgeSnippet = knowledgeMatches.length > 0
+          ? `\n\nOFFICIAL GROUNDED BUSINESS KNOWLEDGE (Use these exact factual details to answer caller questions):\n` +
+            knowledgeMatches.map((k) => `• [${k.category.toUpperCase()}] ${k.title}: ${k.content}`).join('\n')
+          : '';
+
         const systemPrompt = `You are ${persona}, an expressive, warm, articulate, and highly professional front-desk concierge for ${business}.
-You are speaking ON A LIVE TELEPHONE CALL with a customer.
+You are speaking ON A LIVE TELEPHONE CALL with a customer.${knowledgeSnippet}
 
 CRITICAL INSTRUCTIONS FOR ULTRA-REALISTIC TELEPHONY:
 1. Speak exactly like a natural, polite, and helpful receptionist on the phone. Never sound like a robot, an essay, or a corporate IVR.

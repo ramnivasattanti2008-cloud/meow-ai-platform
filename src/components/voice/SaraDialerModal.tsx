@@ -331,9 +331,11 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
     setIsListening(false);
   };
 
-  const handleSendMessage = async (customText?: string) => {
+  const handleSendMessage = async (customText?: string, overrideLang?: SupportedLanguage) => {
     const text = (customText || inputText).trim();
     if (!text || isProcessing || callState !== 'connected') return;
+
+    const activeLanguage = overrideLang || language;
 
     if (recognitionRef.current) {
       try {
@@ -361,7 +363,7 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userInput: text,
-          language,
+          language: activeLanguage,
           personaName: 'Sara',
           businessName,
           purpose: 'appointment_booking',
@@ -387,7 +389,7 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
       // Local zero-dependency fallback
       const localTurn = voiceEngine.processTurn({
         userInput: text,
-        language,
+        language: activeLanguage,
         purpose: 'appointment_booking',
         history: [],
       });
@@ -442,11 +444,40 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
           ? 'bn-IN'
           : 'en-IN';
 
-      recognition.onstart = () => setIsListening(true);
+      recognition.onstart = () => {
+        setIsListening(true);
+        // Instant Barge-In: interrupt agent speech when user starts listening/speaking
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          setIsSpeaking(false);
+        }
+      };
+
+      recognition.onsoundstart = () => {
+        // Voice acoustic barge-in
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          setIsSpeaking(false);
+        }
+      };
+
       recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
         if (transcript) {
-          handleSendMessage(transcript);
+          // Automatic Mid-Call Script Language Detection
+          let detectedLang = language;
+          if (/[\u0C00-\u0C7F]/.test(transcript)) detectedLang = 'te'; // Telugu
+          else if (/[\u0900-\u097F]/.test(transcript)) detectedLang = 'hi'; // Hindi / Devanagari
+          else if (/[\u0B80-\u0BFF]/.test(transcript)) detectedLang = 'ta'; // Tamil
+          else if (/[\u0C80-\u0CFF]/.test(transcript)) detectedLang = 'kn'; // Kannada
+          else if (/[\u0D00-\u0D7F]/.test(transcript)) detectedLang = 'ml'; // Malayalam
+          else if (/[\u0980-\u09FF]/.test(transcript)) detectedLang = 'bn'; // Bengali
+
+          if (detectedLang !== language) {
+            setLanguage(detectedLang);
+          }
+
+          handleSendMessage(transcript, detectedLang);
         }
       };
       recognition.onerror = () => setIsListening(false);
@@ -459,8 +490,14 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
     }
   };
 
-  // Toggle Web Speech recognition microphone
+  // Toggle Web Speech recognition microphone (with barge-in)
   const toggleListening = () => {
+    // Instant Barge-In on button press
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+    }
+
     if (isListening) {
       if (recognitionRef.current) {
         try {

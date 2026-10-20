@@ -110,6 +110,24 @@ describe('Google Cloud Firestore (Firebase) Database Engine', () => {
     expect(calls.some((c) => c.callSid === 'TEST_CALL_123')).toBe(true);
   });
 
+  it('manages and semantically queries agent knowledge base documents', async () => {
+    const docs = await db.getKnowledgeDocs();
+    expect(docs.length).toBeGreaterThanOrEqual(1);
+
+    const newDoc = await db.addKnowledgeDoc({
+      agentId: 'agent-telugu-clinic',
+      title: 'Sunday Pediatric Clinic Schedule',
+      category: 'roster',
+      content: 'Dr. Anita Pediatrician is available on Sundays from 10 AM to 1 PM.',
+      keywords: ['pediatric', 'sunday', 'children', 'dr anita'],
+    });
+    expect(newDoc.id).toBeDefined();
+
+    const matches = await db.queryKnowledge('agent-telugu-clinic', 'pediatrician on sunday');
+    expect(matches.length).toBeGreaterThanOrEqual(1);
+    expect(matches[0].title).toContain('Pediatric');
+  });
+
   it('executes database ping with valid roundtrip latency', async () => {
     const ping = await firestore.ping();
     expect(ping.connected).toBe(true);

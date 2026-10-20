@@ -22,6 +22,8 @@ import {
   Radio,
   Webhook,
   ChevronDown,
+  BrainCircuit,
+  MessageSquare,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Agent, Workflow, Campaign } from '@/lib/types';
@@ -38,6 +40,8 @@ import { AiEmployeesHub } from '@/components/dashboard/AiEmployeesHub';
 import { UniversalAiCopilot } from '@/components/assistant/UniversalAiCopilot';
 import { WebhookIntegrationHub } from '@/components/dashboard/WebhookIntegrationHub';
 import { TelephonyHub } from '@/components/dashboard/TelephonyHub';
+import { AgentTrainingStudio } from '@/components/dashboard/AgentTrainingStudio';
+import { WhatsAppTemplateSimulator } from '@/components/dashboard/WhatsAppTemplateSimulator';
 
 export default function WorkspaceDashboardPage() {
   const [agents, setAgents] = useState<Agent[]>([]);
@@ -53,7 +57,17 @@ export default function WorkspaceDashboardPage() {
 
   // Active view tab in dashboard: Apple-style segmented navigation
   const [activeTab, setActiveTab] = useState<
-    'goals' | 'copilot' | 'resume' | 'employees' | 'appointments' | 'payments' | 'memory' | 'telephony' | 'webhooks'
+    | 'goals'
+    | 'copilot'
+    | 'resume'
+    | 'employees'
+    | 'training'
+    | 'appointments'
+    | 'whatsapp'
+    | 'payments'
+    | 'telephony'
+    | 'webhooks'
+    | 'memory'
   >('goals');
 
   const loadData = async () => {
@@ -224,11 +238,13 @@ export default function WorkspaceDashboardPage() {
               <option value="copilot">🤖 Universal AI Copilot</option>
               <option value="resume">📄 ATS Resume & Career Studio</option>
               <option value="employees">👥 Specialized AI Employees</option>
+              <option value="training">🧠 Agent Training & Knowledge RAG</option>
               <option value="appointments">📅 Appointments & Patient CRM</option>
+              <option value="whatsapp">💬 WhatsApp Business Gateway</option>
               <option value="payments">💳 Invoicing, GST & UPI Links</option>
               <option value="telephony">📞 Inbound Telephony & SIP Gateway</option>
               <option value="webhooks">⚡ External Webhooks & Zapier/Sheets</option>
-              <option value="memory">🧠 Memory Vault & Business Rules</option>
+              <option value="memory">🏛️ Memory Vault & Business Rules</option>
             </select>
             <ChevronDown className="w-4 h-4 text-zinc-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
@@ -290,6 +306,19 @@ export default function WorkspaceDashboardPage() {
 
           <button
             type="button"
+            onClick={() => setActiveTab('training')}
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
+              activeTab === 'training'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
+            }`}
+          >
+            <BrainCircuit className="w-3.5 h-3.5 text-violet-400" />
+            <span>Training &amp; Knowledge</span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => setActiveTab('appointments')}
             className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'appointments'
@@ -299,6 +328,19 @@ export default function WorkspaceDashboardPage() {
           >
             <Calendar className="w-3.5 h-3.5 text-zinc-300" />
             <span>Appointments</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('whatsapp')}
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
+              activeTab === 'whatsapp'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
+            }`}
+          >
+            <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+            <span>WhatsApp Gateway</span>
           </button>
 
           <button
@@ -386,10 +428,24 @@ export default function WorkspaceDashboardPage() {
           </div>
         )}
 
+        {/* Tab: Agent Training & Grounded Knowledge Base */}
+        {activeTab === 'training' && (
+          <div className="space-y-6">
+            <AgentTrainingStudio />
+          </div>
+        )}
+
         {/* Tab 4: Interactive Appointments & Patient CRM */}
         {activeTab === 'appointments' && (
           <div className="space-y-6">
             <AppointmentsHub />
+          </div>
+        )}
+
+        {/* Tab: WhatsApp Business Gateway */}
+        {activeTab === 'whatsapp' && (
+          <div className="space-y-6">
+            <WhatsAppTemplateSimulator />
           </div>
         )}
 
