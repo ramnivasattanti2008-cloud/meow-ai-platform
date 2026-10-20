@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, RotateCcw, Volume2, VolumeX, Mic, CheckCircle2, Clock, ShieldCheck, Sparkles, PhoneCall, Languages } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, VolumeX, Mic, CheckCircle2, Clock, ShieldCheck, Sparkles, PhoneCall, Languages, Copy, Check, MessageSquare } from 'lucide-react';
 
 interface CallSample {
   id: string;
@@ -168,7 +168,35 @@ export const CallRecordingShowcase: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [showTranslations, setShowTranslations] = useState(true);
+  const [copied, setCopied] = useState(false);
   const timerRef = useRef<any>(null);
+
+  const handleCopyTranscript = () => {
+    const text = selectedSample.turns
+      .map(
+        (t) =>
+          `[${t.speaker === 'agent' ? 'Sara (AI)' : 'Caller'}]: ${t.text}${
+            t.textEnTranslation ? `\n(Translation: ${t.textEnTranslation})` : ''
+          }`
+      )
+      .join('\n\n');
+    navigator.clipboard?.writeText(
+      `MEOW Voice AI - Call Record: ${selectedSample.title} (${selectedSample.business})\nOutcome: ${selectedSample.toolExecuted}\n\n${text}`
+    );
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleShareWhatsApp = () => {
+    const text = selectedSample.turns
+      .slice(0, 4)
+      .map((t) => `${t.speaker === 'agent' ? '🤖 Sara' : '👤 Caller'}: ${t.text}`)
+      .join('\n');
+    const msg = encodeURIComponent(
+      `*MEOW Voice AI Call Record*\nBusiness: ${selectedSample.business}\nAction: ${selectedSample.toolExecuted}\n\n${text}\n...\nListen on https://meowboxai.tech/voice-ai`
+    );
+    window.open(`https://wa.me/?text=${msg}`, '_blank');
+  };
 
   // Playback timer simulation
   useEffect(() => {
@@ -292,8 +320,17 @@ export const CallRecordingShowcase: React.FC = () => {
               <span className="text-violet-400">{selectedSample.languageLabel}</span>
             </div>
 
-            {/* Simulated Animated Waveform Bars */}
-            <div className="h-16 flex items-center justify-between gap-1 px-2 bg-zinc-950/80 rounded-xl border border-white/[0.06] overflow-hidden">
+            {/* Simulated Animated Waveform Bars (Clickable Seek) */}
+            <div
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+                setCurrentTime(ratio * selectedSample.durationSeconds);
+              }}
+              title="Click waveform to jump to second"
+              className="h-16 flex items-center justify-between gap-1 px-2 bg-zinc-950/80 rounded-xl border border-white/[0.06] overflow-hidden cursor-pointer hover:border-violet-500/30 transition-all"
+            >
               {Array.from({ length: 32 }).map((_, i) => {
                 const isActive = (i / 32) * selectedSample.durationSeconds <= currentTime;
                 // Height based on playing state
@@ -318,7 +355,16 @@ export const CallRecordingShowcase: React.FC = () => {
 
             {/* Time Scrub & Controls */}
             <div className="space-y-2">
-              <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
+              <div
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const clickX = e.clientX - rect.left;
+                  const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+                  setCurrentTime(ratio * selectedSample.durationSeconds);
+                }}
+                className="w-full bg-zinc-800 hover:bg-zinc-700 h-2 rounded-full overflow-hidden cursor-pointer transition-colors relative"
+                title="Click to seek"
+              >
                 <div
                   className="bg-violet-500 h-full rounded-full transition-all"
                   style={{ width: `${(currentTime / selectedSample.durationSeconds) * 100}%` }}
@@ -392,20 +438,40 @@ export const CallRecordingShowcase: React.FC = () => {
 
         {/* Right Column: Interactive Synced Transcript */}
         <div className="lg:col-span-7 space-y-4 flex flex-col justify-between">
-          <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
+          <div className="flex items-center justify-between pb-2 border-b border-white/[0.06] flex-wrap gap-2">
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
               <PhoneCall className="w-3.5 h-3.5 text-violet-400" />
               <span>SYNCHRONIZED CONVERSATION TRANSCRIPT</span>
             </div>
-            {selectedSample.languageCode !== 'en' && (
+            <div className="flex items-center gap-2">
+              {selectedSample.languageCode !== 'en' && (
+                <button
+                  onClick={() => setShowTranslations(!showTranslations)}
+                  className="text-[11px] font-mono text-zinc-400 hover:text-violet-300 flex items-center gap-1 transition-colors px-2 py-0.5 rounded-lg bg-zinc-900 border border-white/10"
+                >
+                  <Languages className="w-3 h-3" />
+                  <span>{showTranslations ? 'Hide Subtitles' : 'Subtitles'}</span>
+                </button>
+              )}
+
               <button
-                onClick={() => setShowTranslations(!showTranslations)}
-                className="text-[11px] font-mono text-zinc-400 hover:text-violet-300 flex items-center gap-1 transition-colors"
+                onClick={handleCopyTranscript}
+                className="text-[11px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors px-2 py-0.5 rounded-lg bg-zinc-900 border border-white/10"
+                title="Copy entire transcript"
               >
-                <Languages className="w-3 h-3" />
-                <span>{showTranslations ? 'Hide English Subtitles' : 'Show English Subtitles'}</span>
+                {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                <span>{copied ? 'Copied' : 'Copy'}</span>
               </button>
-            )}
+
+              <button
+                onClick={handleShareWhatsApp}
+                className="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors px-2 py-0.5 rounded-lg bg-emerald-950/40 border border-emerald-500/20"
+                title="Share via WhatsApp"
+              >
+                <MessageSquare className="w-3 h-3" />
+                <span>WhatsApp</span>
+              </button>
+            </div>
           </div>
 
           <div className="space-y-3 max-h-[360px] overflow-y-auto pr-2 custom-scrollbar">
@@ -417,13 +483,18 @@ export const CallRecordingShowcase: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className={`p-4 rounded-2xl transition-all duration-200 border ${
+                  onClick={() => {
+                    setCurrentTime(turn.startSec);
+                    if (!isPlaying) setIsPlaying(true);
+                  }}
+                  className={`p-4 rounded-2xl transition-all duration-200 border cursor-pointer ${
                     isCurrentTurn
                       ? 'bg-violet-950/30 border-violet-500/40 shadow-sm scale-[1.01]'
                       : isPast
-                      ? 'bg-zinc-900/40 border-white/[0.06] opacity-80'
-                      : 'bg-zinc-900/20 border-white/[0.04] opacity-50'
+                      ? 'bg-zinc-900/40 border-white/[0.06] opacity-80 hover:opacity-100 hover:border-violet-500/30'
+                      : 'bg-zinc-900/20 border-white/[0.04] opacity-50 hover:opacity-80 hover:border-white/10'
                   }`}
+                  title="Click to play from this turn"
                 >
                   <div className="flex items-center justify-between mb-1.5 text-[11px] font-mono">
                     <span className={`font-semibold flex items-center gap-1.5 ${isAgent ? 'text-violet-300' : 'text-zinc-300'}`}>

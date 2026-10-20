@@ -83,6 +83,15 @@ export const Navbar: React.FC = () => {
           {/* Action CTAs */}
           <div className="hidden sm:flex items-center gap-2.5">
             <Link
+              href="/status"
+              className="px-2.5 py-1 text-xs font-mono text-zinc-400 hover:text-white rounded-full border border-white/10 hover:border-white/20 bg-zinc-900/40 hover:bg-zinc-850 transition-all flex items-center gap-1.5"
+              title="System Status: 99.98% Uptime"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>99.98% SLA</span>
+            </Link>
+
+            <Link
               href="/app"
               className="px-3.5 py-1.5 text-xs font-mono font-medium text-zinc-300 hover:text-white rounded-full border border-white/10 hover:border-white/20 bg-zinc-900/60 hover:bg-zinc-850 transition-all flex items-center gap-2"
             >
@@ -139,6 +148,14 @@ export const Navbar: React.FC = () => {
               </Link>
             ))}
             <div className="pt-4 border-t border-white/[0.08] flex flex-col gap-3">
+              <Link
+                href="/status"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center py-2.5 rounded-full text-xs font-mono font-medium text-emerald-400 border border-emerald-500/20 bg-emerald-950/20 flex items-center justify-center gap-2"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>System Status (99.98% SLA)</span>
+              </Link>
               <Link
                 href="/app"
                 onClick={() => setMobileMenuOpen(false)}

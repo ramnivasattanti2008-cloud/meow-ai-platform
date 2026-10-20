@@ -63,6 +63,12 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/status" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Platform Status &amp; SLA</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/app" className="text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-1 font-mono text-xs">
                   <span>Enterprise Console</span>
                   <ArrowUpRight className="w-3 h-3" />
@@ -120,6 +126,12 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/contact" className="hover:text-white transition-colors">
                   Contact &amp; Discovery
+                </Link>
+              </li>
+              <li>
+                <Link href="/status" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Uptime Status (99.98%)</span>
                 </Link>
               </li>
               <li>

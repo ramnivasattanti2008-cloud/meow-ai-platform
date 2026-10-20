@@ -22,6 +22,8 @@ import {
   Briefcase,
   Heart,
   Smile,
+  Zap,
+  Headphones,
 } from 'lucide-react';
 import { SupportedLanguage, VoiceTurn } from '@/lib/types';
 import { voiceEngine } from '@/lib/voice/engine';
@@ -149,6 +151,8 @@ export const VoiceAgentDemo: React.FC = () => {
   const [language, setLanguage] = useState<SupportedLanguage>('te');
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isHandsFree, setIsHandsFree] = useState(true);
+  const [waveformTick, setWaveformTick] = useState(0);
   const [speechSupported, setSpeechSupported] = useState(false);
   const [consentGranted, setConsentGranted] = useState(false);
   const [showConsentModal, setShowConsentModal] = useState(false);
@@ -156,6 +160,21 @@ export const VoiceAgentDemo: React.FC = () => {
   const [escalated, setEscalated] = useState(false);
   const [escalationReason, setEscalationReason] = useState('');
   const [telephonyLatency, setTelephonyLatency] = useState<number | null>(null);
+
+  const isHandsFreeRef = useRef(isHandsFree);
+  useEffect(() => {
+    isHandsFreeRef.current = isHandsFree;
+  }, [isHandsFree]);
+
+  useEffect(() => {
+    let interval: any;
+    if (isSpeaking || isListening) {
+      interval = setInterval(() => {
+        setWaveformTick((t) => (t + 1) % 100);
+      }, 100);
+    }
+    return () => clearInterval(interval);
+  }, [isSpeaking, isListening]);
 
   const [transcript, setTranscript] = useState<VoiceTurn[]>([
     {
@@ -263,11 +282,30 @@ export const VoiceAgentDemo: React.FC = () => {
       utterance.pitch = 1.04; // natural female voice resonance
 
       utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
+      utterance.onend = () => {
+        setIsSpeaking(false);
+        if (isHandsFreeRef.current) {
+          setTimeout(() => {
+            startListeningSafe();
+          }, 350);
+        }
+      };
       utterance.onerror = () => setIsSpeaking(false);
       window.speechSynthesis.speak(utterance);
     } catch {
       setIsSpeaking(false);
+    }
+  };
+
+  const startListeningSafe = () => {
+    if (recognitionRef.current && !isListening) {
+      try {
+        recognitionRef.current.lang = currentLangConfig.sttLang;
+        recognitionRef.current.start();
+        setIsListening(true);
+      } catch (err) {
+        // Recognition already active
+      }
     }
   };
 
@@ -430,6 +468,12 @@ export const VoiceAgentDemo: React.FC = () => {
   };
 
   const toggleMic = () => {
+    // Barge-in: immediately cancel ongoing speech
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+    }
+
     if (!consentGranted) {
       setShowConsentModal(true);
       return;
@@ -493,8 +537,23 @@ export const VoiceAgentDemo: React.FC = () => {
           </div>
         </div>
 
-        {/* Telemetry & Reset */}
+        {/* Telemetry, Hands-Free Toggle & Reset */}
         <div className="flex items-center gap-2.5">
+          {/* Hands-Free Toggle */}
+          <button
+            type="button"
+            onClick={() => setIsHandsFree(!isHandsFree)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-mono font-medium border transition-all flex items-center gap-1.5 ${
+              isHandsFree
+                ? 'bg-amber-500/15 text-amber-300 border-amber-500/30 shadow-sm'
+                : 'bg-zinc-800/80 text-zinc-400 border-white/10 hover:text-white'
+            }`}
+            title="Continuous hands-free conversation"
+          >
+            <Zap className={`w-3.5 h-3.5 ${isHandsFree ? 'text-amber-400 fill-amber-400' : 'text-zinc-500'}`} />
+            <span>Hands-Free: {isHandsFree ? 'ON' : 'OFF'}</span>
+          </button>
+
           {telephonyLatency && (
             <div className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
               <Activity className="w-3 h-3 animate-pulse" />
@@ -536,6 +595,51 @@ export const VoiceAgentDemo: React.FC = () => {
               </button>
             );
           })}
+        </div>
+      </div>
+
+      {/* Audio Waveform Spectrum Strip */}
+      <div className="px-5 sm:px-8 py-2.5 bg-zinc-950/70 border-b border-white/[0.06] flex items-center justify-between gap-4">
+        <div className="flex items-center gap-1 sm:gap-1.5 h-7">
+          {Array.from({ length: 32 }).map((_, i) => {
+            const active = isSpeaking || isListening;
+            const wave = Math.abs(Math.sin(i * 0.35 + waveformTick * 0.4)) * 22 + 4;
+            const height = active ? Math.min(26, Math.max(4, wave)) : 3;
+            return (
+              <span
+                key={i}
+                className={`w-1 rounded-full transition-all duration-100 ${
+                  isSpeaking
+                    ? 'bg-gradient-to-t from-pink-500 via-rose-400 to-violet-300 shadow-sm shadow-pink-500/30'
+                    : isListening
+                    ? 'bg-gradient-to-t from-emerald-500 via-teal-400 to-cyan-300 shadow-sm shadow-emerald-500/30'
+                    : 'bg-zinc-800/80'
+                }`}
+                style={{ height: `${height}px` }}
+              />
+            );
+          })}
+        </div>
+
+        <div className="flex items-center gap-2 text-[11px] font-mono shrink-0">
+          <span
+            className={`w-2 h-2 rounded-full ${
+              isSpeaking
+                ? 'bg-pink-400 animate-pulse'
+                : isListening
+                ? 'bg-emerald-400 animate-ping'
+                : 'bg-zinc-600'
+            }`}
+          />
+          <span className="text-zinc-400">
+            {isSpeaking
+              ? 'Sara is speaking'
+              : isListening
+              ? 'Listening (Speak now)'
+              : isHandsFree
+              ? 'Hands-Free Ready'
+              : 'Push-to-Talk'}
+          </span>
         </div>
       </div>
 
