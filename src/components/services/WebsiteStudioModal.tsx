@@ -110,6 +110,9 @@ export const WebsiteStudioModal: React.FC<WebsiteStudioModalProps> = ({ isOpen, 
   <footer class="border-t border-white/10 px-6 py-6 text-center text-xs text-zinc-500 font-mono">
     © 2026 ${brandName}. Powered by MEOW AI Engine. Domain: ${targetDomain || 'yourdomain.in'}
   </footer>
+
+  <!-- MEOW Live Vernacular Voice Concierge Widget -->
+  <script src="https://meowboxai.tech/widget.js" data-business="${brandName}" data-lang="te"></script>
 </body>
 </html>`;
 

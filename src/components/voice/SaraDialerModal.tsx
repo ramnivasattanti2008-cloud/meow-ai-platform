@@ -17,6 +17,7 @@ import {
   Clock,
   Radio,
   User,
+  Zap,
 } from 'lucide-react';
 import { SupportedLanguage } from '@/lib/types';
 import { voiceEngine, VoiceDialogueTurnOutput } from '@/lib/voice/engine';
@@ -151,6 +152,18 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
   const [inputText, setInputText] = useState('');
   const [callDuration, setCallDuration] = useState(0);
   const [audioMuted, setAudioMuted] = useState(false);
+  const [isHandsFree, setIsHandsFree] = useState(true);
+
+  const isHandsFreeRef = useRef(isHandsFree);
+  const callStateRef = useRef(callState);
+
+  useEffect(() => {
+    isHandsFreeRef.current = isHandsFree;
+  }, [isHandsFree]);
+
+  useEffect(() => {
+    callStateRef.current = callState;
+  }, [callState]);
 
   const [messages, setMessages] = useState<
     Array<{
@@ -215,7 +228,14 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
     if (voiceMatch) utterance.voice = voiceMatch;
 
     utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      if (isHandsFreeRef.current && callStateRef.current === 'connected') {
+        setTimeout(() => {
+          startListeningSafe();
+        }, 250);
+      }
+    };
     utterance.onerror = () => setIsSpeaking(false);
 
     window.speechSynthesis.speak(utterance);
@@ -314,6 +334,13 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
     const text = (customText || inputText).trim();
     if (!text || isProcessing || callState !== 'connected') return;
 
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch {}
+    }
+    setIsListening(false);
+
     setInputText('');
     const userTimestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -379,27 +406,21 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
     }
   };
 
-  // Toggle Web Speech recognition microphone
-  const toggleListening = () => {
-    if (isListening) {
+  // Safe starter for Web Speech recognition
+  const startListeningSafe = () => {
+    if (callStateRef.current !== 'connected' || typeof window === 'undefined') return;
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) return;
+
+    try {
       if (recognitionRef.current) {
         try {
           recognitionRef.current.stop();
         } catch {}
       }
-      setIsListening(false);
-      return;
-    }
 
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      alert('Speech recognition is not supported in this browser. Please use Chrome or type your message below.');
-      return;
-    }
-
-    try {
       const recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = false;
@@ -433,9 +454,22 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
       recognitionRef.current = recognition;
       recognition.start();
     } catch (err) {
-      console.warn('Speech recognition start error:', err);
       setIsListening(false);
     }
+  };
+
+  // Toggle Web Speech recognition microphone
+  const toggleListening = () => {
+    if (isListening) {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch {}
+      }
+      setIsListening(false);
+      return;
+    }
+    startListeningSafe();
   };
 
   const formatTimer = (seconds: number) => {
@@ -474,10 +508,26 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
 
           <div className="flex items-center gap-2">
             {callState === 'connected' && (
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10 font-mono text-xs text-emerald-400">
-                <Clock className="w-3 h-3 animate-spin" />
-                <span>{formatTimer(callDuration)}</span>
-              </div>
+              <>
+                <button
+                  type="button"
+                  onClick={() => setIsHandsFree(!isHandsFree)}
+                  className={`px-2.5 py-1 rounded-full text-[10px] font-mono flex items-center gap-1.5 transition-all ${
+                    isHandsFree
+                      ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/25'
+                      : 'bg-zinc-800 text-zinc-400 border border-white/5'
+                  }`}
+                  title="Toggle Hands-Free Continuous Voice Conversation"
+                >
+                  <Zap className={`w-3 h-3 ${isHandsFree ? 'text-emerald-400' : 'text-zinc-500'}`} />
+                  <span>{isHandsFree ? 'Hands-Free: ON' : 'Hands-Free: OFF'}</span>
+                </button>
+
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10 font-mono text-xs text-emerald-400">
+                  <Clock className="w-3 h-3 animate-spin" />
+                  <span>{formatTimer(callDuration)}</span>
+                </div>
+              </>
             )}
 
             <button

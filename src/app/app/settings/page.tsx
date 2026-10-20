@@ -23,6 +23,7 @@ import {
   Download,
 } from 'lucide-react';
 import { EasyPaymentModal } from '@/components/payment/EasyPaymentModal';
+import { EmbedWidgetSnippetCard } from '@/components/voice/EmbedWidgetSnippetCard';
 
 export default function WorkspaceSettingsPage() {
   const [healthData, setHealthData] = useState<any>(null);
@@ -336,6 +337,9 @@ export default function WorkspaceSettingsPage() {
             </div>
           </div>
         </div>
+
+        {/* Embeddable Web Voice Receptionist Widget */}
+        <EmbedWidgetSnippetCard />
 
         {/* Organization Profile */}
         <div className="rounded-2xl border border-white/[0.08] bg-zinc-900/30 p-6 space-y-4">

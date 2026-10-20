@@ -272,6 +272,29 @@ export const GoalExecutionHub: React.FC = () => {
             </span>
           </div>
 
+          {/* Autonomous Multi-Agent Swarm Telemetry */}
+          <div className="p-4 rounded-2xl bg-zinc-950/60 border border-white/[0.06] flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <div className="flex items-center gap-2 text-zinc-300">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-semibold text-white">Autonomous Agent Fleet:</span>
+              <span className="text-zinc-400">4 Claude-Specialized Agents Collaborating in Parallel</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 text-[10px]">
+              <span className="px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-300 border border-violet-500/20">
+                Sara (Voice &amp; Intake)
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20">
+                Alex (Career &amp; Tech)
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                Maya (Growth &amp; WhatsApp)
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                Rishi (Ops &amp; Tax Invoices)
+              </span>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Step-by-Step Execution Journey (2 Cols) */}
             <div className="lg:col-span-2 p-6 sm:p-8 rounded-3xl bg-zinc-900/40 border border-white/[0.08] backdrop-blur-xl space-y-6">

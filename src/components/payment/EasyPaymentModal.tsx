@@ -17,6 +17,7 @@ import {
   Phone,
 } from 'lucide-react';
 import { downloadTaxInvoice } from '@/lib/invoice/generateInvoice';
+import { QrCodeSvg } from '@/components/common/QrCodeSvg';
 
 export interface EasyPaymentModalProps {
   isOpen: boolean;
@@ -214,22 +215,11 @@ export const EasyPaymentModal: React.FC<EasyPaymentModalProps> = ({
             {method === 'upi' && (
               <div className="space-y-4">
                 <div className="p-4 rounded-2xl bg-zinc-900/40 border border-white/[0.06] flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-                  {/* Generated QR Code Simulation */}
-                  <div className="w-32 h-32 rounded-xl bg-white p-2 shrink-0 flex flex-col items-center justify-center shadow-md">
-                    <div className="w-full h-full bg-zinc-950 rounded-lg p-1.5 flex flex-col items-center justify-between">
-                      <div className="w-full flex justify-between">
-                        <div className="w-4 h-4 bg-white rounded-sm" />
-                        <div className="w-4 h-4 bg-white rounded-sm" />
-                      </div>
-                      <div className="text-[9px] font-mono text-zinc-300 font-bold tracking-widest">
-                        MEOW • UPI
-                      </div>
-                      <div className="w-full flex justify-between">
-                        <div className="w-4 h-4 bg-white rounded-sm" />
-                        <div className="w-2 h-2 bg-emerald-400 rounded-full" />
-                      </div>
-                    </div>
-                  </div>
+                  {/* Scannable Dynamic UPI QR Code */}
+                  <QrCodeSvg
+                    value={`upi://pay?pa=pay@meowai.tech&pn=MEOW%20AI&am=${amount}&cu=INR&tn=${encodeURIComponent(planTitle)}`}
+                    size={128}
+                  />
 
                   <div className="space-y-2 flex-1">
                     <span className="text-xs font-semibold text-white block">Scan to Pay via any UPI App</span>

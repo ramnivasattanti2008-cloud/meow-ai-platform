@@ -3,6 +3,7 @@ import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
 import { VoiceAgentDemo } from '@/components/voice/VoiceAgentDemo';
 import { CallRecordingShowcase } from '@/components/voice/CallRecordingShowcase';
+import { EmbedWidgetSnippetCard } from '@/components/voice/EmbedWidgetSnippetCard';
 import {
   PhoneCall,
   CalendarCheck,
@@ -87,8 +88,13 @@ export default function VoiceAiPage() {
         </section>
 
         {/* Live Call Transcripts & Recording Showcase */}
-        <section id="call-recording-showcase" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28">
+        <section id="call-recording-showcase" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-28">
           <CallRecordingShowcase />
+        </section>
+
+        {/* 1-Click Embeddable Web Widget Studio */}
+        <section id="embed-widget-studio" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28">
+          <EmbedWidgetSnippetCard />
         </section>
 
         {/* Practical Applications Grid */}

@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { PaymentRecord } from '@/lib/db';
 import { downloadTaxInvoice } from '@/lib/invoice/generateInvoice';
+import { QrCodeSvg } from '@/components/common/QrCodeSvg';
 
 export const PaymentLinkGenerator: React.FC = () => {
   const [payments, setPayments] = useState<PaymentRecord[]>([]);
@@ -252,21 +253,12 @@ export const PaymentLinkGenerator: React.FC = () => {
                 </div>
               </div>
 
-              {/* Dynamic QR Graphic */}
+              {/* Dynamic Scannable QR Graphic */}
               <div className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-xl bg-zinc-900/60 border border-white/[0.06]">
-                <div className="w-28 h-28 rounded-xl bg-white p-2 shrink-0 flex flex-col items-center justify-between shadow-md">
-                  <div className="w-full flex justify-between">
-                    <div className="w-4 h-4 bg-zinc-950 rounded-sm" />
-                    <div className="w-4 h-4 bg-zinc-950 rounded-sm" />
-                  </div>
-                  <div className="text-[9px] font-mono text-zinc-950 font-black tracking-widest text-center">
-                    ₹{amount}
-                  </div>
-                  <div className="w-full flex justify-between">
-                    <div className="w-4 h-4 bg-zinc-950 rounded-sm" />
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full" />
-                  </div>
-                </div>
+                <QrCodeSvg
+                  value={generatedPayload.upiString}
+                  size={120}
+                />
 
                 <div className="space-y-1.5 text-xs">
                   <span className="font-semibold text-white block">UPI Instant Payment</span>
