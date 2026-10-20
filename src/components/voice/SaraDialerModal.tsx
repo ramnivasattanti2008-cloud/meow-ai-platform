@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { SupportedLanguage } from '@/lib/types';
 import { voiceEngine, VoiceDialogueTurnOutput } from '@/lib/voice/engine';
+import { WebAudioWaveform } from '@/components/voice/WebAudioWaveform';
 
 interface SaraDialerModalProps {
   isOpen: boolean;
@@ -614,6 +615,14 @@ export const SaraDialerModal: React.FC<SaraDialerModalProps> = ({
 
           {(callState === 'connected' || callState === 'ended') && (
             <div className="space-y-3.5">
+              {callState === 'connected' && (
+                <div className="pb-1 sticky top-0 z-10">
+                  <WebAudioWaveform
+                    isListening={isListening}
+                    isAgentSpeaking={isSpeaking}
+                  />
+                </div>
+              )}
               {messages.map((m, idx) => (
                 <div
                   key={idx}

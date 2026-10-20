@@ -185,3 +185,49 @@ export interface CareerResume {
   updatedAt: string;
 }
 
+
+
+export type WebhookEventType =
+  | 'appointment.created'
+  | 'payment.settled'
+  | 'lead.qualified'
+  | 'call.completed';
+
+export interface WebhookConfig {
+  id: string;
+  name: string;
+  url: string;
+  secret?: string;
+  events: WebhookEventType[];
+  enabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WebhookDeliveryLog {
+  id: string;
+  webhookId?: string;
+  event: WebhookEventType | string;
+  targetUrl: string;
+  status: 'success' | 'failed';
+  statusCode: number;
+  payload: Record<string, any>;
+  responseBody?: string;
+  latencyMs: number;
+  timestamp: string;
+}
+
+export interface TelephonyInboundCall {
+  id: string;
+  callSid: string;
+  callerNumber: string;
+  calledNumber: string;
+  provider: 'exotel' | 'twilio' | 'telecmo' | 'sip_trunk';
+  regionDetected: string;
+  languageSelected: SupportedLanguage;
+  transcript: string;
+  intentDetected: string;
+  outcome: 'appointment_booked' | 'inquiry_answered' | 'transferred_to_human' | 'voicemail_saved';
+  durationSeconds: number;
+  timestamp: string;
+}

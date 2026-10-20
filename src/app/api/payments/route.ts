@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { dispatchWebhookEvent } from '@/lib/webhooks';
 
 export async function GET() {
   try {
@@ -29,6 +30,18 @@ export async function POST(req: NextRequest) {
       payerEmail: body.payerEmail || 'billing@meowai.tech',
       status: body.status || 'settled',
     });
+
+    // Fire asynchronous webhook dispatch (Accounting / CRM / WhatsApp Receipt)
+    dispatchWebhookEvent('payment.settled', {
+      transactionId: newPayment.transactionId,
+      amount: newPayment.amount,
+      planTitle: newPayment.planTitle,
+      method: newPayment.method,
+      payerName: newPayment.payerName,
+      payerPhone: newPayment.payerPhone,
+      payerEmail: newPayment.payerEmail,
+      status: newPayment.status,
+    }).catch((e) => console.error('Payment webhook trigger error:', e));
 
     return NextResponse.json({ payment: newPayment }, { status: 201 });
   } catch (err: any) {

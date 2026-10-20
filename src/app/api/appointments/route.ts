@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { dispatchWebhookEvent } from '@/lib/webhooks';
 
 export async function GET() {
   try {
@@ -27,6 +28,18 @@ export async function POST(req: NextRequest) {
       language: body.language || 'telugu',
       status: body.status || 'confirmed',
     });
+
+    // Fire asynchronous webhook dispatch (Google Sheets / Zapier / WhatsApp)
+    dispatchWebhookEvent('appointment.created', {
+      appointmentId: newBooking.id,
+      patientName: newBooking.name,
+      phone: newBooking.phone,
+      email: newBooking.email,
+      date: newBooking.date,
+      timeSlot: newBooking.timeSlot,
+      sessionType: newBooking.sessionType,
+      language: newBooking.language,
+    }).catch((e) => console.error('Appointment webhook trigger error:', e));
 
     return NextResponse.json({ appointment: newBooking }, { status: 201 });
   } catch (err: any) {

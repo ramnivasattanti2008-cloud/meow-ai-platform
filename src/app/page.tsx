@@ -475,19 +475,19 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Apple Minimalist Floating Voice Call Pill */}
-        <div className="fixed bottom-6 right-6 z-40">
+        {/* Apple Minimalist Floating Voice Call Pill (Positioned above Text Concierge) */}
+        <div className="fixed bottom-20 right-6 z-40">
           <button
             onClick={() => setDialerOpen(true)}
             className="px-4 py-2.5 rounded-full bg-zinc-950/90 hover:bg-zinc-900 text-white border border-white/15 hover:border-violet-500/50 shadow-2xl backdrop-blur-2xl transition-all flex items-center gap-2.5 group active:scale-95 text-xs font-medium"
-            title="Talk to Sara (Voice Receptionist)"
+            title="Talk to Sara (Live Multilingual Voice Receptionist)"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="font-semibold text-zinc-200 group-hover:text-white">Talk to Sara</span>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-violet-300">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-500/30">
               Live Voice
             </span>
           </button>

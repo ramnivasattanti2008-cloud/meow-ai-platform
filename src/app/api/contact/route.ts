@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ContactSchema } from '@/lib/validation';
 import { db } from '@/lib/db';
+import { dispatchWebhookEvent } from '@/lib/webhooks';
 
 // In-memory rate limiting map: IP -> timestamp array
 const rateLimitMap = new Map<string, number[]>();
@@ -53,6 +54,18 @@ export async function POST(req: NextRequest) {
       preferredContactMethod: validData.preferredContactMethod,
       consent: validData.consent,
     });
+
+    // Fire webhook dispatch (Lead intake into CRM / Slack / WhatsApp)
+    dispatchWebhookEvent('lead.qualified', {
+      leadId: record.id,
+      name: record.name,
+      email: record.email,
+      company: record.company,
+      businessType: record.businessType,
+      serviceOfInterest: record.serviceOfInterest,
+      currentChallenge: record.currentChallenge,
+      preferredContactMethod: record.preferredContactMethod,
+    }).catch((e) => console.error('Contact lead webhook trigger error:', e));
 
     const isEmailConfigured = Boolean(process.env.EMAIL_PROVIDER_API_KEY);
 

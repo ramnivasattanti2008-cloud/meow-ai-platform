@@ -19,6 +19,9 @@ import {
   UserCheck,
   FolderKanban,
   Target,
+  Radio,
+  Webhook,
+  ChevronDown,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Agent, Workflow, Campaign } from '@/lib/types';
@@ -33,6 +36,8 @@ import { ResumeCareerStudio } from '@/components/career/ResumeCareerStudio';
 import { MemoryVaultHub } from '@/components/dashboard/MemoryVaultHub';
 import { AiEmployeesHub } from '@/components/dashboard/AiEmployeesHub';
 import { UniversalAiCopilot } from '@/components/assistant/UniversalAiCopilot';
+import { WebhookIntegrationHub } from '@/components/dashboard/WebhookIntegrationHub';
+import { TelephonyHub } from '@/components/dashboard/TelephonyHub';
 
 export default function WorkspaceDashboardPage() {
   const [agents, setAgents] = useState<Agent[]>([]);
@@ -48,7 +53,7 @@ export default function WorkspaceDashboardPage() {
 
   // Active view tab in dashboard: Apple-style segmented navigation
   const [activeTab, setActiveTab] = useState<
-    'goals' | 'copilot' | 'resume' | 'employees' | 'appointments' | 'payments' | 'memory'
+    'goals' | 'copilot' | 'resume' | 'employees' | 'appointments' | 'payments' | 'memory' | 'telephony' | 'webhooks'
   >('goals');
 
   const loadData = async () => {
@@ -204,8 +209,33 @@ export default function WorkspaceDashboardPage() {
           </div>
         </div>
 
-        {/* Tab Switcher: Apple-style Segmented Control */}
-        <div className="flex items-center gap-1 p-1 rounded-full bg-zinc-900/70 border border-white/[0.08] backdrop-blur-2xl overflow-x-auto text-xs">
+        {/* Mobile View Tab Selector (Single Thumb Navigation) */}
+        <div className="sm:hidden w-full">
+          <label className="text-[10px] font-mono text-zinc-400 block mb-1.5 uppercase">
+            Workspace Hub
+          </label>
+          <div className="relative">
+            <select
+              value={activeTab}
+              onChange={(e) => setActiveTab(e.target.value as any)}
+              className="w-full appearance-none px-4 py-2.5 rounded-2xl bg-zinc-900 border border-white/10 text-white text-xs font-medium focus:outline-none focus:border-violet-500/50 pr-10 shadow-glass"
+            >
+              <option value="goals">🎯 Goal Execution Engine</option>
+              <option value="copilot">🤖 Universal AI Copilot</option>
+              <option value="resume">📄 ATS Resume & Career Studio</option>
+              <option value="employees">👥 Specialized AI Employees</option>
+              <option value="appointments">📅 Appointments & Patient CRM</option>
+              <option value="payments">💳 Invoicing, GST & UPI Links</option>
+              <option value="telephony">📞 Inbound Telephony & SIP Gateway</option>
+              <option value="webhooks">⚡ External Webhooks & Zapier/Sheets</option>
+              <option value="memory">🧠 Memory Vault & Business Rules</option>
+            </select>
+            <ChevronDown className="w-4 h-4 text-zinc-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          </div>
+        </div>
+
+        {/* Desktop Tab Switcher: Apple-style Segmented Control */}
+        <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-zinc-900/70 border border-white/[0.08] backdrop-blur-2xl overflow-x-auto text-xs">
           <button
             type="button"
             onClick={() => setActiveTab('goals')}
@@ -286,6 +316,32 @@ export default function WorkspaceDashboardPage() {
 
           <button
             type="button"
+            onClick={() => setActiveTab('telephony')}
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
+              activeTab === 'telephony'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
+            }`}
+          >
+            <Radio className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Telephony &amp; SIP</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('webhooks')}
+            className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
+              activeTab === 'webhooks'
+                ? 'bg-white/10 text-white shadow-sm border border-white/10 font-medium'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
+            }`}
+          >
+            <Webhook className="w-3.5 h-3.5 text-violet-400" />
+            <span>Webhooks &amp; CRM</span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => setActiveTab('memory')}
             className={`py-1.5 px-3.5 rounded-full flex items-center gap-2 transition-all shrink-0 ${
               activeTab === 'memory'
@@ -341,6 +397,20 @@ export default function WorkspaceDashboardPage() {
         {activeTab === 'payments' && (
           <div className="space-y-6">
             <PaymentLinkGenerator />
+          </div>
+        )}
+
+        {/* Tab: Inbound Telephony & Carrier SIP Gateway */}
+        {activeTab === 'telephony' && (
+          <div className="space-y-6">
+            <TelephonyHub />
+          </div>
+        )}
+
+        {/* Tab: External Webhooks & CRM Integration */}
+        {activeTab === 'webhooks' && (
+          <div className="space-y-6">
+            <WebhookIntegrationHub />
           </div>
         )}
 

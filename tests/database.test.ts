@@ -59,6 +59,55 @@ describe('Google Cloud Firestore (Firebase) Database Engine', () => {
     const stats = await db.getStats();
     expect(stats.provider).toContain('Firestore');
     expect(stats.status).toBe('healthy');
+    expect(stats.collections.webhooks).toBeGreaterThanOrEqual(1);
+    expect(stats.collections.telephonyCalls).toBeGreaterThanOrEqual(1);
+  });
+
+  it('manages external webhooks and delivery logs', async () => {
+    const webhooks = await db.getWebhooks();
+    expect(webhooks.length).toBeGreaterThanOrEqual(1);
+
+    const newWh = await db.addWebhook({
+      name: 'Test Webhook Endpoint',
+      url: 'https://example.com/test-webhook',
+      events: ['appointment.created'],
+      enabled: true,
+    });
+    expect(newWh.id).toBeDefined();
+
+    const logged = await db.logWebhookDelivery({
+      webhookId: newWh.id,
+      event: 'appointment.created',
+      targetUrl: newWh.url,
+      status: 'success',
+      statusCode: 200,
+      payload: { test: true },
+      latencyMs: 45,
+    });
+    expect(logged.status).toBe('success');
+
+    const logs = await db.getWebhookLogs(5);
+    expect(logs.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('records and queries inbound telephony calls', async () => {
+    const newCall = await db.addTelephonyCall({
+      callSid: 'TEST_CALL_123',
+      callerNumber: '+91 98480 12345',
+      calledNumber: '+91 80 4000 0001',
+      provider: 'exotel',
+      regionDetected: 'Telangana & AP (Telugu)',
+      languageSelected: 'te',
+      transcript: 'నమస్కారం! డాక్టర్ అపాయింట్‌మెంట్ కావాలి.',
+      intentDetected: 'appointment_booking',
+      outcome: 'appointment_booked',
+      durationSeconds: 120,
+    });
+    expect(newCall.id).toBeDefined();
+
+    const calls = await db.getTelephonyCalls(5);
+    expect(calls.length).toBeGreaterThanOrEqual(1);
+    expect(calls.some((c) => c.callSid === 'TEST_CALL_123')).toBe(true);
   });
 
   it('executes database ping with valid roundtrip latency', async () => {

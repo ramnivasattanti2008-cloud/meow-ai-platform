@@ -1,6 +1,6 @@
 import { store } from '@/lib/store';
 import { firestore } from './firebase';
-import { Agent, Workflow, Campaign, ContactRequest, ProjectRecord, UserMemoryItem, CareerResume } from '@/lib/types';
+import { Agent, Workflow, Campaign, ContactRequest, ProjectRecord, UserMemoryItem, CareerResume, WebhookConfig, WebhookDeliveryLog, TelephonyInboundCall } from '@/lib/types';
 
 export interface BookingRecord {
   id: string;
@@ -323,6 +323,101 @@ class UnifiedDatabase {
       ],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
+    },
+  ];
+
+  private localWebhooks: WebhookConfig[] = [
+    {
+      id: 'wh-1',
+      name: 'Google Sheets / Zapier Lead Sync',
+      url: 'https://hooks.zapier.com/hooks/catch/1928374/meow_leads/',
+      secret: 'whsec_meow_prod_9981',
+      events: ['appointment.created', 'lead.qualified', 'payment.settled'],
+      enabled: true,
+      createdAt: new Date(Date.now() - 172800000).toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    {
+      id: 'wh-2',
+      name: 'WhatsApp Business Cloud Bot',
+      url: 'https://graph.facebook.com/v19.0/meow_notifications/messages',
+      secret: 'whsec_meta_cloud_2201',
+      events: ['appointment.created', 'call.completed'],
+      enabled: true,
+      createdAt: new Date(Date.now() - 86400000).toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+  ];
+
+  private localWebhookLogs: WebhookDeliveryLog[] = [
+    {
+      id: 'log-1',
+      webhookId: 'wh-1',
+      event: 'appointment.created',
+      targetUrl: 'https://hooks.zapier.com/hooks/catch/1928374/meow_leads/',
+      status: 'success',
+      statusCode: 200,
+      payload: {
+        event: 'appointment.created',
+        bookingId: 'bk-1',
+        patient: 'Rajesh K.',
+        doctor: 'Orthopedic Consultation',
+        slot: 'Tomorrow 5:30 PM IST',
+        language: 'telugu',
+      },
+      responseBody: '{"status":"success","attempt":"1","zap_id":"91823"}',
+      latencyMs: 142,
+      timestamp: new Date(Date.now() - 3600000).toISOString(),
+    },
+    {
+      id: 'log-2',
+      webhookId: 'wh-2',
+      event: 'call.completed',
+      targetUrl: 'https://graph.facebook.com/v19.0/meow_notifications/messages',
+      status: 'success',
+      statusCode: 200,
+      payload: {
+        event: 'call.completed',
+        caller: '+91 98480 •••••',
+        language: 'te',
+        intent: 'book_appointment',
+        durationSec: 115,
+        summary: 'Caller requested appointment for knee joint pain. Booked for tomorrow 5:30 PM.',
+      },
+      responseBody: '{"messaging_product":"whatsapp","messages":[{"id":"wamid.HBgL..."}]}',
+      latencyMs: 198,
+      timestamp: new Date(Date.now() - 7200000).toISOString(),
+    },
+  ];
+
+  private localTelephonyCalls: TelephonyInboundCall[] = [
+    {
+      id: 'call-tel-1',
+      callSid: 'EXO_CALL_982143',
+      callerNumber: '+91 98480 12345',
+      calledNumber: '+91 80 4000 0001',
+      provider: 'exotel',
+      regionDetected: 'Telangana & AP (Telugu)',
+      languageSelected: 'te',
+      transcript: 'నమస్కారం! డాక్టర్ అపాయింట్‌మెంట్ కావాలి. (Namaskaram! Doctor appointment required.)',
+      intentDetected: 'appointment_booking',
+      outcome: 'appointment_booked',
+      durationSeconds: 142,
+      timestamp: new Date(Date.now() - 14400000).toISOString(),
+    },
+    {
+      id: 'call-tel-2',
+      callSid: 'TWI_CALL_332190',
+      callerNumber: '+91 94401 67890',
+      calledNumber: '+91 80 4000 0001',
+      provider: 'twilio',
+      regionDetected: 'Karnataka (Kannada/English)',
+      languageSelected: 'en',
+      transcript: 'Hi, I need pricing information for turnkey AI voice setup.',
+      intentDetected: 'sales_inquiry',
+      outcome: 'inquiry_answered',
+      durationSeconds: 98,
+      timestamp: new Date(Date.now() - 28800000).toISOString(),
     },
   ];
 
@@ -673,9 +768,107 @@ class UnifiedDatabase {
     return this.localResumes[idx];
   }
 
+  /* ---------------- WEBHOOKS ---------------- */
+  async getWebhooks(): Promise<WebhookConfig[]> {
+    if (firestore.isConfigured()) {
+      const docs = await firestore.getDocuments<WebhookConfig>('webhooks');
+      if (docs && docs.length > 0) return docs;
+    }
+    return this.localWebhooks;
+  }
+
+  async addWebhook(webhook: Omit<WebhookConfig, 'id' | 'createdAt' | 'updatedAt'>): Promise<WebhookConfig> {
+    const newWebhook: WebhookConfig = {
+      ...webhook,
+      id: `wh-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    this.localWebhooks.unshift(newWebhook);
+    if (firestore.isConfigured()) {
+      await firestore.setDocument('webhooks', newWebhook.id, newWebhook);
+    }
+    return newWebhook;
+  }
+
+  async updateWebhook(id: string, updates: Partial<WebhookConfig>): Promise<WebhookConfig | null> {
+    const idx = this.localWebhooks.findIndex((w) => w.id === id);
+    if (idx === -1) return null;
+    this.localWebhooks[idx] = {
+      ...this.localWebhooks[idx],
+      ...updates,
+      updatedAt: new Date().toISOString(),
+    };
+    if (firestore.isConfigured()) {
+      await firestore.setDocument('webhooks', id, this.localWebhooks[idx]);
+    }
+    return this.localWebhooks[idx];
+  }
+
+  async deleteWebhook(id: string): Promise<boolean> {
+    const idx = this.localWebhooks.findIndex((w) => w.id === id);
+    if (idx === -1) return false;
+    this.localWebhooks.splice(idx, 1);
+    return true;
+  }
+
+  /* ---------------- WEBHOOK LOGS ---------------- */
+  async getWebhookLogs(limit: number = 20): Promise<WebhookDeliveryLog[]> {
+    if (firestore.isConfigured()) {
+      const docs = await firestore.getDocuments<WebhookDeliveryLog>('webhook_logs');
+      if (docs && docs.length > 0) {
+        return docs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()).slice(0, limit);
+      }
+    }
+    return this.localWebhookLogs.slice(0, limit);
+  }
+
+  async logWebhookDelivery(log: Omit<WebhookDeliveryLog, 'id' | 'timestamp'>): Promise<WebhookDeliveryLog> {
+    const newLog: WebhookDeliveryLog = {
+      ...log,
+      id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      timestamp: new Date().toISOString(),
+    };
+    this.localWebhookLogs.unshift(newLog);
+    if (this.localWebhookLogs.length > 50) {
+      this.localWebhookLogs = this.localWebhookLogs.slice(0, 50);
+    }
+    if (firestore.isConfigured()) {
+      await firestore.setDocument('webhook_logs', newLog.id, newLog);
+    }
+    return newLog;
+  }
+
+  /* ---------------- TELEPHONY INBOUND CALLS ---------------- */
+  async getTelephonyCalls(limit: number = 20): Promise<TelephonyInboundCall[]> {
+    if (firestore.isConfigured()) {
+      const docs = await firestore.getDocuments<TelephonyInboundCall>('telephony_calls');
+      if (docs && docs.length > 0) {
+        return docs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()).slice(0, limit);
+      }
+    }
+    return this.localTelephonyCalls.slice(0, limit);
+  }
+
+  async addTelephonyCall(call: Omit<TelephonyInboundCall, 'id' | 'timestamp'>): Promise<TelephonyInboundCall> {
+    const newCall: TelephonyInboundCall = {
+      ...call,
+      id: `call-tel-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      timestamp: new Date().toISOString(),
+    };
+    this.localTelephonyCalls.unshift(newCall);
+    if (this.localTelephonyCalls.length > 50) {
+      this.localTelephonyCalls = this.localTelephonyCalls.slice(0, 50);
+    }
+    if (firestore.isConfigured()) {
+      await firestore.setDocument('telephony_calls', newCall.id, newCall);
+    }
+    return newCall;
+  }
+
   /* ---------------- HEALTH & STATS ---------------- */
   async getStats() {
-    const [agents, workflows, campaigns, leads, bookings, payments, projects, memories, resumes, ping] = await Promise.all([
+    const [agents, workflows, campaigns, leads, bookings, payments, projects, memories, resumes, webhooks, webhookLogs, telephonyCalls, ping] = await Promise.all([
       this.getAgents(),
       this.getWorkflows(),
       this.getCampaigns(),
@@ -685,6 +878,9 @@ class UnifiedDatabase {
       this.getProjects(),
       this.getMemories(),
       this.getResumes(),
+      this.getWebhooks(),
+      this.getWebhookLogs(),
+      this.getTelephonyCalls(),
       firestore.ping(),
     ]);
 
@@ -704,6 +900,9 @@ class UnifiedDatabase {
         projects: projects.length,
         memories: memories.length,
         resumes: resumes.length,
+        webhooks: webhooks.length,
+        webhookLogs: webhookLogs.length,
+        telephonyCalls: telephonyCalls.length,
       },
     };
   }
