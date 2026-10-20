@@ -12,9 +12,6 @@ import {
   ShieldAlert,
   Headphones,
   CheckCircle2,
-  Terminal,
-  Globe2,
-  Server,
   Layers,
   ArrowRight,
 } from 'lucide-react';
@@ -127,116 +124,8 @@ export default function VoiceAiPage() {
           </div>
         </section>
 
-        {/* Neural Architecture & Multilingual Research Benchmark */}
-        <section className="py-20 border-t border-white/[0.08] bg-zinc-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-            <div className="max-w-3xl mb-12">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-mono mb-3">
-                <Globe2 className="w-3.5 h-3.5" />
-                <span>NEURAL RESEARCH FOUNDATION</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                Dual-Engine Architecture for All 22 Indian Languages
-              </h2>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">
-                Rather than relying on generic US-centric cloud APIs with artificial accents, MEOW uses an open-source dual-engine architecture combining Kokoro-82M and IIT Madras AI4Bharat neural acoustic models (Indic-TTS &amp; IndicF5) for authentic pronunciation of dental stops, retroflex consonants, and natural code-switching.
-              </p>
-            </div>
-
-            {/* Benchmark Scorecards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 font-mono text-xs">
-              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-white/10 space-y-2">
-                <span className="text-[10px] text-zinc-400 uppercase block">Engine A: Kokoro-82M</span>
-                <div className="text-white font-bold text-sm">English (Indian Accent)</div>
-                <div className="text-emerald-400 font-extrabold text-lg">142ms Latency</div>
-                <div className="text-zinc-500 text-[11px]">RTF: 0.041 • MOS: 4.62 / 5.0</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-white/10 space-y-2">
-                <span className="text-[10px] text-zinc-400 uppercase block">Engine B: AI4Bharat VITS</span>
-                <div className="text-white font-bold text-sm">తెలుగు (Telugu - te-IN)</div>
-                <div className="text-emerald-400 font-extrabold text-lg">178ms Latency</div>
-                <div className="text-zinc-500 text-[11px]">RTF: 0.042 • MOS: 4.45 / 5.0</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-white/10 space-y-2">
-                <span className="text-[10px] text-zinc-400 uppercase block">Engine B: AI4Bharat VITS</span>
-                <div className="text-white font-bold text-sm">हिन्दी (Hindi - hi-IN)</div>
-                <div className="text-emerald-400 font-extrabold text-lg">165ms Latency</div>
-                <div className="text-zinc-500 text-[11px]">RTF: 0.037 • MOS: 4.48 / 5.0</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-violet-500/30 space-y-2">
-                <span className="text-[10px] text-violet-300 uppercase block">Studio: IndicF5 Flow</span>
-                <div className="text-white font-bold text-sm">Cross-Lingual Teluglish</div>
-                <div className="text-violet-400 font-extrabold text-lg">380ms Latency</div>
-                <div className="text-zinc-500 text-[11px]">1:1 Sara Voice Clone • MOS: 4.55</div>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-zinc-900/30 border border-white/[0.06] flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
-              <span className="text-zinc-400">
-                Covers all 22 Eighth Schedule Indian languages: Assamese, Bengali, Bodo, Dogri, Gujarati, Hindi, Kannada, Kashmiri, Konkani, Maithili, Malayalam, Manipuri, Marathi, Nepali, Odia, Punjabi, Sanskrit, Santali, Sindhi, Tamil, Telugu, and Urdu.
-              </span>
-              <Link
-                href="/app/agents"
-                className="px-3 py-1.5 rounded-xl bg-violet-600/20 hover:bg-violet-600/30 text-violet-300 border border-violet-500/30 transition-colors"
-              >
-                Launch Vernacular Audio Lab →
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Production Telephony Architecture Guide */}
-        <section className="py-20 border-t border-white/[0.08] bg-zinc-950">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 p-8 sm:p-10 space-y-6 text-left">
-              <div className="flex items-center gap-3 pb-4 border-b border-white/[0.08]">
-                <div className="w-10 h-10 rounded-xl bg-zinc-800 border border-white/10 flex items-center justify-center text-violet-400">
-                  <Server className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white">Production Telephony Architecture</h3>
-                  <p className="text-xs text-zinc-400">How our engine connects to real PSTN / SIP phone networks</p>
-                </div>
-              </div>
-
-              <p className="text-sm text-zinc-300 leading-relaxed">
-                The sandbox above runs directly inside your web browser. In commercial production deployments, MEOW connects via secure server-side SIP trunks to established telecom aggregators:
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                <div className="p-4 rounded-xl bg-zinc-950 border border-white/[0.06] space-y-1">
-                  <div className="text-white font-semibold flex items-center gap-1.5">
-                    <Globe2 className="w-3.5 h-3.5 text-violet-400" />
-                    Indian Operators (Exotel / Airtel)
-                  </div>
-                  <p className="text-zinc-400 font-sans text-xs">
-                    Local 080 / 040 virtual numbers compliant with Department of Telecommunications (DoT) regulations.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-zinc-950 border border-white/[0.06] space-y-1">
-                  <div className="text-white font-semibold flex items-center gap-1.5">
-                    <PhoneCall className="w-3.5 h-3.5 text-violet-400" />
-                    Global Gateways (Twilio / LiveKit)
-                  </div>
-                  <p className="text-zinc-400 font-sans text-xs">
-                    Ultra-low-latency WebRTC and SIP routing for international inquiries.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-500/30 text-xs text-amber-200 space-y-1">
-                <strong>Responsible Telephony Commitment:</strong> We never deploy automated predictive dialers, unsolicited cold callers, or deceptive bots. MEOW Voice is strictly configured for inbound customer inquiries and explicit double-opt-in follow-ups.
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
-        <section className="pt-16 text-center max-w-3xl mx-auto px-4">
+        <section className="pt-20 pb-12 text-center max-w-3xl mx-auto px-4 border-t border-white/[0.08]">
           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Deploy a dedicated voice agent for your business
           </h3>

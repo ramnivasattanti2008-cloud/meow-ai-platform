@@ -13,22 +13,11 @@ import {
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
-  Lock,
-  Headphones,
-  Calendar,
-  Layers,
   Sparkles,
   HelpCircle,
   Building2,
   GraduationCap,
   Briefcase,
-  Terminal,
-  Bot,
-  Brain,
-  FileText,
-  CreditCard,
-  Target,
-  ChevronRight,
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -260,16 +249,6 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Sample User Prompt */}
-              <div className="p-4 rounded-2xl bg-zinc-950/80 border border-white/[0.06] space-y-1 font-mono">
-                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">
-                  Sample Goal Instruction:
-                </div>
-                <div className="text-xs text-violet-300">
-                  {currentSegmentData.samplePrompt}
-                </div>
-              </div>
-
               {/* Feature Checklist */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {currentSegmentData.bulletPoints.map((pt, idx) => (
@@ -415,71 +394,6 @@ export default function HomePage() {
                   <span>Explore MEOW Growth</span><ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* PRAGMATIC DELIVERY PROCESS */}
-        <section className="py-24 border-t border-white/[0.08] bg-zinc-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
-                PRAGMATIC DELIVERY
-              </h2>
-              <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                How We Build and Ship Systems
-              </h3>
-              <p className="text-zinc-400 text-sm mt-3">
-                No endless slide decks or multi-year contracts. We deliver verifiable automation in tight sprints.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-              <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/30 space-y-3">
-                <div className="font-mono text-2xl font-bold text-violet-400/80">01</div>
-                <h4 className="text-base font-semibold text-white">Discover &amp; Map</h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  We audit your current inquiry flow, identify where manual repetitive friction occurs, and isolate high-ROI automation targets.
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/30 space-y-3">
-                <div className="font-mono text-2xl font-bold text-violet-400/80">02</div>
-                <h4 className="text-base font-semibold text-white">Architect &amp; Guardrail</h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  We configure prompt instructions, connect your CRM/calendar tools, and set deterministic human-in-the-loop escalation gates.
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/30 space-y-3">
-                <div className="font-mono text-2xl font-bold text-violet-400/80">03</div>
-                <h4 className="text-base font-semibold text-white">Deploy &amp; Test</h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  The system is deployed into staging. We test vernacular speech latency, verify booking locks, and run edge-case scenarios.
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/30 space-y-3">
-                <div className="font-mono text-2xl font-bold text-violet-400/80">04</div>
-                <h4 className="text-base font-semibold text-white">Supervise &amp; Optimize</h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Your team receives unified logs, supervisor alerts, and ongoing tuning to ensure accuracy improves as inquiry volume grows.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECURITY & HUMAN OVERSIGHT */}
-        <section className="py-20 border-t border-white/[0.08] bg-zinc-900/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-zinc-800 border border-white/10 mx-auto flex items-center justify-center text-violet-400">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Engineered with Guardrails &amp; Human Supervision
-              </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Autonomous AI is only as useful as its safety boundaries. MEOW enforces strict protocol checks: voice agents disclose their automated identity on turn one, emergency medical keywords transfer to human duty nurses, and financial commitments require supervisor confirmation.
-              </p>
             </div>
           </div>
         </section>

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
-import { WorkflowBuilder } from '@/components/platform/WorkflowBuilder';
-import { AgentSwarmStudio } from '@/components/platform/AgentSwarmStudio';
+import { PlatformViewSwitcher } from '@/components/platform/PlatformViewSwitcher';
 import {
   Cpu,
   Layers,
@@ -78,26 +77,9 @@ export default function PlatformPage() {
           </p>
         </div>
 
-        {/* Autonomous Multi-Agent Swarm (Crew Mode) Canvas */}
-        <section id="agent-swarm-studio" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-28">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs text-violet-300 font-mono mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-              <span>PARALLEL MULTI-AGENT COLLABORATION</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-              The Autonomous Agent Swarm
-            </h2>
-            <p className="text-zinc-400 text-sm">
-              Watch Sara, Alex, Maya, and Rishi decompose, write, code, and execute your goals with sub-second handoffs.
-            </p>
-          </div>
-          <AgentSwarmStudio />
-        </section>
-
-        {/* Interactive Workflow Builder Canvas */}
-        <section id="workflow-canvas-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28">
-          <WorkflowBuilder />
+        {/* Interactive Platform Engine & Fleet Switcher */}
+        <section id="platform-engine-canvas" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28">
+          <PlatformViewSwitcher />
         </section>
 
         {/* System Architecture Grid */}
