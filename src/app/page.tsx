@@ -178,6 +178,22 @@ export default function HomePage() {
               </Link>
             </div>
 
+            {/* Institutional Syndicate Trust Pill */}
+            <div className="flex justify-center mb-8">
+              <Link
+                href="/verify"
+                className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 hover:border-emerald-500/40 text-xs text-zinc-300 transition-all shadow-glass group active:scale-95"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span>
+                  Backed by <strong className="text-white group-hover:text-emerald-300">Apex Frontier Syndicate &amp; Horizon DeepTech Lab</strong>
+                </span>
+                <span className="text-zinc-600 hidden sm:inline">•</span>
+                <span className="font-mono text-emerald-400 font-semibold">$25K Pre-Seed SAFE</span>
+                <ArrowRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-emerald-300 transition-transform group-hover:translate-x-0.5 shrink-0" />
+              </Link>
+            </div>
+
             {/* Interactive Hero Visual */}
             <div className="max-w-5xl mx-auto pt-2">
               <HeroVisual onCallSara={() => setDialerOpen(true)} />

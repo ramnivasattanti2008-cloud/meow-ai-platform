@@ -119,6 +119,12 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/verify" className="hover:text-emerald-300 text-emerald-400 font-mono text-xs flex items-center gap-1 transition-colors">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Investor Verification</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/pricing" className="hover:text-white transition-colors">
                   Transparent Pricing
                 </Link>
@@ -155,7 +161,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="mt-14 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <p>© {new Date().getFullYear()} MEOW AI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} MeowBoxAI Inc. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-zinc-400">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />

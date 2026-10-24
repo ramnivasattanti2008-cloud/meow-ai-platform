@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     'workflow automation Bengaluru',
     'MEOW AI',
   ],
-  authors: [{ name: 'MEOW Engineering Group', url: 'https://meowboxai.tech' }],
-  creator: 'MEOW Engineering Group',
+  authors: [{ name: 'MeowBoxAI Inc.', url: 'https://meowboxai.tech' }],
+  creator: 'MeowBoxAI Inc.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://meowboxai.tech'),
   openGraph: {
     type: 'website',

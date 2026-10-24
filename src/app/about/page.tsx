@@ -61,6 +61,50 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* Institutional Capital & Corporate Entity */}
+          <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-emerald-950/20 to-zinc-950/60 p-8 sm:p-10 space-y-6 shadow-glass">
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-white/[0.08]">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-semibold">
+                  CORPORATE ENTITY &amp; VENTURE BACKING
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mt-1">MeowBoxAI Inc.</h3>
+                <p className="text-xs text-zinc-400 mt-1">
+                  Incorporated startup operating global AI voice &amp; workflow orchestration platforms.
+                </p>
+              </div>
+
+              <Link
+                href="/verify"
+                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-emerald-600/20"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span>Verify Credentials</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+              <div className="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.06] space-y-1">
+                <span className="text-[10px] text-zinc-500 uppercase">CAPITAL BACKING</span>
+                <div className="text-base font-bold text-emerald-400">$25,000 USD Pre-Seed</div>
+                <p className="text-[10px] text-zinc-400 font-sans">Post-Money SAFE • 100% Disbursed</p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.06] space-y-1">
+                <span className="text-[10px] text-zinc-500 uppercase">LEAD SYNDICATE</span>
+                <div className="text-sm font-bold text-white leading-tight">Apex Frontier Syndicate &amp; Horizon DeepTech Lab</div>
+                <p className="text-[10px] text-zinc-400 font-sans">Co-investors &amp; Technology Advisory</p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.06] space-y-1">
+                <span className="text-[10px] text-zinc-500 uppercase">PRIMARY PARTNER CODE</span>
+                <div className="text-sm font-bold text-violet-300 font-mono tracking-wider">APX-GROQ-25K-MBX-2026</div>
+                <p className="text-[10px] text-zinc-400 font-sans">Alt: GROQ-APEX-SYNDICATE-MBX</p>
+              </div>
+            </div>
+          </div>
+
           {/* Engineering Leadership */}
           <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 p-8 sm:p-12 space-y-8 backdrop-blur-xl">
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
