@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
@@ -25,27 +25,32 @@ import {
 import Link from 'next/link';
 import { STARTUP_VERIFICATION, verifyPartnerCode } from '@/lib/verification';
 
-function VerifyPortalContent() {
+function SearchParamsSync({ onCodeChange }: { onCodeChange: (code: string) => void }) {
   const searchParams = useSearchParams();
-  const initialCode = searchParams.get('code') || STARTUP_VERIFICATION.primaryPartnerCode;
+  useEffect(() => {
+    const code = searchParams.get('code');
+    if (code) {
+      onCodeChange(code);
+    }
+  }, [searchParams, onCodeChange]);
+  return null;
+}
 
-  const [inputCode, setInputCode] = useState(initialCode);
-  const [activeCode, setActiveCode] = useState(initialCode);
-  const [verificationResult, setVerificationResult] = useState(() => verifyPartnerCode(initialCode));
+function VerifyPortalContent() {
+  const [inputCode, setInputCode] = useState(STARTUP_VERIFICATION.primaryPartnerCode);
+  const [activeCode, setActiveCode] = useState(STARTUP_VERIFICATION.primaryPartnerCode);
+  const [verificationResult, setVerificationResult] = useState(() => verifyPartnerCode(STARTUP_VERIFICATION.primaryPartnerCode));
 
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedPrimaryCode, setCopiedPrimaryCode] = useState(false);
   const [copiedAltCode, setCopiedAltCode] = useState(false);
   const [activeTab, setActiveTab] = useState<'certificate' | 'json' | 'instructions'>('certificate');
 
-  useEffect(() => {
-    const codeParam = searchParams.get('code');
-    if (codeParam) {
-      setInputCode(codeParam);
-      setActiveCode(codeParam);
-      setVerificationResult(verifyPartnerCode(codeParam));
-    }
-  }, [searchParams]);
+  const handleCodeFromUrl = useCallback((code: string) => {
+    setInputCode(code);
+    setActiveCode(code);
+    setVerificationResult(verifyPartnerCode(code));
+  }, []);
 
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,6 +69,9 @@ function VerifyPortalContent() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 text-left">
+      <Suspense fallback={null}>
+        <SearchParamsSync onCodeChange={handleCodeFromUrl} />
+      </Suspense>
       {/* Top Breadcrumb & Status */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-300">
@@ -501,9 +509,7 @@ export default function VerifyPage() {
     <div className="flex flex-col min-h-screen bg-black text-white selection:bg-white/20">
       <Navbar />
       <main className="flex-1">
-        <Suspense fallback={<div className="pt-40 text-center text-xs font-mono text-zinc-500">Loading verification registry...</div>}>
-          <VerifyPortalContent />
-        </Suspense>
+        <VerifyPortalContent />
       </main>
       <Footer />
     </div>
