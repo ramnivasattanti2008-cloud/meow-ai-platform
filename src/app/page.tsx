@@ -126,55 +126,51 @@ export default function HomePage() {
       <Navbar />
 
       <main className="flex-1">
-        {/* HERO SECTION: Apple Clean Minimalist */}
+        {/* HERO SECTION: Minimalist White & Black High Contrast */}
         <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
-          {/* Subtle Ambient Illumination */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-tr from-violet-600/15 via-indigo-600/10 to-transparent blur-3xl rounded-full pointer-events-none -z-10" />
-
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Mission Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs text-zinc-300 font-mono mb-8 backdrop-blur-xl">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>MEOW: The AI Command Center</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-white/10 text-xs text-zinc-300 font-mono mb-8 backdrop-blur-xl">
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              <span>MeowBoxAI • Autonomous Execution &amp; Voice Telephony</span>
             </div>
 
-            {/* Apple Minimalist Headline */}
+            {/* High-Contrast Bold Headline */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.08] mb-6">
-              One AI.{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 via-zinc-400 to-zinc-600">
-                Every part of life and work.
+              Autonomous execution.<br />
+              <span className="text-zinc-400">
+                Engineered for real-world operations.
               </span>
             </h1>
 
             {/* Supporting Copy */}
             <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10">
-              MEOW combines an everyday conversational assistant, specialized AI employees, persistent personal memory, and voice phone agents into one unified platform that turns instructions into verified outcomes.
+              MeowBoxAI combines sub-180ms vernacular voice telephony, multi-step deterministic pipelines, and persistent memory into a high-reliability operating engine.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-12">
               <Link
                 href="/app"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-zinc-950 font-bold text-sm hover:bg-zinc-200 active:scale-[0.98] transition-all shadow-subtle flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-zinc-200 active:scale-[0.98] transition-all shadow-subtle flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4 text-violet-600" />
-                <span>Launch Command Center</span>
+                <span>Launch Console</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <button
                 type="button"
                 onClick={() => setDialerOpen(true)}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/90 text-zinc-300 hover:text-white border border-white/10 hover:border-violet-500/40 active:scale-[0.98] transition-all text-sm font-medium backdrop-blur-xl flex items-center justify-center gap-2 font-mono group shadow-lg"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900 text-white hover:bg-zinc-800 border border-white/10 hover:border-white/20 active:scale-[0.98] transition-all text-sm font-medium flex items-center justify-center gap-2 font-mono group"
               >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <Mic className="w-4 h-4 text-violet-400 group-hover:scale-110 transition-transform" />
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                <Mic className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
                 <span>Call Sara (8 Languages)</span>
               </button>
               <Link
                 href="/pricing"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-zinc-900/60 text-zinc-400 hover:text-zinc-200 border border-white/[0.06] active:scale-[0.98] transition-all text-sm font-medium flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-black text-zinc-400 hover:text-white border border-white/10 hover:border-white/20 active:scale-[0.98] transition-all text-sm font-medium flex items-center justify-center gap-2"
               >
-                <span>View Plans (From ₹0)</span>
+                <span>Pricing Plans (From ₹0)</span>
               </Link>
             </div>
 
@@ -182,15 +178,15 @@ export default function HomePage() {
             <div className="flex justify-center mb-8">
               <Link
                 href="/verify"
-                className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 hover:border-emerald-500/40 text-xs text-zinc-300 transition-all shadow-glass group active:scale-95"
+                className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-zinc-950 hover:bg-zinc-900 border border-white/10 hover:border-white/25 text-xs text-zinc-300 transition-all shadow-subtle group active:scale-95"
               >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse shrink-0" />
                 <span>
-                  Backed by <strong className="text-white group-hover:text-emerald-300">Apex Frontier Syndicate &amp; Horizon DeepTech Lab</strong>
+                  Backed by <strong className="text-white group-hover:text-zinc-200">Apex Frontier Syndicate &amp; Horizon DeepTech Lab</strong>
                 </span>
-                <span className="text-zinc-600 hidden sm:inline">•</span>
-                <span className="font-mono text-emerald-400 font-semibold">$25K Pre-Seed SAFE</span>
-                <ArrowRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-emerald-300 transition-transform group-hover:translate-x-0.5 shrink-0" />
+                <span className="text-zinc-700 hidden sm:inline">•</span>
+                <span className="font-mono text-zinc-300 font-semibold">$25K Pre-Seed SAFE</span>
+                <ArrowRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition-transform group-hover:translate-x-0.5 shrink-0" />
               </Link>
             </div>
 
@@ -202,27 +198,27 @@ export default function HomePage() {
         </section>
 
         {/* CUSTOMER SEGMENTS INTERACTIVE SHOWCASE */}
-        <section className="py-24 border-t border-white/[0.08] bg-zinc-950/70 relative">
+        <section className="py-24 border-t border-white/[0.08] bg-zinc-950 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3">
                 BUILT FOR EVERY STAGE OF WORK
               </h2>
               <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                Who MEOW Serves
+                Who MeowBoxAI Serves
               </h3>
               <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
-                One execution engine adapted for students, creators, local businesses, and modern enterprises.
+                One execution engine adapted for professionals, creators, local businesses, and modern enterprises.
               </p>
 
-              {/* Segment Toggle Bar (Apple Style) */}
-              <div className="mt-8 inline-flex items-center p-1.5 rounded-2xl bg-zinc-900/80 border border-white/[0.08] backdrop-blur-xl max-w-full overflow-x-auto">
+              {/* Segment Toggle Bar */}
+              <div className="mt-8 inline-flex items-center p-1.5 rounded-2xl bg-zinc-900 border border-white/[0.08] backdrop-blur-xl max-w-full overflow-x-auto">
                 {segments.map((s) => (
                   <button
                     key={s.id}
                     type="button"
                     onClick={() => setActiveSegment(s.id as any)}
-                    className={`py-2 px-4 rounded-xl text-xs font-semibold transition-all shrink-0 flex items-center gap-2 ${
+                    className={`py-2 px-4 rounded-xl text-xs font-medium transition-all shrink-0 flex items-center gap-2 ${
                       activeSegment === s.id
                         ? 'bg-zinc-800 text-white shadow-sm border border-white/10'
                         : 'text-zinc-400 hover:text-white'
@@ -238,7 +234,7 @@ export default function HomePage() {
             <div className="max-w-4xl mx-auto p-8 sm:p-10 rounded-3xl bg-zinc-900/40 border border-white/[0.08] backdrop-blur-2xl space-y-6 text-left">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.08] pb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-zinc-800 border border-white/10 flex items-center justify-center text-violet-400">
+                  <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center text-white">
                     <currentSegmentData.icon className="w-6 h-6" />
                   </div>
                   <div>
@@ -253,7 +249,7 @@ export default function HomePage() {
 
                 <Link
                   href={currentSegmentData.ctaHref}
-                  className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+                  className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-semibold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
                 >
                   <span>{currentSegmentData.cta}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -273,7 +269,7 @@ export default function HomePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {currentSegmentData.bulletPoints.map((pt, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-xs text-zinc-300">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
                     <span>{pt}</span>
                   </div>
                 ))}
@@ -286,20 +282,20 @@ export default function HomePage() {
         <section className="py-24 border-t border-white/[0.08] bg-zinc-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3">
                 THE FLAGSHIP EXECUTION ENGINE
               </h2>
               <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                How MEOW Turns Instructions Into Outcomes
+                How MeowBoxAI Turns Instructions Into Outcomes
               </h3>
               <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
-                Most AI merely generates text advice. MEOW breaks goals down, coordinates tools and specialized agents, and produces tangible, verified work.
+                Most AI merely generates text advice. MeowBoxAI coordinates tools, specialized models, and deterministic verification to produce tangible, verified work.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl space-y-3 text-left">
-                <div className="font-mono text-xs text-violet-400 uppercase font-bold">Step 01</div>
+                <div className="font-mono text-xs text-zinc-400 uppercase font-bold">Step 01</div>
                 <h4 className="text-base font-bold text-white">Research &amp; Validate</h4>
                 <p className="text-xs text-zinc-400 leading-relaxed">
                   Scrapes and verifies external facts, active job openings, or inbound patient inquiries with zero hallucination.
@@ -307,7 +303,7 @@ export default function HomePage() {
               </div>
 
               <div className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl space-y-3 text-left">
-                <div className="font-mono text-xs text-violet-400 uppercase font-bold">Step 02</div>
+                <div className="font-mono text-xs text-zinc-400 uppercase font-bold">Step 02</div>
                 <h4 className="text-base font-bold text-white">Prepare Deliverable</h4>
                 <p className="text-xs text-zinc-400 leading-relaxed">
                   Tailors an ATS 95+ resume draft, generates commercial statement-of-work copy, or drafts localized WhatsApp tokens.
@@ -315,15 +311,15 @@ export default function HomePage() {
               </div>
 
               <div className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl space-y-3 text-left">
-                <div className="font-mono text-xs text-violet-400 uppercase font-bold">Step 03</div>
+                <div className="font-mono text-xs text-zinc-400 uppercase font-bold">Step 03</div>
                 <h4 className="text-base font-bold text-white">Organize &amp; Track</h4>
                 <p className="text-xs text-zinc-400 leading-relaxed">
-                  Assembles application deadlines, locks calendar slots to prevent double-bookings, and creates instant UPI links.
+                  Assembles application deadlines, locks calendar slots to prevent double-bookings, and creates instant payment links.
                 </p>
               </div>
 
               <div className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 backdrop-blur-xl space-y-3 text-left">
-                <div className="font-mono text-xs text-violet-400 uppercase font-bold">Step 04</div>
+                <div className="font-mono text-xs text-zinc-400 uppercase font-bold">Step 04</div>
                 <h4 className="text-base font-bold text-white">Review and Approve</h4>
                 <p className="text-xs text-zinc-400 leading-relaxed">
                   Places human-in-the-loop review checkpoints before any consequential action, invoice dispatch, or export.
@@ -334,84 +330,84 @@ export default function HomePage() {
         </section>
 
         {/* THREE CORE PRODUCT PILLARS */}
-        <section className="py-24 border-t border-white/[0.08] bg-zinc-950/60 relative">
+        <section className="py-24 border-t border-white/[0.08] bg-zinc-950 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3">
                 INTEGRATED SERVICE SUITE
               </h2>
               <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
                 Three Connected Engines. One Resilient Foundation.
               </h3>
               <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
-                Rather than disjointed point solutions, MEOW unifies conversational voice, automated backend execution, and marketing intelligence into an integrated operating system.
+                Rather than fragmented tools, MeowBoxAI unifies conversational voice telephony, autonomous workflow execution, and marketing intelligence into an integrated operating system.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
               <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 hover:bg-zinc-900/70 p-8 flex flex-col justify-between transition-all group backdrop-blur-xl">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-zinc-800 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-violet-500/40 transition-colors">
-                    <Workflow className="w-6 h-6 text-violet-400" />
+                  <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-white/30 transition-colors">
+                    <Workflow className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2">MEOW Automate</h4>
-                  <p className="text-xs font-mono text-zinc-400 mb-4">Custom business workflow automation &amp; internal systems</p>
+                  <h4 className="text-xl font-bold text-white mb-2">Autonomous Pipelines</h4>
+                  <p className="text-xs font-mono text-zinc-400 mb-4">Deterministic workflow automation &amp; system integrations</p>
                   <p className="text-zinc-300 text-sm leading-relaxed mb-6">
-                    Bridge your fragmented software into self-operating pipelines. From document extraction to multi-step CRM updates, MEOW replaces manual spreadsheet copying with reliable event-driven systems.
+                    Bridge your fragmented software into self-operating pipelines. From document extraction to multi-step CRM updates, MeowBoxAI replaces manual tasks with reliable event-driven systems.
                   </p>
                   <ul className="space-y-2.5 mb-8 text-xs text-zinc-400">
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Document intelligence (Invoices, records, PDFs)</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Custom internal copilots &amp; RAG assistants</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>CRM, Google Sheets, &amp; WhatsApp synchronizations</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Human-in-the-loop approval thresholds</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Document intelligence (Invoices, records, PDFs)</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Custom internal copilots &amp; RAG assistants</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>CRM, Google Sheets, &amp; WhatsApp synchronizations</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Human-in-the-loop approval thresholds</span></li>
                   </ul>
                 </div>
-                <Link href="/platform" className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-violet-300 transition-colors pt-4 border-t border-white/[0.06]">
-                  <span>Explore MEOW Automate</span><ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <Link href="/platform" className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-zinc-300 transition-colors pt-4 border-t border-white/[0.06]">
+                  <span>Explore Pipelines</span><ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
 
               <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 hover:bg-zinc-900/70 p-8 flex flex-col justify-between transition-all group backdrop-blur-xl">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-zinc-800 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-violet-500/40 transition-colors">
-                    <Mic className="w-6 h-6 text-violet-400" />
+                  <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-white/30 transition-colors">
+                    <Mic className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2">MEOW Voice (Sara Concierge)</h4>
+                  <h4 className="text-xl font-bold text-white mb-2">Sara Voice Telephony</h4>
                   <p className="text-xs font-mono text-zinc-400 mb-4">Expressive conversational voice agent in 8 Indian languages</p>
                   <p className="text-zinc-300 text-sm leading-relaxed mb-6">
-                    Voiced by Sara — a natural, responsive voice receptionist speaking Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English. Handles inquiries, checks doctor schedules, and resolves questions in real-time.
+                    Voiced by Sara — a natural, responsive voice receptionist speaking Telugu, Hindi, Tamil, Kannada, Malayalam, Marathi, Bengali, and Indian English. Handles inbound inquiries, schedules appointments, and resolves questions in real-time.
                   </p>
                   <ul className="space-y-2.5 mb-8 text-xs text-zinc-400">
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>8 Indian languages (Telugu, Hindi, Tamil, Kannada +)</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Real calendar slot reservation &amp; double-booking protection</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Emergency symptom detection &amp; immediate nurse transfer</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Live in-browser web dialer with instant speech synthesis</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>8 Indian languages with native cadence</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Real calendar slot reservation &amp; double-booking protection</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Emergency symptom detection &amp; immediate nurse transfer</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Live in-browser web dialer with instant speech synthesis</span></li>
                   </ul>
                 </div>
-                <Link href="/voice-ai" className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-violet-300 transition-colors pt-4 border-t border-white/[0.06]">
-                  <span>Explore MEOW Voice</span><ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <Link href="/voice-ai" className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-zinc-300 transition-colors pt-4 border-t border-white/[0.06]">
+                  <span>Explore Voice Engine</span><ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
 
               <div className="rounded-3xl border border-white/[0.08] bg-zinc-900/40 hover:bg-zinc-900/70 p-8 flex flex-col justify-between transition-all group backdrop-blur-xl">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-zinc-800 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-violet-500/40 transition-colors">
-                    <Zap className="w-6 h-6 text-violet-400" />
+                  <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-white/30 transition-colors">
+                    <Zap className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2">MEOW Growth</h4>
-                  <p className="text-xs font-mono text-zinc-400 mb-4">AI-assisted marketing operations &amp; campaign velocity</p>
+                  <h4 className="text-xl font-bold text-white mb-2">Growth Systems</h4>
+                  <p className="text-xs font-mono text-zinc-400 mb-4">Marketing operations &amp; campaign velocity</p>
                   <p className="text-zinc-300 text-sm leading-relaxed mb-6">
-                    Systematize your lead generation. Generate structured campaign briefs, localized WhatsApp &amp; Meta copy, and automated nurture sequences tailored specifically to your business archetype.
+                    Systematize your lead acquisition. Generate structured campaign briefs, localized WhatsApp copy, and automated nurture sequences tailored specifically to your business archetype.
                   </p>
                   <ul className="space-y-2.5 mb-8 text-xs text-zinc-400">
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Deterministic &amp; Claude-powered campaign briefs</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Channel-specific copy (WhatsApp, Meta, Email)</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Automated lead qualification checklists</span></li>
-                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" /><span>Attribution tracking without spam tactics</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Structured data-driven campaign briefs</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Channel-specific copy (WhatsApp, Meta, Email)</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Automated lead qualification checklists</span></li>
+                    <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" /><span>Full attribution tracking without spam tactics</span></li>
                   </ul>
                 </div>
-                <Link href="/growth" className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-violet-300 transition-colors pt-4 border-t border-white/[0.06]">
-                  <span>Explore MEOW Growth</span><ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <Link href="/growth" className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-zinc-300 transition-colors pt-4 border-t border-white/[0.06]">
+                  <span>Explore Growth</span><ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
@@ -419,17 +415,17 @@ export default function HomePage() {
         </section>
 
         {/* CALL RECORDING & VERNACULAR SHOWCASE */}
-        <section className="py-24 border-t border-white/[0.08] bg-zinc-950/80">
+        <section className="py-24 border-t border-white/[0.08] bg-zinc-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-14">
-              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
-                SARA CONCIERGE AUDIO
+              <h2 className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3">
+                TELEPHONY AUDIO BENCHMARKS
               </h2>
               <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                Listen to Multilingual Voice Calls
+                Multilingual Voice Verification
               </h3>
               <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
-                Natural speech synthesis across Telugu, Hindi, and Indian English with Web Audio dual-tone telephone simulation.
+                Natural speech synthesis across Telugu, Hindi, and Indian English with browser Web Audio simulation.
               </p>
             </div>
 
@@ -441,10 +437,10 @@ export default function HomePage() {
         <section className="py-24 border-t border-white/[0.08] bg-zinc-950">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-3">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3">
                 COMMON QUESTIONS
               </h2>
-              <h3 className="text-3xl font-extrabold text-white">Honest Answers</h3>
+              <h3 className="text-3xl font-extrabold text-white">Direct Answers</h3>
             </div>
 
             <div className="space-y-4">
@@ -454,7 +450,7 @@ export default function HomePage() {
                   className="p-6 rounded-3xl border border-white/[0.08] bg-zinc-900/40 text-left space-y-2 backdrop-blur-xl"
                 >
                   <h4 className="text-base font-semibold text-white flex items-center gap-2">
-                    <HelpCircle className="w-4 h-4 text-violet-400 shrink-0" />
+                    <HelpCircle className="w-4 h-4 text-zinc-400 shrink-0" />
                     <span>{faq.q}</span>
                   </h4>
                   <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed pl-6">{faq.a}</p>
@@ -468,43 +464,40 @@ export default function HomePage() {
         <section className="py-24 border-t border-white/[0.08] bg-zinc-950 text-center relative">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Ready to accomplish more with less work?
+              Ready to accomplish more with less overhead?
             </h2>
             <p className="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-              Open the AI Command Center to test the instruction-to-outcome pipeline, build your tailored resume, or test Sara Voice.
+              Open the developer console to inspect the execution pipeline, run memory queries, or test Sara Voice.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/app"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-zinc-950 font-bold text-sm hover:bg-zinc-200 transition-all shadow-subtle flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-zinc-200 transition-all shadow-subtle flex items-center justify-center gap-2"
               >
-                <span>Launch MEOW Platform</span>
+                <span>Launch Console</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/pricing"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white transition-all text-sm font-medium"
               >
-                Explore Pricing (From ₹0)
+                Explore Plans (From ₹0)
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Apple Minimalist Floating Voice Call Pill (Positioned above Text Concierge) */}
+        {/* Floating Voice Call Pill */}
         <div className="fixed bottom-20 right-6 z-40">
           <button
             onClick={() => setDialerOpen(true)}
-            className="px-4 py-2.5 rounded-full bg-zinc-950/90 hover:bg-zinc-900 text-white border border-white/15 hover:border-violet-500/50 shadow-2xl backdrop-blur-2xl transition-all flex items-center gap-2.5 group active:scale-95 text-xs font-medium"
+            className="px-4 py-2.5 rounded-full bg-zinc-950 hover:bg-zinc-900 text-white border border-white/15 hover:border-white/30 shadow-2xl backdrop-blur-2xl transition-all flex items-center gap-2.5 group active:scale-95 text-xs font-medium"
             title="Talk to Sara (Live Multilingual Voice Receptionist)"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="font-semibold text-zinc-200 group-hover:text-white">Talk to Sara</span>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-500/30">
-              Live Voice
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span className="font-semibold text-white">Talk to Sara</span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-zinc-200 border border-white/10">
+              Voice AI
             </span>
           </button>
         </div>

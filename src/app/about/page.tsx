@@ -62,10 +62,10 @@ export default function AboutPage() {
           </div>
 
           {/* Institutional Capital & Corporate Entity */}
-          <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-emerald-950/20 to-zinc-950/60 p-8 sm:p-10 space-y-6 shadow-glass">
+          <div className="rounded-3xl border border-white/10 bg-zinc-950 p-8 sm:p-10 space-y-6 shadow-subtle">
             <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-white/[0.08]">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-semibold">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 font-semibold">
                   CORPORATE ENTITY &amp; VENTURE BACKING
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mt-1">MeowBoxAI Inc.</h3>
@@ -76,7 +76,7 @@ export default function AboutPage() {
 
               <Link
                 href="/verify"
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-emerald-600/20"
+                className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-mono text-xs font-semibold flex items-center gap-2 transition-all active:scale-95 shadow-sm"
               >
                 <ShieldCheck className="w-4 h-4" />
                 <span>Verify Credentials</span>
@@ -87,7 +87,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
               <div className="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.06] space-y-1">
                 <span className="text-[10px] text-zinc-500 uppercase">CAPITAL BACKING</span>
-                <div className="text-base font-bold text-emerald-400">$25,000 USD Pre-Seed</div>
+                <div className="text-base font-bold text-white">$25,000 USD Pre-Seed</div>
                 <p className="text-[10px] text-zinc-400 font-sans">Post-Money SAFE • 100% Disbursed</p>
               </div>
 
@@ -99,7 +99,7 @@ export default function AboutPage() {
 
               <div className="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.06] space-y-1">
                 <span className="text-[10px] text-zinc-500 uppercase">PRIMARY PARTNER CODE</span>
-                <div className="text-sm font-bold text-violet-300 font-mono tracking-wider">APX-GROQ-25K-MBX-2026</div>
+                <div className="text-sm font-bold text-white font-mono tracking-wider">APX-GROQ-25K-MBX-2026</div>
                 <p className="text-[10px] text-zinc-400 font-sans">Alt: GROQ-APEX-SYNDICATE-MBX</p>
               </div>
             </div>
@@ -115,7 +115,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mt-1">MEOW Engineering Group</h3>
                 <div className="flex items-center gap-3 text-xs font-mono text-zinc-400 mt-2">
                   <span className="flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-violet-400" />
+                    <MapPin className="w-3.5 h-3.5 text-zinc-400" />
                     Bengaluru, Karnataka, India
                   </span>
                   <span>•</span>

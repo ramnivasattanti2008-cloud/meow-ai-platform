@@ -104,7 +104,7 @@ function VerifyPortalContent() {
               value={inputCode}
               onChange={(e) => setInputCode(e.target.value)}
               placeholder="Enter Partner Code (e.g. APX-GROQ-25K-MBX-2026)"
-              className="w-full pl-11 pr-4 py-3 rounded-2xl bg-zinc-950 border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-violet-500/50 uppercase tracking-wider"
+              className="w-full pl-11 pr-4 py-3 rounded-2xl bg-zinc-950 border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-white/40 uppercase tracking-wider"
             />
           </div>
           <button
@@ -206,7 +206,7 @@ function VerifyPortalContent() {
               : 'text-zinc-400 hover:text-white'
           }`}
         >
-          <FileText className="w-4 h-4 text-violet-400" />
+          <FileText className="w-4 h-4 text-zinc-400" />
           <span>Ecosystem Partner Guide (Groq / AWS)</span>
         </button>
 
@@ -250,7 +250,7 @@ function VerifyPortalContent() {
                       href={record.primaryWebsiteUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-violet-400 hover:underline font-mono"
+                      className="text-zinc-300 hover:text-white underline font-mono"
                     >
                       {record.primaryWebsiteUrl}
                     </a>
@@ -427,7 +427,7 @@ function VerifyPortalContent() {
 
             <div className="p-3 rounded-xl bg-zinc-900 border border-white/[0.06] space-y-1">
               <span className="text-zinc-400 block text-[10px]">PRIMARY WEBSITE URL:</span>
-              <span className="text-violet-300 font-bold select-all">{record.primaryWebsiteUrl}</span>
+              <span className="text-white font-bold select-all">{record.primaryWebsiteUrl}</span>
             </div>
 
             <div className="p-3 rounded-xl bg-zinc-900 border border-white/[0.06] space-y-1">

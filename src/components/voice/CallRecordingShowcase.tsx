@@ -281,9 +281,9 @@ export const CallRecordingShowcase: React.FC = () => {
       {/* Header with Case Selector */}
       <div className="p-4 sm:p-6 border-b border-white/[0.08] bg-zinc-900/40 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-[11px] font-mono text-violet-300 mb-1.5">
-            <Sparkles className="w-3 h-3" />
-            <span>AUTHENTIC AUDIO RECORDING SIMULATOR</span>
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10 text-[11px] font-mono text-zinc-300 mb-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            <span>TELEPHONY AUDIO RECORDING SIMULATOR</span>
           </div>
           <h3 className="text-xl font-bold text-white">Live Call Transcripts &amp; Audio Playback</h3>
           <p className="text-xs text-zinc-400 mt-0.5">
@@ -314,10 +314,10 @@ export const CallRecordingShowcase: React.FC = () => {
         {/* Left Column: Player & Active Turn */}
         <div className="lg:col-span-5 space-y-6">
           {/* Audio Visualizer & Scrub Bar */}
-          <div className="p-6 rounded-2xl border border-white/[0.08] bg-gradient-to-b from-zinc-900/70 to-zinc-950 space-y-5">
+          <div className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-950 space-y-5">
             <div className="flex items-center justify-between text-xs font-mono">
               <span className="text-zinc-400 uppercase tracking-wider">{selectedSample.business}</span>
-              <span className="text-violet-400">{selectedSample.languageLabel}</span>
+              <span className="text-zinc-200">{selectedSample.languageLabel}</span>
             </div>
 
             {/* Simulated Animated Waveform Bars (Clickable Seek) */}
@@ -329,7 +329,7 @@ export const CallRecordingShowcase: React.FC = () => {
                 setCurrentTime(ratio * selectedSample.durationSeconds);
               }}
               title="Click waveform to jump to second"
-              className="h-16 flex items-center justify-between gap-1 px-2 bg-zinc-950/80 rounded-xl border border-white/[0.06] overflow-hidden cursor-pointer hover:border-violet-500/30 transition-all"
+              className="h-16 flex items-center justify-between gap-1 px-2 bg-zinc-900/80 rounded-xl border border-white/[0.06] overflow-hidden cursor-pointer hover:border-white/20 transition-all"
             >
               {Array.from({ length: 32 }).map((_, i) => {
                 const isActive = (i / 32) * selectedSample.durationSeconds <= currentTime;
@@ -343,9 +343,9 @@ export const CallRecordingShowcase: React.FC = () => {
                     style={{ height: `${Math.max(6, randomHeight)}px` }}
                     className={`w-1 rounded-full transition-all duration-150 ${
                       isActive
-                        ? 'bg-violet-400'
+                        ? 'bg-white'
                         : isPlaying
-                        ? 'bg-zinc-700'
+                        ? 'bg-zinc-600'
                         : 'bg-zinc-800'
                     }`}
                   />
@@ -366,7 +366,7 @@ export const CallRecordingShowcase: React.FC = () => {
                 title="Click to seek"
               >
                 <div
-                  className="bg-violet-500 h-full rounded-full transition-all"
+                  className="bg-white h-full rounded-full transition-all"
                   style={{ width: `${(currentTime / selectedSample.durationSeconds) * 100}%` }}
                 />
               </div>
@@ -416,13 +416,13 @@ export const CallRecordingShowcase: React.FC = () => {
           {/* Operational Metrics Card */}
           <div className="p-4 rounded-2xl bg-zinc-900/30 border border-white/[0.06] space-y-3 font-mono text-xs">
             <div className="text-zinc-400 font-semibold flex items-center gap-2">
-              <Clock className="w-3.5 h-3.5 text-violet-400" />
+              <Clock className="w-3.5 h-3.5 text-zinc-400" />
               <span>REAL-TIME TELEPHONY TELEMETRY</span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-[11px]">
               <div>
                 <span className="text-zinc-500 block">First-Token Latency</span>
-                <span className="text-emerald-400 font-bold">{selectedSample.latencyMs} ms (Claude Haiku)</span>
+                <span className="text-white font-bold">{selectedSample.latencyMs} ms (Claude Haiku)</span>
               </div>
               <div>
                 <span className="text-zinc-500 block">Speech Disclosure</span>
@@ -431,7 +431,7 @@ export const CallRecordingShowcase: React.FC = () => {
             </div>
             <div className="pt-2 border-t border-white/[0.06]">
               <span className="text-zinc-500 text-[10px] block">TOOL EXECUTION CALL:</span>
-              <code className="text-violet-300 text-[11px] break-all">{selectedSample.toolExecuted}</code>
+              <code className="text-zinc-300 text-[11px] break-all">{selectedSample.toolExecuted}</code>
             </div>
           </div>
         </div>
@@ -440,14 +440,14 @@ export const CallRecordingShowcase: React.FC = () => {
         <div className="lg:col-span-7 space-y-4 flex flex-col justify-between">
           <div className="flex items-center justify-between pb-2 border-b border-white/[0.06] flex-wrap gap-2">
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
-              <PhoneCall className="w-3.5 h-3.5 text-violet-400" />
+              <PhoneCall className="w-3.5 h-3.5 text-zinc-400" />
               <span>SYNCHRONIZED CONVERSATION TRANSCRIPT</span>
             </div>
             <div className="flex items-center gap-2">
               {selectedSample.languageCode !== 'en' && (
                 <button
                   onClick={() => setShowTranslations(!showTranslations)}
-                  className="text-[11px] font-mono text-zinc-400 hover:text-violet-300 flex items-center gap-1 transition-colors px-2 py-0.5 rounded-lg bg-zinc-900 border border-white/10"
+                  className="text-[11px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors px-2 py-0.5 rounded-lg bg-zinc-900 border border-white/10"
                 >
                   <Languages className="w-3 h-3" />
                   <span>{showTranslations ? 'Hide Subtitles' : 'Subtitles'}</span>
@@ -459,13 +459,13 @@ export const CallRecordingShowcase: React.FC = () => {
                 className="text-[11px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors px-2 py-0.5 rounded-lg bg-zinc-900 border border-white/10"
                 title="Copy entire transcript"
               >
-                {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                {copied ? <Check className="w-3 h-3 text-white" /> : <Copy className="w-3 h-3" />}
                 <span>{copied ? 'Copied' : 'Copy'}</span>
               </button>
 
               <button
                 onClick={handleShareWhatsApp}
-                className="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors px-2 py-0.5 rounded-lg bg-emerald-950/40 border border-emerald-500/20"
+                className="text-[11px] font-mono text-zinc-300 hover:text-white flex items-center gap-1 transition-colors px-2 py-0.5 rounded-lg bg-zinc-900 border border-white/10"
                 title="Share via WhatsApp"
               >
                 <MessageSquare className="w-3 h-3" />
@@ -489,17 +489,17 @@ export const CallRecordingShowcase: React.FC = () => {
                   }}
                   className={`p-4 rounded-2xl transition-all duration-200 border cursor-pointer ${
                     isCurrentTurn
-                      ? 'bg-violet-950/30 border-violet-500/40 shadow-sm scale-[1.01]'
+                      ? 'bg-zinc-900 border-white/30 shadow-sm scale-[1.01]'
                       : isPast
-                      ? 'bg-zinc-900/40 border-white/[0.06] opacity-80 hover:opacity-100 hover:border-violet-500/30'
-                      : 'bg-zinc-900/20 border-white/[0.04] opacity-50 hover:opacity-80 hover:border-white/10'
+                      ? 'bg-zinc-950/60 border-white/[0.06] opacity-80 hover:opacity-100 hover:border-white/20'
+                      : 'bg-zinc-950/30 border-white/[0.04] opacity-50 hover:opacity-80 hover:border-white/10'
                   }`}
                   title="Click to play from this turn"
                 >
                   <div className="flex items-center justify-between mb-1.5 text-[11px] font-mono">
-                    <span className={`font-semibold flex items-center gap-1.5 ${isAgent ? 'text-violet-300' : 'text-zinc-300'}`}>
-                      <span className={`w-2 h-2 rounded-full ${isAgent ? 'bg-violet-400' : 'bg-emerald-400'}`} />
-                      {isAgent ? 'MEOW Voice Agent' : 'Inbound Caller'}
+                    <span className={`font-semibold flex items-center gap-1.5 ${isAgent ? 'text-white' : 'text-zinc-400'}`}>
+                      <span className={`w-2 h-2 rounded-full ${isAgent ? 'bg-white' : 'bg-zinc-500'}`} />
+                      {isAgent ? 'Sara Voice Agent' : 'Inbound Caller'}
                     </span>
                     <span className="text-zinc-500 text-[10px]">
                       0:{turn.startSec.toString().padStart(2, '0')} – 0:{turn.endSec.toString().padStart(2, '0')}
@@ -522,7 +522,7 @@ export const CallRecordingShowcase: React.FC = () => {
 
           <div className="p-3 rounded-xl bg-zinc-950 border border-white/[0.06] flex items-center justify-between text-xs text-zinc-400">
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <ShieldCheck className="w-4 h-4 text-zinc-300" />
               <span>Full compliance with Indian Telephony regulations &amp; emergency escalation protocols</span>
             </span>
             <span className="font-mono text-[10px] text-zinc-500">v1.2-telugu-prod</span>

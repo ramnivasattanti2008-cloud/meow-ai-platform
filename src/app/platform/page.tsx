@@ -63,8 +63,8 @@ export default function PlatformPage() {
         {/* Header */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs text-zinc-300 font-mono mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-            <span>MEOW AUTOMATE ENGINE</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-white" />
+            <span>AUTONOMOUS PIPELINE ENGINE</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white max-w-4xl mx-auto leading-tight mb-6">
@@ -86,7 +86,7 @@ export default function PlatformPage() {
         <section className="py-20 border-t border-white/[0.08] bg-zinc-900/20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-2">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-2">
                 PLATFORM CAPABILITIES
               </h2>
               <h3 className="text-3xl font-bold text-white">How the Platform Works Together</h3>
@@ -100,7 +100,7 @@ export default function PlatformPage() {
                     key={idx}
                     className="p-6 rounded-2xl border border-white/[0.08] bg-zinc-900/40 hover:bg-zinc-900/70 transition-all space-y-3"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-zinc-800 border border-white/10 flex items-center justify-center text-violet-400">
+                    <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center text-white">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h4 className="text-base font-semibold text-white">{p.title}</h4>

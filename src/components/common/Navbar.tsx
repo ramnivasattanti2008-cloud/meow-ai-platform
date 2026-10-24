@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight, Sparkles, Terminal } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Terminal } from 'lucide-react';
+import { Logo } from '@/components/common/Logo';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -32,39 +33,21 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         scrolled
-          ? 'bg-black/75 backdrop-blur-2xl border-b border-white/[0.08] shadow-subtle'
+          ? 'bg-black/85 backdrop-blur-xl border-b border-white/[0.08] shadow-subtle'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-18">
           {/* Logo & Brand Mark */}
-          <Link href="/" className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded-lg">
-            <div className="w-8 h-8 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center shadow-subtle group-hover:border-white/20 transition-colors">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M4 17V8.5L8 12.5L12 7L16 12.5L20 8.5V17C20 18.1046 19.1046 19 18 19H6C4.89543 19 4 18.1046 4 17Z"
-                  fill="currentColor"
-                  className="text-white"
-                />
-                <circle cx="8.5" cy="11.5" r="1" fill="#a78bfa" />
-                <circle cx="15.5" cy="11.5" r="1" fill="#a78bfa" />
-              </svg>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-base tracking-tight text-white">
-                MEOW
-              </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/[0.08] text-zinc-400 border border-white/[0.06]">
-                AI
-              </span>
-            </div>
+          <Link href="/" className="group focus:outline-none focus-visible:ring-1 focus-visible:ring-white/40 rounded-lg">
+            <Logo />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 bg-zinc-900/50 border border-white/[0.08] rounded-full px-3 py-1 backdrop-blur-xl">
+          <nav className="hidden lg:flex items-center gap-1 bg-zinc-900/60 border border-white/[0.08] rounded-full px-3 py-1 backdrop-blur-xl">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -84,11 +67,11 @@ export const Navbar: React.FC = () => {
           <div className="hidden sm:flex items-center gap-2.5">
             <Link
               href="/app"
-              className="px-3.5 py-1.5 text-xs font-mono font-medium text-zinc-300 hover:text-white rounded-full border border-white/10 hover:border-white/20 bg-zinc-900/60 hover:bg-zinc-850 transition-all flex items-center gap-2"
+              className="px-3.5 py-1.5 text-xs font-mono font-medium text-zinc-300 hover:text-white rounded-full border border-white/10 hover:border-white/20 bg-zinc-900/80 hover:bg-zinc-800 transition-all flex items-center gap-2"
             >
-              <Terminal className="w-3.5 h-3.5 text-violet-400" />
+              <Terminal className="w-3.5 h-3.5 text-zinc-400" />
               <span>Console</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-white/80 animate-pulse" />
             </Link>
 
             <Link
@@ -106,7 +89,7 @@ export const Navbar: React.FC = () => {
               href="/app"
               className="px-2.5 py-1.5 text-xs font-mono text-zinc-300 rounded-full border border-white/10 bg-zinc-900/60 flex items-center gap-1"
             >
-              <Terminal className="w-3 h-3 text-violet-400" />
+              <Terminal className="w-3 h-3 text-zinc-400" />
               App
             </Link>
             <button
@@ -144,7 +127,7 @@ export const Navbar: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-center py-2.5 rounded-full text-xs font-medium text-white border border-white/15 bg-zinc-900 flex items-center justify-center gap-2"
               >
-                <Terminal className="w-3.5 h-3.5 text-violet-400" />
+                <Terminal className="w-3.5 h-3.5 text-zinc-400" />
                 Launch Console
               </Link>
               <Link

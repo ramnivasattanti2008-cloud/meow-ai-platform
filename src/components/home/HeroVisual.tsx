@@ -83,16 +83,16 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
         <button
           onClick={runSimulation}
           disabled={isSimulating}
-          className="hidden md:flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-medium rounded-lg bg-violet-600/20 text-violet-300 border border-violet-500/30 hover:bg-violet-600/30 transition-all disabled:opacity-50"
+          className="hidden md:flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-medium rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 hover:bg-zinc-700 hover:text-white transition-all disabled:opacity-50"
         >
           {isSimulating ? (
             <>
-              <RefreshCw className="w-3 h-3 animate-spin" />
+              <RefreshCw className="w-3 h-3 animate-spin text-white" />
               <span>Simulating Event...</span>
             </>
           ) : (
             <>
-              <Play className="w-3 h-3 fill-current" />
+              <Play className="w-3 h-3 fill-current text-white" />
               <span>Simulate Pipeline</span>
             </>
           )}
@@ -105,7 +105,7 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
           <div className="space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-violet-300">
+                <div className="w-8 h-8 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-200">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
@@ -113,41 +113,41 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
                   <p className="text-xs text-zinc-400 font-mono">Caller: Hyderabad (+91 98490 *****) • Telugu/English</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="px-2 py-0.5 rounded-full text-xs font-mono bg-zinc-900 text-zinc-300 border border-white/10 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                 Active Session
               </span>
             </div>
 
             {/* Conversation Flow */}
             <div className="space-y-3 font-sans text-xs sm:text-sm">
-              <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/[0.06] text-zinc-300">
-                <span className="text-xs font-mono text-zinc-400 block mb-1">CALLER (AUDIO TRANSCRIPTION)</span>
+              <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-white/[0.06] text-zinc-300">
+                <span className="text-[11px] font-mono text-zinc-400 block mb-1">CALLER (AUDIO TRANSCRIPTION)</span>
                 &quot;నమస్కారం అండి, రేపు సాయంత్రం డాక్టర్ గారి కన్సల్టేషన్ దొరుకుతుందా?&quot;
                 <div className="text-xs text-zinc-400 mt-1 italic">&quot;Namaskaram, is doctor consultation available tomorrow evening?&quot;</div>
               </div>
 
-              <div className="p-3 rounded-xl bg-violet-950/30 border border-violet-500/20 text-zinc-200">
-                <span className="text-xs font-mono text-violet-400 block mb-1">MEOW VOICE AI (TELUGU DIALOGUE TURN)</span>
+              <div className="p-3.5 rounded-xl bg-zinc-900 border border-white/10 text-white">
+                <span className="text-[11px] font-mono text-zinc-400 block mb-1">MEOW VOICE AI (TELUGU DIALOGUE TURN)</span>
                 &quot;నమస్కారం అండి! రేపు సాయంత్రం 5:30 PM మరియు 6:30 PM స్లాట్‌లు ఖాళీగా ఉన్నాయి. మీకు 5:30 PM అనుకూలమా?&quot;
                 <div className="text-xs text-zinc-400 mt-1 italic">&quot;Namaskaram! Tomorrow 5:30 PM and 6:30 PM slots are open. Would 5:30 PM suit you?&quot;</div>
               </div>
 
               <div className="flex items-center gap-3 p-2.5 rounded-xl bg-zinc-900/40 border border-white/[0.04]">
-                <Clock className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-mono text-zinc-300">Latency: 380ms STT → Claude Intent → 220ms Natural Telugu TTS</span>
+                <Clock className="w-4 h-4 text-zinc-400" />
+                <span className="text-xs font-mono text-zinc-300">Roundtrip Latency: 180ms STT → LLM Inference → Native Telugu TTS</span>
               </div>
 
               {onCallSara && (
                 <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-2xl bg-zinc-900/60 border border-white/[0.06]">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-xs text-zinc-300 font-medium">Want to test hands-free dialogue in real time?</span>
+                    <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                    <span className="text-xs text-zinc-300 font-medium">Test hands-free dialogue in real time:</span>
                   </div>
                   <button
                     type="button"
                     onClick={onCallSara}
-                    className="px-3.5 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+                    className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-semibold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
                   >
                     <Phone className="w-3.5 h-3.5 fill-current" />
                     <span>Talk to Sara Now</span>
@@ -162,7 +162,7 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
           <div className="space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-lime-500/20 border border-lime-400/30 flex items-center justify-center text-lime-300">
+                <div className="w-8 h-8 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-200">
                   <Database className="w-4 h-4" />
                 </div>
                 <div>
@@ -175,28 +175,28 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
 
             {/* Stepper Pipeline */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-1.5">
+              <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-1.5">
                 <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
                   <span>STEP 1: REASON</span>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-zinc-300" />
                 </div>
                 <div className="text-sm font-medium text-white">Extract Intent &amp; Time</div>
-                <p className="text-xs text-zinc-400">Validated 17:30 slot requirement via Claude function calling schema.</p>
+                <p className="text-xs text-zinc-400">Validated 17:30 slot requirement via function calling schema.</p>
               </div>
 
-              <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-1.5">
+              <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-1.5">
                 <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
                   <span>STEP 2: LOCK</span>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-zinc-300" />
                 </div>
                 <div className="text-sm font-medium text-white">Calendar Synchronization</div>
                 <p className="text-xs text-zinc-400">Locked appointment slot #9842 on Google Calendar with zero double-booking.</p>
               </div>
 
-              <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-1.5">
+              <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-1.5">
                 <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
                   <span>STEP 3: GATE</span>
-                  <UserCheck className="w-3.5 h-3.5 text-violet-400" />
+                  <UserCheck className="w-3.5 h-3.5 text-zinc-300" />
                 </div>
                 <div className="text-sm font-medium text-white">Human Oversight Rule</div>
                 <p className="text-xs text-zinc-400">Patient flagged with priority status; clinic frontdesk notified on dashboard.</p>
@@ -209,7 +209,7 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
           <div className="space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-violet-300">
+                <div className="w-8 h-8 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-200">
                   <Zap className="w-4 h-4" />
                 </div>
                 <div>
@@ -217,15 +217,15 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
                   <p className="text-xs text-zinc-400 font-mono">Turning verified inquiries into repeat customer relationships</p>
                 </div>
               </div>
-              <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                +100% Attribution
+              <span className="text-xs font-mono text-white bg-zinc-900 px-2.5 py-0.5 rounded border border-white/10">
+                100% Attribution
               </span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-2">
                 <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
-                  <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+                  <MessageSquare className="w-3.5 h-3.5 text-zinc-300" />
                   <span>WhatsApp Lead Engagement</span>
                 </div>
                 <p className="text-xs text-zinc-300 leading-relaxed">
@@ -236,7 +236,7 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
 
               <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-2">
                 <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
-                  <Calendar className="w-3.5 h-3.5 text-violet-400" />
+                  <Calendar className="w-3.5 h-3.5 text-zinc-300" />
                   <span>Automated 24h Reminder Loop</span>
                 </div>
                 <p className="text-xs text-zinc-300 leading-relaxed">
@@ -251,13 +251,13 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ onCallSara }) => {
         {/* Live System Indicator Footer */}
         <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between text-xs text-zinc-400 gap-2 font-mono">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
-            <span>Claude API Adapter Ready</span>
-            <span className="text-zinc-600">|</span>
-            <span>8 Vernacular Indian Languages • Sara Voice AI</span>
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span>Telemetry Active</span>
+            <span className="text-zinc-700">|</span>
+            <span>8 Vernacular Dialects • Sara Voice Engine</span>
           </div>
           <div className="text-zinc-400">
-            Action: <span className="text-zinc-200">Production-Ready Architecture</span>
+            Engine: <span className="text-zinc-200">MeowBoxAI Core</span>
           </div>
         </div>
       </div>

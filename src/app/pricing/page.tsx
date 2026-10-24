@@ -245,7 +245,7 @@ export default function PricingPage() {
                 key={tier.name}
                 className={`rounded-3xl border p-7 flex flex-col justify-between transition-all text-left backdrop-blur-xl ${
                   tier.highlight
-                    ? 'border-violet-500/30 bg-zinc-900/50 shadow-2xl'
+                    ? 'border-white/30 bg-zinc-900/60 shadow-2xl'
                     : 'border-white/[0.08] bg-zinc-900/30 hover:border-white/15'
                 }`}
               >
@@ -255,7 +255,7 @@ export default function PricingPage() {
                       {tier.badge}
                     </span>
                     {tier.highlight && (
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-violet-500/10 text-violet-300 border border-violet-500/20">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-white text-black font-semibold">
                         Popular
                       </span>
                     )}
@@ -346,7 +346,7 @@ export default function PricingPage() {
                   <div className="space-y-3 mb-8 text-xs text-zinc-300">
                     {tier.features.map((feat, idx) => (
                       <div key={idx} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-zinc-300 shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </div>
                     ))}

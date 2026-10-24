@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Heart, Globe, Terminal, ArrowUpRight } from 'lucide-react';
+import { ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { Logo } from '@/components/common/Logo';
 
 export const Footer: React.FC = () => {
   return (
@@ -9,27 +10,17 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand & Purpose */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M4 17V8.5L8 12.5L12 7L16 12.5L20 8.5V17C20 18.1046 19.1046 19 18 19H6C4.89543 19 4 18.1046 4 17Z"
-                    fill="white"
-                  />
-                  <circle cx="8.5" cy="11.5" r="1" fill="#8b5cf6" />
-                  <circle cx="15.5" cy="11.5" r="1" fill="#8b5cf6" />
-                </svg>
-              </div>
-              <span className="font-semibold text-white tracking-tight text-lg">MEOW AI</span>
+            <Link href="/" className="inline-block">
+              <Logo size={22} />
             </Link>
             <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">
-              AI that does the work, not just talks about the work. Multilingual voice agents, business workflow automation, and AI-powered growth systems engineered for modern Indian SMBs and startups.
+              Autonomous execution engines, voice telephony agents, and memory vault systems engineered for high-growth operations.
             </p>
             <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 pt-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               <span>Bengaluru, Karnataka, India</span>
               <span className="text-zinc-600">•</span>
-              <span>English &amp; తెలుగు Native</span>
+              <span>English &amp; Regional Multi-Dialect</span>
             </div>
           </div>
 
@@ -39,27 +30,27 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5">
               <li>
                 <Link href="/voice-ai" className="hover:text-white transition-colors">
-                  MEOW Voice
+                  Sara Voice Engine
                 </Link>
               </li>
               <li>
                 <Link href="/platform" className="hover:text-white transition-colors">
-                  MEOW Automate
+                  Autonomous Pipelines
                 </Link>
               </li>
               <li>
                 <Link href="/growth" className="hover:text-white transition-colors">
-                  MEOW Growth
+                  Growth Systems
                 </Link>
               </li>
               <li>
                 <Link href="/ai-services#automation-configurator" className="hover:text-white transition-colors">
-                  Website &amp; Tech Setup
+                  Infrastructure Setup
                 </Link>
               </li>
               <li>
                 <Link href="/pricing" className="hover:text-white transition-colors">
-                  Payment Gateway Setup
+                  Pricing &amp; Plans
                 </Link>
               </li>
               <li>
@@ -69,8 +60,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/app" className="text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-1 font-mono text-xs">
-                  <span>Enterprise Console</span>
+                <Link href="/app" className="text-zinc-300 hover:text-white transition-colors flex items-center gap-1 font-mono text-xs">
+                  <span>Developer Console</span>
                   <ArrowUpRight className="w-3 h-3" />
                 </Link>
               </li>

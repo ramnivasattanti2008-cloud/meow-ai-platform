@@ -22,6 +22,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { EasyPaymentModal } from '@/components/payment/EasyPaymentModal';
+import { Logo } from '@/components/common/Logo';
 
 interface WorkspaceLayoutProps {
   children: React.ReactNode;
@@ -49,12 +50,9 @@ export const WorkspaceLayout: React.FC<WorkspaceLayoutProps> = ({ children }) =>
     <div className="min-h-screen bg-black text-white flex flex-col md:flex-row text-left font-sans antialiased">
       {/* Mobile Top Header */}
       <div className="md:hidden flex items-center justify-between border-b border-white/[0.08] px-4 py-3 bg-black/80 backdrop-blur-xl sticky top-0 z-40">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center">
-            <Bot className="w-3.5 h-3.5 text-zinc-300" />
-          </div>
-          <span className="font-semibold text-sm">MEOW Console</span>
-        </div>
+        <Link href="/" className="flex items-center gap-2">
+          <Logo size={18} showWordmark={true} />
+        </Link>
         <button
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
           className="p-1.5 rounded-lg text-zinc-400 hover:text-white"
@@ -71,23 +69,8 @@ export const WorkspaceLayout: React.FC<WorkspaceLayoutProps> = ({ children }) =>
       >
         {/* Brand & Exit to Public Website */}
         <div className="flex items-center justify-between pb-6 border-b border-white/[0.08] mb-6">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-zinc-900 border border-white/15 flex items-center justify-center shadow-subtle">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M4 17V8.5L8 12.5L12 7L16 12.5L20 8.5V17C20 18.1046 19.1046 19 18 19H6C4.89543 19 4 18.1046 4 17Z"
-                  fill="white"
-                />
-                <circle cx="8.5" cy="11.5" r="1" fill="#a78bfa" />
-                <circle cx="15.5" cy="11.5" r="1" fill="#a78bfa" />
-              </svg>
-            </div>
-            <div>
-              <div className="font-semibold text-sm tracking-tight text-white flex items-center gap-1.5">
-                MEOW Console
-              </div>
-              <div className="text-[10px] font-mono text-zinc-500">Autonomous Operations</div>
-            </div>
+          <Link href="/" className="flex items-center gap-2">
+            <Logo size={20} showWordmark={true} />
           </Link>
 
           <Link
